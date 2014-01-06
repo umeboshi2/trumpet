@@ -1,0 +1,19 @@
+from pyramid.security import Allow, Everyone, Authenticated
+
+    
+# the acl entries are allow/deny, group, permission
+class RootGroupFactory(object):
+    __name__ = ""
+    __acl__ = [
+        (Allow, Everyone, 'public'),
+        (Allow, Authenticated, 'user'),
+        (Allow, 'manager', 'manage'),
+        (Allow, 'editor', ('wiki_add', 'wiki_edit')),
+        (Allow, 'admin', ('admin', 'manage')),
+        ]
+
+    def __init__(self, request):
+        # comment
+        pass
+
+

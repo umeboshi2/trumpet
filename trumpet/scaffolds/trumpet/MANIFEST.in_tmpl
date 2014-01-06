@@ -1,0 +1,5 @@
+recursive-include {{package}}/templates *.mako *.pt
+recursive-include {{package}}/static *
+#recursive-include {{package}}/resources *
+include setup.py
+

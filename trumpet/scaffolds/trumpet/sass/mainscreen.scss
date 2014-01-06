@@ -1,0 +1,35 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+// colors
+//@import "partials/basecolors/darkseagreen";
+@import "partials/basecolors/lightskyblue";
+
+
+/* import all colors and variables before bootstrap */
+
+@import "partials/bootstrap-variables";
+
+//@import "bootstrap/variables";
+//@import "bootstrap/mixins";
+
+
+@import "bootstrap";
+
+@import "partials/common-page";
+
+@import "partials/list-styles";
+
+// extra stuff
+//@import "partials/imagelist-admin";
+//@import "partials/userlist-admin";
+//@import "partials/grouplist-admin";
+//@import "partials/rssviewer-viewfeed";
+//@import "partials/facebook";
+
+//@import "partials/hubby";
+
+@import "partials/tickets";
+.fc-header-title h2 {
+    font-size: 1.2em;
+}

@@ -1,0 +1,5 @@
+recursive-include trumpet/templates *.mako *.pt
+recursive-include trumpet/static *
+recursive-include trumpet/resources *
+recursive-include trumpet/scaffolds/trumpet *
+

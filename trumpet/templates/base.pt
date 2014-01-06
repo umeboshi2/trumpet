@@ -1,0 +1,4 @@
+<metal:block use-macro="main_template">
+  <div metal:fill-slot="content">
+  </div>
+</metal:block>

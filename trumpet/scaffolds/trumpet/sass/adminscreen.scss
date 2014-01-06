@@ -1,0 +1,42 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+// colors
+//@import "partials/basecolors/darkseagreen";
+//@import "partials/basecolors/azure3";
+@import "partials/basecolors/mistyrose3";
+
+/* import all colors and variables before bootstrap */
+
+@import "partials/bootstrap-variables";
+
+
+@import "bootstrap";
+
+
+@import "partials/common-page";
+@import "partials/list-styles";
+
+#editor {
+    position: relative;
+    //position: absolute;
+    #top: 0;
+    #right: 0;
+    #bottom: 0;
+    #left: 0;
+    width: 50em;
+    height: 30em;
+
+}
+
+// extra stuff
+@import "partials/imagelist-admin";
+@import "partials/userlist-admin";
+@import "partials/grouplist-admin";
+
+//@import "partials/rssviewer-viewfeed";
+//@import "partials/facebook";
+
+//@import "partials/hubby";
+
+//@import "partials/tickets";
