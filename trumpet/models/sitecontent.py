@@ -238,10 +238,13 @@ class UserAppResource(Base, SerialBase):
 
 
 def populate_images(imagedir='images'):
+    import os
+    if not os.path.isdir(imagedir):
+        print "No Images to populate"
+        return
     session = DBSession()
     from trumpet.managers.admin.images import ImageManager
     im = ImageManager(session)
-    import os
     for basename in os.listdir(imagedir):
         filename = os.path.join(imagedir, basename)
         imgfile = file(filename)
