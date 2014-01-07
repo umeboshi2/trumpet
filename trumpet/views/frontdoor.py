@@ -17,7 +17,7 @@ from trumpet.managers.admin.sitewebview import SiteWebviewManager
 from trumpet.managers.admin.sitewebview import SiteAppManager
 
 from trumpet.views.base import BasicView, static_asset_response
-from trumpet.views.forms import LoginSchema
+from trumpet.views.schema import LoginSchema
 from trumpet.views.login import check_login_form
 
 

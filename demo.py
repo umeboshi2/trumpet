@@ -12,17 +12,8 @@ from trumpet.models.base import initialize_sql
 from trumpet.models.sitecontent import populate_images, populate_sitetext
 from trumpet.models.consultant import populate_ticket_status
 
-from trumpet.config.base import basetemplate, configure_base_layout
 from trumpet.config.base import configure_webviews
-from trumpet.config.static import configure_static
-from trumpet.config.wiki import configure_wiki
-from trumpet.config.rssviewer import configure_rssviewer
-from trumpet.config.login import configure_login
 from trumpet.config.login import configure_frontdoor
-
-from trumpet.config.admin import configure_admin
-from trumpet.config.static import configure_sitecontent
-from trumpet.config.consultant import configure_consultant
 
 from trumpet.security import make_authn_authz_policies
 from trumpet.security import authenticate
@@ -68,20 +59,11 @@ def main(global_config, **settings):
                           )
     config.include('cornice')
     configure_frontdoor(config)
-    configure_static(config)
-    configure_base_layout(config)
     
-    config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_view('trumpet.views.frontdoor.FrontDoorView',
                     route_name='home',)
 
-    #configure_login(config)
-    #configure_rssviewer(config, '/rssviewer')
-    #configure_wiki(config, '/wiki')
-    #configure_admin(config)
-    #configure_sitecontent(config)
-    #configure_consultant(config)
     config.scan('trumpet.views.rest.users')
     config.scan('trumpet.views.rest.webview')
     config.scan('trumpet.views.rest.sitecontent')

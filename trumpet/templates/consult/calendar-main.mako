@@ -1,2 +1,0 @@
-<div id="maincalendar">
-</div>

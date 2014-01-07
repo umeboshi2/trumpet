@@ -1,9 +1,9 @@
-from trumpet.views.base import BaseViewer
+from trumpet.views.base import BasicView
 
 from trumpet.managers.consultant.tickets import TicketManager
 
 
-class JSONViewer(BaseViewer):
+class JSONViewer(BasicView):
     def __init__(self, request):
         super(JSONViewer, self).__init__(request)
         self.tm = TicketManager(self.request.db)

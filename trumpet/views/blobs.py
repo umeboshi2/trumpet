@@ -1,10 +1,6 @@
-import os
-from datetime import datetime
-
 from pyramid.response import Response
 
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
-#from pyramid.security import authenticated_userid
 
 from trumpet.models.sitecontent import SiteImage
 from trumpet.models.sitecontent import SiteCSS, SiteJS
@@ -16,9 +12,8 @@ FILETYPE_MAP = dict(css=SiteCSS, js=SiteJS,
 CONTENT_TYPE_MAP = dict(image='image/jpeg', thumb='image/jpeg',
                         css='text/css', js='text/javascript',
                         ejs='text/javascript')
-from base import BaseViewer
-from menus import BaseMenu
 
+# FIXME: update this to use BasicView
 class BlobViewer(object):
     def __init__(self, request):
         self.request = request
