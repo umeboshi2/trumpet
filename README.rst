@@ -9,6 +9,8 @@
 
 
 
+
+
 Abstract
 ========
 
@@ -28,6 +30,34 @@ SQLAlchemy: http://www.sqlalchemy.org/
 Mako Templates: http://www.makotemplates.org/
 
 Icons: http://www.sireasgallery.com/ (trumpet icon)
+
+
+Setup
+========
+
+I like to use virtualenvwrapper::
+
+  sudo apt-get install virtualenvwrapper
+
+  mkvirtualenv trumpet
+  workon trumpet
+
+go build haberdashery and install into your virtualenv:
+
+https://github.com/umeboshi2/haberdashery
+
+Prepare the package according to the instructions then
+install it as editable::
+
+  python setup.py develop
+
+Development packages are needed to install some of the 
+python packages::
+
+  sudo apt-get install libpq-dev python-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests libxml2-dev libxslt1-dev
+
+
+
 
 
 TODO
@@ -186,5 +216,4 @@ Making an action button
 
 
 
-apt-get install libpq-dev python-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests python-virtualenv libxml2-dev libxslt1-dev
 
