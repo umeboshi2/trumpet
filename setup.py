@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import sys
 import os
 
-version = '0.1.1'
+version = '0.2.0'
 
 requires = [
     'pyramid',
@@ -12,27 +12,40 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'docutils',        # only needed for wiki
-    'feedparser',      # only needed for rssviewer
     'pyramid-beaker',  # session management
+
+    # we need to think about using another
+    # postgresql/sqlalchemy package that
+    # can be used with pypy
+    'psycopg2',        # dbapi for postgresql
+    
+    # we need to stop using deform
     'pyramid-deform',  # we will start using deform/colander/peppercorn
     'deform',
-    'Mako',            # we have mako templates for forms
-    'FormEncode',      # we use parts of formencode to make html
+
+    # this is for the simple rss viewer example
+    'feedparser',      # only needed for rssviewer
+
+    
     'Pillow',          # image management
     'vobject',         # vcard, iCal support
     'icalendar',       # more iCal support
-    'haberdashery>=0.0dev',
+
     'waitress',
-    'twill',
-    'mechanize',       # mechanize may be better than twill sometimes
-    'beautifulsoup4',
-    'lxml',            # lxml parser for beautifulsoup4
-    'facebook-sdk',
-    'psycopg2',        # dbapi for postgresql
-    'filemagic',       # useful for identifying blobs
-    'markdown',
-    'pyramid-layout',
+
+    
+    #'twill',
+    #'mechanize',       # mechanize may be better than twill sometimes
+    #'beautifulsoup4',
+    #'lxml',            # lxml parser for beautifulsoup4
+    #'facebook-sdk',
+    #'filemagic',       # useful for identifying blobs
+    #'markdown',
+
+    
+    'pyramid-mako',
     'cornice',         # REST views
+    'haberdashery>=0.0dev',
     
 ]
 
@@ -56,11 +69,7 @@ Start a website with pyramid""",
       # -*- Entry points: -*-
       [pyramid.scaffold]
       trumpet=trumpet.scaffolds:TrumpetProjectTemplate
-      # A console script to serve the application and monitor static resources
       [console_scripts]
       trumpet-make-tmpl-links = trumpet.scripts.Make_tmpl_links:main
       """,
-      dependency_links=[
-      'https://github.com/umeboshi2/haberdashery/archive/master.tar.gz#egg=haberdashery-0.0dev',
-      ],
       )
