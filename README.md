@@ -1,8 +1,6 @@
 # Trumpet Documentation
 
-.. image:: https://travis-ci.org/umeboshi2/trumpet.png?branch=master
-   :target: https://travis-ci.org/umeboshi2/trumpet
-
+[![Build Status](https://travis-ci.org/umeboshi2/trumpet.png?branch=master)](https://travis-ci.org/umeboshi2/trumpet)
 
 
 
