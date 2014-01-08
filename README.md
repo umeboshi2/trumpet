@@ -1,5 +1,4 @@
- Trumpet Documentation
-=======================
+# Trumpet Documentation
 
 .. image:: https://travis-ci.org/umeboshi2/trumpet.png?branch=master
    :target: https://travis-ci.org/umeboshi2/trumpet
@@ -8,16 +7,7 @@
 
 
 
-Abstract
-========
-
-This project contains a simple set of essential models, view classes 
-and templates that help generate a web application using the pyramid 
-framework.
-
-This is ALPHA quality code.  Expect things to break while this project
-is slowly formed.
-
+## Abstract
 
 
 Pyramid Framework: http://www.pylonsproject.org/
@@ -29,24 +19,19 @@ Mako Templates: http://www.makotemplates.org/
 Icons: http://www.sireasgallery.com/ (trumpet icon)
 
 
-Setup
-========
+## Setup
 
-I like to use virtualenvwrapper::
+I like to use virtualenvwrapper
 
-  sudo apt-get install virtualenvwrapper
 
-  mkvirtualenv trumpet
-  workon trumpet
+```sh
+sudo apt-get install virtualenvwrapper
 
-go build haberdashery and install into your virtualenv:
+mkvirtualenv trumpet
+workon trumpet
 
-https://github.com/umeboshi2/haberdashery
-
-Prepare the package according to the instructions then
-install it as editable::
-
-  python setup.py develop
+pip install requests
+```
 
 Development packages are needed to install some of the 
 python packages::
@@ -54,200 +39,9 @@ python packages::
   sudo apt-get install libpq-dev python-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests libxml2-dev libxslt1-dev
 
 
+Next we have to download build and prepare the static resources.
 
-
-
-TODO
-====
-
-- Integrate sucker-compass.  https://github.com/adambom/sucker-compass
-
-- Admin section will handle some site images and text.
-
-  + make thumbnail images
-
-  + better list images page
-
-- start using cryptacular and/or SRP
-
-- add exception logging
-
-- start making REST interface
-
-  + cornice uses url-dispatch, but can possibly work alongside
-    traversal in a hybrid manner.
-
-- compare python-magic and filemagic
-
-- add exception pages
-
-- replace fanstatic with webassets
-
-
-Webviews
-===========
-
-A Webview is a name created to denote a single page application.  Trumpet is 
-being geared to become a library to help create websites where most/all 
-pages are apps.  I have managed to shrink the html page served by pyramid 
-to a very small head with one script tag loading requirejs and pointing 
-to the loader for the app.  I would love to use another name for this, but 
-naming is probably the hardest part of development.
-
-Page Layouts
--------------
-
-Before switching to the SPA paradigm of thought, every page was rendered 
-with a template that depended on the presence of a layout model.  The layout 
-model was simply an object with attributes that was applied to a mako 
-template.  The type of each attribute is either text or mako template.  One 
-of my original goals was to store the main layout template in the 
-database, as well as css and javascript, to allow the end user/admin to 
-customize the site without updating the code.
-
-Server vs. Client
-------------------
-
-Mako templates are very powerful, allowing the author to wield the 
-full power of python when rendering the template.  In fact, the 
-templates are versatile enough to bypass writing code in the 
-view callable and put all the logic in the template, although this 
-is generally not the wisest thing to do.  The largest problem with 
-using the mako templates is that the code is executed server side, 
-preventing me from being able to protect the service from mistakes 
-or malice.  I thought about using a more restrictive template 
-system, but soon realized that the inherent problem was the 
-server side rendering, and the server templates would either have 
-to be too limited to be of more than cosmetic use, or flexible 
-enough to bypass the policy of the server.
-
-This is where client side templating comes to the rescue.  With 
-client side templates, it is far more difficult to endanger the 
-service that is being provided.  I am expecting the worst of the 
-problems to be dysfunctional pages, although the admin pages that 
-edit the templates should always work.  I also see a very slim (I 
-hope!) possibility that bad templates could cause a denial of 
-service, but I don't expect this to be a problem that occurs often.
-
-Being less familiar with javascript than with python, I had to 
-search and compare templating styles.  I started with underscore 
-templates, but found them to be very limiting.  I then started 
-using EJS templates, and found them to be very similar to mako 
-templates, although not as versatile.  Nevertheless, I settled 
-on using EJS templates for trumpet.
-
-After believing I was happy with using EJS templates, I was 
-looking around the stackoverflow forums to find a solution 
-that I was having with CoffeeScript and learned about 
-teacup.  Teacup is a domain specific language that works 
-very well as a templating system.  With teacup, not only do you 
-have the full flexibility of javascript when rendering the 
-template, you are also using coffeescript to define the template, 
-which is far more elegant than anything else I have seen on either 
-the python or javascript sides.  I did like how concise jade is, but 
-I feel that teacup will be a better fit for trumpet.
-
-REST
-----------
-
-The general idea behind REST isn't really hard to understand.  It 
-was having to unlearn the way by which much of the web had already 
-been operating for years.  I spent many years knowing nothing of 
-PUT and DELETE, but only being familiar with GET and POST, which I 
-naively treated (loosely) as read/write methods.  Now that I look 
-back (and not very far either) I was often using GET to perform both 
-deletions of single objects, as well as attaching relations together.
-
-After learning REST, my ability to write arbitrary url's to perform 
-a function has been severely hampered, and this is a good thing.  I 
-now have only four verbs that I am able to use, and I am completely 
-restricted from putting verbs in the url, or even identifying the url 
-as an action.  These restrictions help keep the web services well 
-structured and coherent.  In fact, a good REST API decouples the 
-server from the browser, allowing a larger variety of clients to 
-have access to the services.
-
-Static Resources
--------------------
-
-Managing static resources can become very messy the more involved 
-a project becomes in using them.  The very large variety of 
-javascript libraries and css frameworks available can be 
-overwhelming.  Making sure that everything fits together and works 
-can be an arduous task.  Tracking upstream dependencies is probably 
-a bit more difficult for a python/pyramid programmer than it is 
-for a person using rails or nodejs.  I had been (and I am currently 
-still) using fanstatic to help manage these resources.  There are 
-quite a few prepackaged libraries depending on fanstatic available 
-on the Python Package Index.  These packages don't seem to be in 
-much use, and after updating quite a few of them myself, I decided 
-to wean myself away from fanstatic.  I am currently investigating 
-webassets, which seems to be a far more robust and capable asset 
-manager.
-
-Moreover, and more especially with css, it can 
-become very time consuming to modify two or more upstream css 
-resources to match the general style of your page.
-
-
-
-
-Notes
-=====
-
-Making an action button
-------------------------
-
-- make a 'div' with 'action-button' in the class
-
-- also name the div in either the class or id, so it
- can be selected with jquery
-
-- in the div, make a hidden input with value=url
-
-- make sure that the action-button is imported in css
-
-- make jquery script that performs action on click
-
-  + example:  window.location = url
-
-
-
-
-
-
-haberdashery
-============
-
-[![Build Status](https://travis-ci.org/umeboshi2/haberdashery.png?branch=master)](https://travis-ci.org/umeboshi2/haberdashery)
-
-Introduction
---------------
-
-
-Common accessories for web applications
-
-The purpose of this project is to provide a common code base for 
-providing command static resources, such as css and javascript, 
-for my pyramid projects.  This is basically just a metapackage 
-that depends on many javascript libraries that are deployed with 
-fanstatic.  I create the css files with compass, and while a 
-framework is here to compile css with compass, as well as compile 
-javascript using coffee, this is usually done at the project level.  
-The framework here only provides a reference for how this can 
-be done in the project.
-
-Also, with regards to generating css, the sass/partials directory 
-is used as a set of components where resources are built.  This 
-directory is symlinked in the sass directory of my projects, which is 
-what I will be doing until I find a better method of using the compenents, 
-or spend the time to create mixins.
-
-Setup
-======
-
-Setup Compass
-----------------
+### Setup Compass
 
 Make sure rubygems is on your system:
 ```sh
@@ -287,11 +81,10 @@ compass compile
 ```
 
 
-Setup NodeJS
--------------
+### Setup NodeJS
 
-Get nodejs for debian
---------------------------
+#### Get nodejs for debian
+
 
 For debian, build a current version of nodejs using
 the build scripts in this repository:
@@ -301,6 +94,8 @@ https://github.com/mark-webster/node-debian
 Follow the instructions to build the debian package, 
 then install it.
 
+#### Install global nodejs packages
+
 Then, install these packages globally:
 
 ```sh
@@ -309,14 +104,15 @@ sudo npm install -g grunt-cli
 sudo npm install -g bower
 ```
 
-Build Haberdashery
---------------------
+### Get packages for grunt 
 
 In the project directory, get the packages for grunt:
 
 ```sh
 npm install
 ```
+
+### Get bower components
 
 Then install the bower packages:
 
@@ -373,9 +169,7 @@ python setup.py (develop/install/sdist)
 ```
 
  
-CSS Framework
-================
-
+## CSS Framework
 
 -  [Compass](http://compass-style.org/):  
    Compass is the tool I use to generate my CSS resources.  The CSS 
@@ -431,8 +225,7 @@ CSS Framework
    from another site.
    
 
-Basic Javascript Libraries
-===============================
+## Basic Javascript Libraries
 
 -  [Requirejs](http://requirejs.org):
    Required.
@@ -484,8 +277,181 @@ Basic Javascript Libraries
 
 
 
-Misc Javascript
-=================
+## TODO
+
+- Integrate sucker-compass.  https://github.com/adambom/sucker-compass
+
+- Admin section will handle some site images and text.
+
+  + make thumbnail images
+
+  + better list images page
+
+- start using cryptacular and/or SRP
+
+- add exception logging
+
+- start making REST interface
+
+  + cornice uses url-dispatch, but can possibly work alongside
+    traversal in a hybrid manner.
+
+- compare python-magic and filemagic
+
+- add exception pages
+
+- replace fanstatic with webassets
+
+
+## Webviews
+
+A Webview is a name created to denote a single page application.  Trumpet is 
+being geared to become a library to help create websites where most/all 
+pages are apps.  I have managed to shrink the html page served by pyramid 
+to a very small head with one script tag loading requirejs and pointing 
+to the loader for the app.  I would love to use another name for this, but 
+naming is probably the hardest part of development.
+
+### Page Layouts
+
+Before switching to the SPA paradigm of thought, every page was rendered 
+with a template that depended on the presence of a layout model.  The layout 
+model was simply an object with attributes that was applied to a mako 
+template.  The type of each attribute is either text or mako template.  One 
+of my original goals was to store the main layout template in the 
+database, as well as css and javascript, to allow the end user/admin to 
+customize the site without updating the code.
+
+### Server vs. Client
+
+Mako templates are very powerful, allowing the author to wield the 
+full power of python when rendering the template.  In fact, the 
+templates are versatile enough to bypass writing code in the 
+view callable and put all the logic in the template, although this 
+is generally not the wisest thing to do.  The largest problem with 
+using the mako templates is that the code is executed server side, 
+preventing me from being able to protect the service from mistakes 
+or malice.  I thought about using a more restrictive template 
+system, but soon realized that the inherent problem was the 
+server side rendering, and the server templates would either have 
+to be too limited to be of more than cosmetic use, or flexible 
+enough to bypass the policy of the server.
+
+This is where client side templating comes to the rescue.  With 
+client side templates, it is far more difficult to endanger the 
+service that is being provided.  I am expecting the worst of the 
+problems to be dysfunctional pages, although the admin pages that 
+edit the templates should always work.  I also see a very slim (I 
+hope!) possibility that bad templates could cause a denial of 
+service, but I don't expect this to be a problem that occurs often.
+
+Being less familiar with javascript than with python, I had to 
+search and compare templating styles.  I started with underscore 
+templates, but found them to be very limiting.  I then started 
+using EJS templates, and found them to be very similar to mako 
+templates, although not as versatile.  Nevertheless, I settled 
+on using EJS templates for trumpet.
+
+After believing I was happy with using EJS templates, I was 
+looking around the stackoverflow forums to find a solution 
+that I was having with CoffeeScript and learned about 
+teacup.  Teacup is a domain specific language that works 
+very well as a templating system.  With teacup, not only do you 
+have the full flexibility of javascript when rendering the 
+template, you are also using coffeescript to define the template, 
+which is far more elegant than anything else I have seen on either 
+the python or javascript sides.  I did like how concise jade is, but 
+I feel that teacup will be a better fit for trumpet.
+
+### REST
+
+The general idea behind REST isn't really hard to understand.  It 
+was having to unlearn the way by which much of the web had already 
+been operating for years.  I spent many years knowing nothing of 
+PUT and DELETE, but only being familiar with GET and POST, which I 
+naively treated (loosely) as read/write methods.  Now that I look 
+back (and not very far either) I was often using GET to perform both 
+deletions of single objects, as well as attaching relations together.
+
+After learning REST, my ability to write arbitrary url's to perform 
+a function has been severely hampered, and this is a good thing.  I 
+now have only four verbs that I am able to use, and I am completely 
+restricted from putting verbs in the url, or even identifying the url 
+as an action.  These restrictions help keep the web services well 
+structured and coherent.  In fact, a good REST API decouples the 
+server from the browser, allowing a larger variety of clients to 
+have access to the services.
+
+### Static Resources
+
+Managing static resources can become very messy the more involved 
+a project becomes in using them.  The very large variety of 
+javascript libraries and css frameworks available can be 
+overwhelming.  Making sure that everything fits together and works 
+can be an arduous task.  Tracking upstream dependencies is probably 
+a bit more difficult for a python/pyramid programmer than it is 
+for a person using rails or nodejs.  I had been (and I am currently 
+still) using fanstatic to help manage these resources.  There are 
+quite a few prepackaged libraries depending on fanstatic available 
+on the Python Package Index.  These packages don't seem to be in 
+much use, and after updating quite a few of them myself, I decided 
+to wean myself away from fanstatic.  I am currently investigating 
+webassets, which seems to be a far more robust and capable asset 
+manager.
+
+Moreover, and more especially with css, it can 
+become very time consuming to modify two or more upstream css 
+resources to match the general style of your page.
+
+
+
+
+## Notes
+
+### Making an action button
+
+- make a 'div' with 'action-button' in the class
+
+- also name the div in either the class or id, so it
+ can be selected with jquery
+
+- in the div, make a hidden input with value=url
+
+- make sure that the action-button is imported in css
+
+- make jquery script that performs action on click
+
+  + example:  window.location = url
+
+
+
+
+
+
+
+## haberdashery
+
+Common Accessories for web applications
+
+The purpose of this project is to provide a common code base for 
+providing command static resources, such as css and javascript, 
+for my pyramid projects.  This is basically just a metapackage 
+that depends on many javascript libraries that are deployed with 
+fanstatic.  I create the css files with compass, and while a 
+framework is here to compile css with compass, as well as compile 
+javascript using coffee, this is usually done at the project level.  
+The framework here only provides a reference for how this can 
+be done in the project.
+
+Also, with regards to generating css, the sass/partials directory 
+is used as a set of components where resources are built.  This 
+directory is symlinked in the sass directory of my projects, which is 
+what I will be doing until I find a better method of using the compenents, 
+or spend the time to create mixins.
+
+
+
+## Misc Javascript
 
 This section lists libraries and widgets that I am experimenting with:
 
@@ -504,14 +470,12 @@ EJS Templating (I was using this until found out about teacup)
 
 
 
-Creating CSS
--------------
+## Creating CSS
 
 This project is configured to make use of compass to compile sass/scss stylesheets into css to be deployed through fanstatic.
 
 
-Using Javascript
---------------------
+## Using Javascript
 
 This project is using coffeescript to generate javascript to be 
 deployed.  The coffee command is best installed by installing the 
@@ -524,45 +488,9 @@ Coffee Script: http://coffeescript.org/
 
 
 
-Other Packages
----------------------
-
-https://github.com/umeboshi2/js.jquery
-
-This package uses jQuery2 to provide the jquery resource.  This is 
-meant to be a drop-in replacement for js.jquery, and using 
-this modification shouldn't be required for the rest of the 
-code to work properly.
-
-https://github.com/umeboshi2/js.ace
-
-This update was necessary for EJS templates.  I created an update 
-script that helps to upgrade the package periodically.
 
 
-https://github.com/umeboshi2/js.deform
-
-I have been upgrading to deform version 2.  This package is 
-currently just a mirror of https://github.com/dairiki/js.deform .
-
-
-https://raw.github.com/PaulUithol/Backbone-relational/master/backbone-relational.js
-
-
-http://pathable.github.io/supermodel/
-
-
-
-Minified Resources
----------------------
-
-The watch script will automatically minify every scss/sass and 
-coffee file that is created or modified.  In order to do this, you 
-need to install yui-compressor.  I am using the package from 
-wheezy to provide this.
-
-New System
--------------------
+## New System
 
 Fanstatic has been removed completely.  All javascript dependencies are 
 now being maintained with javascript development tools.  Package management 
@@ -571,10 +499,7 @@ appropriate community help maintain the packages and dependencies, I firmly
 feel that the project can be more easily updated and maintained.
 
 
-TODO
-------------
-
-- Clean stdlib directory.  Make sure bower package exists for each resource.
+## TODO 2
 
 - Start tracking css selector usage and use this to make smaller stylesheets.
 
