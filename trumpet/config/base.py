@@ -1,29 +1,30 @@
 
 
-def configure_webviews(config):
-    config.add_view('trumpet.views.base.StaticView', name='stdlib')
-    config.add_view('trumpet.views.base.StaticView', name='stylesheets')
+def configure_base_views(config):
+    # bower components
     config.add_view('trumpet.views.base.StaticView', name='components')
-    
+    # css 
+    config.add_view('trumpet.views.base.StaticView', name='css')
+    # fonts
+    config.add_view('trumpet.views.base.StaticView', name='fonts')
+    # local libs
+    config.add_view('trumpet.views.base.StaticView', name='lib')
+    # applications
+    config.add_view('trumpet.views.appview.AppView', name='app')
 
-    config.add_view('trumpet.views.webview.LoaderView', name='loader')
-    config.add_view('trumpet.views.webview.AppView', name='app')
-    config.add_view('trumpet.views.webview.WebView', name='webview')
-
-    config.add_view('trumpet.views.appview.AppView', name='apps')
-    
-    
-
-
-
-    
-def configure_sitecontent(config, rootpath='/blob'):
+    # this is for pulling binaries from a database or filesystem
+    rootpath = 'blobs'
     config.add_route('blob', '%s/{filetype}/{id}' % rootpath)
     config.add_view('trumpet.views.blobs.BlobViewer', route_name='blob',
                     renderer='string',)
-                    
     
+    # these are for apps stored in the database
+    #config.add_view('trumpet.views.webview.LoaderView', name='loader')
+    #config.add_view('trumpet.views.webview.AppView', name='app')
+    #config.add_view('trumpet.views.webview.WebView', name='webview')
 
+    
+    
 
 
 

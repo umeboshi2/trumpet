@@ -22,14 +22,6 @@ from trumpet.views.login import check_login_form
 
 
 
-LOADER_TEMPLATE = """\
-define(['cs!/stdlib/coffee/config', 'cs!/app/${name}'], function (config, app){
-    console.log("Running ${name}");
-    app();
-});
-"""
-
-
 
 class FrontDoorView(BasicView):
     def __init__(self, request):
@@ -64,8 +56,8 @@ class FrontDoorView(BasicView):
                 content = render(template, env)
                 self.response = Response(body=content)
             else:
-                asset = os.path.join(
-                    'haberdashery:apps/frontdoor', *subpath)
+                assetpath = 'trumpet:static/apps/frontdoor'
+                asset = os.path.join(assetpath, *subpath)
                 self.response = static_asset_response(request, asset)
 
     def handle_login(self, post):

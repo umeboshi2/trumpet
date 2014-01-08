@@ -12,7 +12,7 @@ from trumpet.models.base import initialize_sql
 from trumpet.models.sitecontent import populate_images, populate_sitetext
 from trumpet.models.consultant import populate_ticket_status
 
-from trumpet.config.base import configure_webviews
+from trumpet.config.base import configure_base_views
 from trumpet.config.login import configure_frontdoor
 
 from trumpet.security import make_authn_authz_policies
@@ -58,6 +58,7 @@ def main(global_config, **settings):
                           session_factory=session_factory
                           )
     config.include('cornice')
+    configure_base_views(config)
     configure_frontdoor(config)
     
     config.add_route('home', '/')
@@ -70,7 +71,6 @@ def main(global_config, **settings):
     config.scan('trumpet.views.rest.simplerss')
 
 
-    configure_webviews(config)
     
     return config.make_wsgi_app()
 

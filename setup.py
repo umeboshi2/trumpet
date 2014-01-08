@@ -13,6 +13,7 @@ requires = [
     'zope.sqlalchemy',
     'docutils',        # only needed for wiki
     'pyramid-beaker',  # session management
+    'waitress',
 
     # we need to think about using another
     # postgresql/sqlalchemy package that
@@ -31,9 +32,8 @@ requires = [
     'vobject',         # vcard, iCal support
     'icalendar',       # more iCal support
 
-    'waitress',
 
-    
+    'requests',
     #'twill',
     #'mechanize',       # mechanize may be better than twill sometimes
     #'beautifulsoup4',
@@ -45,8 +45,6 @@ requires = [
     
     'pyramid-mako',
     'cornice',         # REST views
-    'haberdashery>=0.0dev',
-    
 ]
 
 setup(name='trumpet',

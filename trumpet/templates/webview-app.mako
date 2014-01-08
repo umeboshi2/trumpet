@@ -6,10 +6,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome.css"/>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-${basecolor}.css"/>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/screen-${basecolor}.css"/>
-    <script data-main="${appname}/app/main" src="/stdlib/require.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-${basecolor}.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/screen-${basecolor}.css"/>
+    <script data-main="${appname}/main" src="/components/requirejs-bower/require.js" type="text/javascript"></script>
   </head>
   <body>
   </body>

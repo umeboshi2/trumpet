@@ -3,7 +3,6 @@ from datetime import datetime
 
 import transaction
 from docutils.core import publish_parts
-from formencode.htmlgen import html
 
 from mako.template import Template
 from mako.exceptions import MakoException
@@ -74,14 +73,15 @@ class BasicView(object):
 
     def get_app_settings(self):
         return self.request.registry.settings
-    
+
+STATIC_VIEWS = ['lib', 'css', 'components', 'fonts']
 class StaticView(BasicView):
     def __init__(self, request):
         super(StaticView, self).__init__(request)
         view = request.view_name
-        if view in ['stdlib', 'stylesheets', 'components']:
-            path = os.path.join(view, *request.subpath)
-            asset = ':'.join(('haberdashery', path))
+        if view in STATIC_VIEWS:
+            path = os.path.join('static', view, *request.subpath)
+            asset = ':'.join(('trumpet', path))
             self.response = static_asset_response(request, asset)
         else:
             raise HTTPNotFound()

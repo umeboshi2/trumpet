@@ -1,0 +1,37 @@
+/* -------------------------------------------------------*/
+/* 
+      Action Button
+*/
+/* -------------------------------------------------------*/
+
+@mixin action-button {
+    @include sassy-button;
+    font-weight: bold;
+    font-family: "Droid Sans Bold";
+}
+
+.action-button {
+    @include action-button;
+}
+
+.action-button-submit {
+    background: $basecolor2;
+    text-align: center;
+}
+
+.action-button-submit:hover {
+    background: $basecolor1;
+    cursor: pointer;
+}
+
+/* remove these id's later and just use classes */
+
+#action-button-submit {
+    background: $basecolor2;
+    text-align: center;
+}
+
+#action-button-submit:hover {
+    background: $basecolor1;
+    cursor: pointer;
+}

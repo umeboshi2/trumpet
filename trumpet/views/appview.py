@@ -17,19 +17,10 @@ from trumpet.managers.admin.sitewebview import SiteAppManager
 from trumpet.views.base import BasicView, static_asset_response
 
 
-
-LOADER_TEMPLATE = """\
-define(['cs!/stdlib/coffee/config', 'cs!/app/${name}'], function (config, app){
-    console.log("Running ${name}");
-    app();
-});
-"""
-
-
-
 class AppView(BasicView):
     def __init__(self, request):
         super(AppView, self).__init__(request)
+        assetpath = 'trumpet:static/apps'
         view = request.view_name
         subpath = request.subpath
         if not len(subpath):
@@ -37,7 +28,7 @@ class AppView(BasicView):
         appname = subpath[0]
         if len(subpath) == 1:
             # check for existence
-            asset = 'haberdashery:apps/%s' % appname
+            asset = '%s/%s' % (assetpath, appname)
             resolver = AssetResolver()
             descriptor = resolver.resolve(asset)
             if not descriptor.exists():
@@ -51,7 +42,7 @@ class AppView(BasicView):
             self.response = Response(body=content)
         else:
             #asset = 'haberdashery:apps/%s' % appname
-            asset = os.path.join('haberdashery:apps', *subpath)
+            asset = os.path.join(assetpath, *subpath)
             self.response = static_asset_response(request, asset)
 
             
