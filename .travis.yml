@@ -4,6 +4,7 @@ language: python
 #  - pip install . --use-mirrors
 #  - pip install -r requirements.txt --use-mirrors
 before_install:
+  - sudo apt-get install npm
   - gem install compass
   - gem install susy
   - gem install sassy-buttons
