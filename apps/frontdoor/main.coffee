@@ -34,7 +34,10 @@ requirements = [
   'frontdoor/main'
   ]
 
-require requirements, (App) ->
+require [
+  'application'
+  'frontdoor/main'
+  ], (App) ->
   # debug
   window.app = App
   

@@ -14,11 +14,11 @@ define (require, exports, module) ->
     entries: [
       {
         name: 'Simple RSS'
-        url: '/apps/simplerss'
+        url: '#simplerss'
       }
       {
         name: 'Jellyfish'
-        url: '/apps/jellyfish'
+        url: '#jellyfish'
       }
       ]
 
@@ -28,26 +28,17 @@ define (require, exports, module) ->
   
   class Controller extends Backbone.Marionette.Controller
     start: ->
-      console.log 'called controller.start()'
+      #console.log 'called controller.start()'
       layout = new Views.MainPageLayout
       layout.on 'show', =>
         view = new Views.MainPageView
           el: 'body'
         mainbar = new Views.MainBarView
           el: '#mainbar'
-        mainbar.render()
-        mainmenu = new Views.MenuView
-          el: '#main-menu'
-          model: MainMenuModel
-        mainmenu.render()
+        MSGBUS.events.trigger 'mainbar:show', mainbar
         
         user = MSGBUS.reqres.request 'current:user'
         
-        usermenu = new Views.UserMenuView
-          el: '#user-menu'
-          model: user
-        usermenu.render()
-
         
         # FIXME
         show_login_form = false
@@ -59,12 +50,31 @@ define (require, exports, module) ->
           
       MSGBUS.events.trigger 'mainpage:show', layout
       
-      #if ! user.has('username')
-      #  view = new FDViews.LoginView
-      #    el: '.right-column-content'
-      #  MSGBUS.events.trigger 'rcontent:show', layout      
+    mainbar_displayed: (view) ->
+      window.fooview = view
+      #console.log 'mainbar_displayed called'
+      window.myel = $('#mainbar')
+      mainmenu = new Views.MenuView
+        el: '#main-menu'
+        model: MainMenuModel
+      MSGBUS.events.trigger 'main-menu:show', mainmenu
+
+      #console.log 'build user menu'
+      user = MSGBUS.reqres.request 'current:user'
+  
+      usermenu = new Views.UserMenuView
+        el: '#user-menu'
+        model: user
+      MSGBUS.events.trigger 'user-menu:show', usermenu
+      
+      
 
       
+  MSGBUS.events.on 'mainbar:displayed', (view) ->
+    controller = new Controller
+    controller.mainbar_displayed view
+    #console.log 'handle mainbar:displayed'
+          
 
   module.exports = Controller
   

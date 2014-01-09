@@ -71,18 +71,12 @@ gem install bootstrap-sass
 gem install compass-ui
 ```
 
-In the haberdashery directory, prepare and compile css:
-
-```sh
-python generate-scss.py
-compass compile
-```
-
 
 ### Setup NodeJS
 
 #### Get nodejs for debian
 
+sudo apt-get install cdbs devscripts debhelper pkg-config curl
 
 For debian, build a current version of nodejs using
 the build scripts in this repository:
@@ -124,34 +118,6 @@ have written a script that helps to deploy only what is needed from
 the bower components.  The script is not very smart, but handles any
 bower package that points to a single file, or list of files very well.
 
-
-```sh
-python prepare-bower-components.py
-```
-
-Next, we need some google fonts.  We need the requests package 
-for python to run the next script.  Either install it system wide:
-
-```sh
-sudo apt-get install python-requests
-```
-
-or install it into your virtualenv:
-
-```sh
-pip install requests
-```
-
- 
-Then download the fonts from google by running a python 
-script:
-
-```sh
-python get-google-fonts.py
-```
-
-This will install the fonts in the haberdashery package 
-directory.
 
 
 run grunt

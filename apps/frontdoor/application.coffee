@@ -22,6 +22,9 @@ define (require, exports, module) ->
       subheader: '#subheader'
       footer: '#footer'
       
+      main_menu: '#main-menu'
+      user_menu: '#user-menu'
+      
       
       sidebar: '.sidebar'
       rcontent: '.right-column-content'
@@ -36,22 +39,31 @@ define (require, exports, module) ->
       
     # connect events
     MSGBUS.events.on 'mainpage:show', (view) =>
-      console.log 'mainpage:show called'
+      #console.log 'mainpage:show called'
       app.mainview.show view
 
     MSGBUS.events.on 'mainbar:show', (view) =>
-      console.log 'mainbar:show called'
+      #console.log 'mainbar:show called'
+      # FIXME:  why call show twice?
       app.mainbar.show view
-
+      app.mainbar.show view
+      MSGBUS.events.trigger 'mainbar:displayed', view
+      
     MSGBUS.events.on 'rcontent:show', (view) =>
-      console.log 'rcontent:show called'
+      #console.log 'rcontent:show called'
       app.rcontent.show view
       
     MSGBUS.events.on 'main-menu:show', (view) =>
-      console.log 'main-menu:show called'
-
+      #console.log 'main-menu:show called'
+      app.main_menu.show view
+      app.main_menu.show view
+      
     MSGBUS.events.on 'user-menu:show', (view) =>
-      console.log 'user-menu:show called'
+      #console.log 'user-menu:show called'
+      # FIXME:  why call show twice?
+      app.user_menu.show view
+      app.user_menu.show view
+      
       
   app = new Marionette.Application()
   app.current_user = new common_models.CurrentUser
