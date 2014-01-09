@@ -10,9 +10,9 @@ before_install:
   - gem install sassy-buttons
   - gem install bootstrap-sass
   - gem install compass-ui
-#  - sudo npm install -g coffee-script
-#  - sudo npm install -g grunt-cli
-#  - sudo npm install -g bower
+  - npm install -g coffee-script
+  - npm install -g grunt-cli
+  - npm install -g bower
   - npm install
   - bower install
   - grunt
