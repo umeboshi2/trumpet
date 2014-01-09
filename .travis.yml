@@ -4,15 +4,15 @@ language: python
 #  - pip install . --use-mirrors
 #  - pip install -r requirements.txt --use-mirrors
 before_install:
-  - sudo apt-get install npm
+#  - sudo apt-get install npm
   - gem install compass
   - gem install susy
   - gem install sassy-buttons
   - gem install bootstrap-sass
   - gem install compass-ui
-  - sudo npm install -g coffee-script
-  - sudo npm install -g grunt-cli
-  - sudo npm install -g bower
+#  - sudo npm install -g coffee-script
+#  - sudo npm install -g grunt-cli
+#  - sudo npm install -g bower
   - npm install
   - bower install
   - grunt
