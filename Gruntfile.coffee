@@ -27,6 +27,19 @@ module.exports = (grunt) ->
       compass:
         files: ['sass/**/*.scss']
         tasks: ['compass']
+      cpcoffee:
+        files: ['apps/**/*.coffee']
+        tasks: ['copy:coffee']
+        
+    copy:
+      coffee:
+        files:
+          [
+            expand: true
+            src: ['apps/**']
+            dest: 'trumpet/static/'
+          ]  
+        
         
     clean:
       js:
