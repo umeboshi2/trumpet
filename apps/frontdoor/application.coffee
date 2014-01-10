@@ -11,6 +11,9 @@ define (require, exports, module) ->
   Page = require 'common/page'
   main_menu = require 'common/templates/main-menu'
 
+  require 'frontdoor/main'
+  require 'simplerss/main'
+  
 
   prepare_app = (app) ->
     app.addRegions
@@ -36,6 +39,7 @@ define (require, exports, module) ->
 
     app.addInitializer ->
       MSGBUS.commands.execute 'frontdoor:route'
+      MSGBUS.commands.execute 'simplerss:route'
       
     # connect events
     MSGBUS.events.on 'mainpage:show', (view) =>
@@ -72,8 +76,6 @@ define (require, exports, module) ->
   MSGBUS.reqres.setHandler 'current:user', ->
     app.current_user
     
-    
-
   # we prepare the app after we fetch
   # the current user, then we assign
   # app.ready to true (I should use msgbus

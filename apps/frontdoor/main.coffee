@@ -3,7 +3,8 @@ require.config
   baseUrl: 'frontdoor'
   paths:
     jquery: '/components/jquery/jquery'
-    underscore: '/components/underscore-amd/underscore'
+    #underscore: '/components/underscore-amd/underscore'
+    underscore: '/components/lodash/dist/lodash.compat'
     backbone: '/components/backbone-amd/backbone'
     'backbone.wreqr': '/components/backbone.wreqr/lib/amd/backbone.wreqr'
     'backbone.babysitter': '/components/backbone.babysitter/lib/amd/backbone.babysitter'

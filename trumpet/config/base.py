@@ -11,6 +11,8 @@ def configure_base_views(config):
     config.add_view('trumpet.views.base.StaticView', name='lib')
     # applications
     config.add_view('trumpet.views.appview.AppView', name='app')
+    # FIXME applications 
+    config.add_view('trumpet.views.appview.AppView', name='apps')
 
 
     # admin view

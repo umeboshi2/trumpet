@@ -13,6 +13,10 @@ define (require, exports, module) ->
     label: 'Main'
     entries: [
       {
+        name: 'Home'
+        url: '#'
+      }
+      {
         name: 'Simple RSS'
         url: '#simplerss'
       }
@@ -27,7 +31,7 @@ define (require, exports, module) ->
     
   
   class Controller extends Backbone.Marionette.Controller
-    start: ->
+    initialize_page: ->
       #console.log 'called controller.start()'
       layout = new Views.MainPageLayout
       layout.on 'show', =>
@@ -49,11 +53,20 @@ define (require, exports, module) ->
           view.render()
           
       MSGBUS.events.trigger 'mainpage:show', layout
-      
+
+    make_main_content: ->
+        $('#header').text 'Front Door'
+        
+    start: ->
+      if document.getElementById 'main-content'
+        @make_main_content()
+      else
+        @initialize_page()
+        @make_main_content()
+        
     mainbar_displayed: (view) ->
       window.fooview = view
       #console.log 'mainbar_displayed called'
-      window.myel = $('#mainbar')
       mainmenu = new Views.MenuView
         el: '#main-menu'
         model: MainMenuModel
