@@ -30,6 +30,8 @@
     "grunt-contrib-csslint": "~0.2.0",
     "bower": "~1.2.8",
     "matchdep": "~0.3.0",
-    "grunt-shell": "~0.6.1"
+    "grunt-shell": "~0.6.1",
+    "lodash-cli": "~2.4.1",
+    "grunt-lodash": "~0.3.0"
   }
 }

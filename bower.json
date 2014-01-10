@@ -31,7 +31,8 @@
     "requirejs-bower": "https://github.com/jrburke/requirejs-bower.git#~2.1.9",
     "teacup": "https://github.com/goodeggs/teacup.git",
     "backbone.babysitter": "~0.0.6",
-    "font-awesome": "~4.0.3"
+    "font-awesome": "~4.0.3",
+    "lodash": "~2.4.1"
   },
   "resolutions": {
     "jquery": "~2.0.3",
