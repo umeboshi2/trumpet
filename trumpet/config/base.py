@@ -12,6 +12,12 @@ def configure_base_views(config):
     # applications
     config.add_view('trumpet.views.appview.AppView', name='app')
 
+
+    # admin view
+    config.add_view('trumpet.views.appview.AdminAppView', name='admin',
+                    permission='admin')
+    
+    
     # this is for pulling binaries from a database or filesystem
     rootpath = 'blobs'
     config.add_route('blob', '%s/{filetype}/{id}' % rootpath)

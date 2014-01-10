@@ -55,10 +55,13 @@ class FrontDoorView(BasicView):
                 env = dict(appname='frontdoor', basecolor=basecolor)
                 content = render(template, env)
                 self.response = Response(body=content)
+                self.response.encode_content()
             else:
                 assetpath = 'trumpet:static/apps/frontdoor'
                 asset = os.path.join(assetpath, *subpath)
                 self.response = static_asset_response(request, asset)
+        else:
+            self.response = HTTPNotFound()
 
     def handle_login(self, post):
         if check_login_form(self.request):

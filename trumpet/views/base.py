@@ -40,6 +40,15 @@ def static_asset_response(request, asset):
             zip_response = True
     if zip_response:
         response.encode_content()
+    for ending in ['.css', '.js']:
+        # one day for css and js
+        if path.endswith(ending):
+            response.cache_expires(3600*24)
+            response.cache_control.public = True
+    if path.endswith('.ttf'):
+        # one year for fonts
+        response.cache_expires(3600*24*365)
+        response.cache_control.public = True
     return response
 
 
