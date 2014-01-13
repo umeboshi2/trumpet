@@ -21,4 +21,5 @@ define (require, exports, module) ->
   
   module.exports =
     LoginView: LoginView
+
     

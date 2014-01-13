@@ -1,48 +1,22 @@
 define (require, exports, module) ->
-    $ = require 'jquery'
-    _ = require 'underscore'
-    Backbone = require 'backbone'
-    ########################################
-    # Collections
-    ########################################
+  $ = require 'jquery'
+  _ = require 'underscore'
+  Backbone = require 'backbone'
+  ########################################
+  # Models
+  ########################################
 
-    class SitePath extends Backbone.Model
-        defaults:
-            name: ''
-            type: 'path'
-    class SiteAppResource extends Backbone.Model
-        defaults:
-            name: ''
-            type: 'coffee'
-            
-                        
+  class RssFeed extends Backbone.Model
+    defaults:
+      name: 'No RSS'
+      url: '#'
+      
+  make_rss_data_model = (rss_id) ->
+    class RssData extends Backbone.Model
+      url: '/rest/simplerss/feeds/' + rss_id + '/feeddata'
+    return new RssData(rss_id)
     
-    class SiteTemplate extends Backbone.Model
-        defaults:
-            name: ''
-            content: ''
-            type: 'tmpl'
-                        
-    class SiteCSS extends Backbone.Model
-        defaults:
-            name: ''
-            content: ''
-            type: 'css'
-                        
-    class SiteJS extends Backbone.Model
-        defaults:
-            name: ''
-            content: ''
-            type: 'js'
-
-
-
-    module.exports =
-        SitePath: SitePath
-        SiteAppResource: SiteAppResource
-        SiteTemplate: SiteTemplate
-        SiteCSS: SiteCSS
-        SiteJS: SiteJS
-        
-    
-    
+      
+  module.exports =
+    RssFeed: RssFeed
+    make_rss_data_model: make_rss_data_model

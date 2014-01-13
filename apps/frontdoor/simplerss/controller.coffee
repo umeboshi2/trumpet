@@ -3,7 +3,6 @@ define (require, exports, module) ->
   Backbone = require 'backbone'
   Marionette = require 'marionette'
   MSGBUS = require 'msgbus'
-
   Views = require 'views/mainviews'
 
   FDViews = require 'frontdoor/views'

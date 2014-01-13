@@ -1,59 +1,37 @@
 define (require, exports, module) ->
-    $ = require 'jquery'
-    _ = require 'underscore'
-    Backbone = require 'backbone'
+  $ = require 'jquery'
+  _ = require 'underscore'
+  Backbone = require 'backbone'
+  
+  { User, Group, RssFeed,
+  make_rss_data_model } = require 'models'
+  MSGBUS = require 'msgbus'
+      
 
-    ########################################
-    # Collections
-    ########################################
-    class SitePathList extends Backbone.Collection
-        model: SitePath
-        url: '/rest/sitepath'
-        # wrap the parsing to retrieve the
-        # 'data' attribute from the json response
-        parse: (response) ->
-            return response.data
-                        
+  ########################################
+  # Collections
+  ########################################
+  class BaseCollection extends Backbone.Collection
+    # wrap the parsing to retrieve the
+    # 'data' attribute from the json response
+    parse: (response) ->
+      return response.data
 
-    class SiteAppResList extends Backbone.Collection
-        model: SiteAppResource
-        url: '/rest/siteapp'
-        # wrap the parsing to retrieve the
-        # 'data' attribute from the json response
-        parse: (response) ->
-            return response.data
-           
-    class SiteTemplateList extends Backbone.Collection
-        model: SiteTemplate
-        url: '/rest/sitetmpl'
-        # wrap the parsing to retrieve the
-        # 'data' attribute from the json response
-        parse: (response) ->
-            return response.data
-                        
-    class SiteCSSList extends Backbone.Collection
-        model: SiteCSS
-        url: '/rest/sitecss'
-        # wrap the parsing to retrieve the
-        # 'data' attribute from the json response
-        parse: (response) ->
-            return response.data
-                        
-    class SiteJSList extends Backbone.Collection
-        model: SiteJS
-        url: '/rest/sitejs'
-        # wrap the parsing to retrieve the
-        # 'data' attribute from the json response
-        parse: (response) ->
-            return response.data
+  class RssFeedList extends BaseCollection
+    model: RssFeed
+    url: '/rest/simplerss/feeds'
 
+  # set handlers on message bus
+  # 
+  MSGBUS.reqres.setHandler 'rss:feedlist', ->
+    new RssFeedList
 
-    module.exports =
-        SitePathList: SitePathList
-        SiteAppResList: SiteAppResList
-        SiteTemplateList: SiteTemplateList
-        SiteCSSList: SiteCSSList
-        SiteJSList: SiteJSList
-        
-    
+  MSGBUS.reqres.setHandler 'rss:feeddata', (feed_id) ->
+    console.log 'handle rss:feeddata ' + feed_id
+    model = make_rss_data_model feed_id
+    return model
+          
+  
+  module.exports =
+    RssFeedList: RssFeedList
     
