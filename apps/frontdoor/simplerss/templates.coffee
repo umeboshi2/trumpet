@@ -35,7 +35,7 @@ define (require, exports, module) ->
   ########################################
   rss_feed_entry = renderable (feed) ->
     div '.listview-list-entry', ->
-      a href:'#showfeed/' + feed.id, feed.name
+      a href:'#simplerss/showfeed/' + feed.id, feed.name
 
   rss_feed_entry_empty = renderable (feed) ->
     div '.listview-list-entry', ->

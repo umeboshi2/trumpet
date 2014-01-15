@@ -34,48 +34,12 @@ define (require, exports, module) ->
   # Templates
   ########################################
   layout = renderable () ->
-    div '.page', ->
-      nav '#mainbar',\
-      'data-spy':'affix', 'data-offset-top':'10', ->
-        div '.navbar-header', ->
-          # the id for the data-target came from a tutorial
-          # and it should be renamed
-          button '.navbar-toggle', type:'button', 'data-toggle':'collapse',\
-          'data-target':'#ctx-menu-collapse-1', ->
-            span '.sr-only', 'Toggle navigations'
-            span 'badge', 'expand'
-          a '.navbar-brand', href:"/", 'brand'
-        div '#ctx-menu-collapse-1.collapse.navbar-collapse', ->
-          div '#user-menu.navbar.navbar-nav.navbar-right'
-          div '#main-menu.nav.navbar-nav.navbar-left'
-      div '.main-content', ->
-        div '#header'
-        div '#subheader'
-        div '#content', ->
-          div '.two-col', ->
-            div '.sidebar'
-            div '.right-column-content'
-        div '#footer'
-    
-
-  ##################################################################
-  # ##########################
-  ##################################################################    
-  viewfeed = renderable (data) ->
-    div '.listview-header', data.feed.name
-    div '.listview-list', ->
-      for entry in data.entries
-        div '.listview-list-entry', ->
-          p ->
-            a '.rssviewer-viewfeed-entry-link',
-            href:entry.link, entry.title
-          div ->
-            teacup.raw entry.summary
-            
-  layout = renderable () ->
     div '.something-very-special'
     
-          
+  frontdoor_main = renderable () ->
+    div '.action-button', 'hello'
+              
   module.exports =
     layout: layout
+    frontdoor_main: frontdoor_main
     

@@ -8,9 +8,9 @@ define (require, exports, module) ->
   MSGBUS = require 'msgbus'
 
   common_models = require 'common/models'
-  Page = require 'common/page'
-  main_menu = require 'common/templates/main-menu'
 
+  require 'mainpage'
+  
   require 'frontdoor/main'
   require 'simplerss/main'
   
@@ -38,6 +38,11 @@ define (require, exports, module) ->
     app.msgbus = MSGBUS
 
     app.addInitializer ->
+      # execute code to generate basic page
+      # layout
+      MSGBUS.commands.execute 'mainpage:init'
+
+      # then setup the routes
       MSGBUS.commands.execute 'frontdoor:route'
       MSGBUS.commands.execute 'simplerss:route'
       
@@ -48,26 +53,35 @@ define (require, exports, module) ->
 
     MSGBUS.events.on 'mainbar:show', (view) =>
       #console.log 'mainbar:show called'
-      # FIXME:  why call show twice?
-      app.mainbar.show view
       app.mainbar.show view
       MSGBUS.events.trigger 'mainbar:displayed', view
-      
-    MSGBUS.events.on 'rcontent:show', (view) =>
-      #console.log 'rcontent:show called'
-      app.rcontent.show view
       
     MSGBUS.events.on 'main-menu:show', (view) =>
       #console.log 'main-menu:show called'
       app.main_menu.show view
-      app.main_menu.show view
       
     MSGBUS.events.on 'user-menu:show', (view) =>
       #console.log 'user-menu:show called'
-      # FIXME:  why call show twice?
       app.user_menu.show view
-      app.user_menu.show view
+
+
+    MSGBUS.events.on 'sidebar:show', (view) =>
+      console.log 'sidebar:show called'
+      app.sidebar.show view
+
+    MSGBUS.events.on 'sidebar:close', () =>
+      console.log 'sidebar:close called'
+      app.sidebar.close()
+
       
+    MSGBUS.events.on 'rcontent:show', (view) =>
+      console.log 'rcontent:show called'
+      app.rcontent.show view
+      
+    MSGBUS.events.on 'rcontent:close', () =>
+      app.rcontent.close()
+      
+            
       
   app = new Marionette.Application()
   app.current_user = new common_models.CurrentUser

@@ -3,42 +3,45 @@ define (require, exports, module) ->
   Backbone = require 'backbone'
   Marionette = require 'marionette'
   MSGBUS = require 'msgbus'
-  Views = require 'views/mainviews'
 
-  FDViews = require 'frontdoor/views'
+  Views = require 'simplerss/views'
+  Collections = require 'collections'
+  
 
-  FDController = require 'frontdoor/controller'
-  
-  
-  main_menu_data =
-    tagclass: 'main-menu'
-    label: 'Main'
-    entries: [
-      {
-        name: 'Simple RSS'
-        url: '#simplerss'
-      }
-      {
-        name: 'Jellyfish'
-        url: '#jellyfish'
-      }
-      ]
-
-  MainMenuModel = new Backbone.Model main_menu_data
-  
-    
-  
   class Controller extends Backbone.Marionette.Controller
     make_main_content: ->
-        $('#header').text 'simplerss'
-              
+      MSGBUS.events.trigger 'rcontent:close'
+      @set_header 'simplerss'
+      feeds = MSGBUS.reqres.request 'rss:feedlist'
+      view = new Views.FeedListView
+        collection: feeds
+      response = feeds.fetch()
+      response.done ->
+        console.log 'feeds fetched'
+      MSGBUS.events.trigger 'sidebar:show', view
+          
     start: ->
-      if document.getElementById('main-content')
-        @make_main_content()
-      else
-        c = new FDController
-        c.initialize_page()
-        @make_main_content()
-        
+      @feeds = MSGBUS.reqres.request 'rss:feedlist'
+      @make_main_content()
+
+    set_header: (title) ->
+      header = $ '#header'
+      header.text title
+      header.append '<a class="action-button pull-right" href="#simplerss/addfeed">Add Feed</a>'
+      
+    show_feed: (feed_id) ->
+      #@make_main_content()
+      feed_data = MSGBUS.reqres.request 'rss:feeddata', feed_id
+      window.feed_data = feed_data
+      response = feed_data.fetch()
+      response.done =>
+        view = new Views.FeedDataView
+          model: feed_data
+        MSGBUS.events.trigger 'rcontent:show', view
+        @set_header feed_data.get('feed').title
+        $('html, body').animate {scrollTop: 0}, 'fast'
+      
+      
+              
   module.exports = Controller
   
