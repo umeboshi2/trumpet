@@ -1,8 +1,26 @@
+@import "sassy-buttons";
+
 /* -------------------------------------------------------*/
 /* 
       Action Button
 */
 /* -------------------------------------------------------*/
+$sb-base-color: $basecolor4;
+$sb-text-color: lighten($basecolor1, 15);
+$sb-font-size: 0.7em;
+
+$sb-second-color: false;
+$sb-border-radius: 0.3em;
+$sb-padding: 0.1em 0.1em;
+
+$sb-text-style: "inset";
+$sb-gradient-style: "simple";
+$sb-pseudo-states: true;
+
+@mixin sassy-button-default-structure {
+  display: inline-block;
+  cursor: pointer;
+}
 
 @mixin action-button {
     @include sassy-button;
@@ -12,10 +30,10 @@
 
 .action-button {
     @include action-button;
+    background: $basecolor4;
 }
 
 .action-button-submit {
-    background: $basecolor2;
     text-align: center;
 }
 

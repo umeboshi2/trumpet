@@ -1,0 +1,16 @@
+.listview-list {
+    background: $basecolor4;
+    padding: 0.3em;
+}
+
+.listview-list-entry {
+    background: $basecolor4;
+    margin: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: $basecolor2;
+    padding: 0.3em;
+    a {
+	color: $basecolor1;
+	}
+}

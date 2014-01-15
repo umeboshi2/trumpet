@@ -1,14 +1,30 @@
+@import "susy";
 
 @import "compass/css3/border-radius";
 
 
 @import "partials/fonts";
+@import "partials/action-button";
+
+
+/* Basic Grid */
+
+$total-columns  : 12;
+$column-width   : 6em;
+$gutter-width   : 1em;
+$grid-padding   : $gutter-width + 0.5em;
+
+$tablet: 8;
+$computer: 8em 12;
+
 
 body {
     padding-top: 4em;
 }
 
 .page {
+    @include container($total-columns, $tablet, $computer);
+
     font-family: "Source Sans Pro",sans;
 }
 
@@ -30,4 +46,17 @@ body {
 
 #header {
     @extend .small-header;
+}
+
+.two-col {
+    @include span-columns($total-columns);
+}
+
+.right-column-content {
+    @include span-columns(5 * $total-columns / 6, $total-columns);
+    @include omega;
+}
+
+.sidebar {
+    @include span-columns($total-columns / 6, $total-columns);
 }
