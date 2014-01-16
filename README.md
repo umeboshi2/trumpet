@@ -24,17 +24,19 @@ I like to use virtualenvwrapper
 
 ```sh
 sudo apt-get install virtualenvwrapper
-
 mkvirtualenv trumpet
 workon trumpet
-
 pip install requests
 ```
 
 Development packages are needed to install some of the 
 python packages::
 
-  sudo apt-get install libpq-dev python-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests libxml2-dev libxslt1-dev
+```sh
+sudo apt-get install libpq-dev python-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests libxml2-dev libxslt1-dev libssl-dev
+```
+
+  
 
 
 Next we have to download build and prepare the static resources.
@@ -74,26 +76,31 @@ gem install compass-ui
 
 ### Setup NodeJS
 
-#### Get nodejs for debian
+FIXME:  Need better instructions for nodeenv.
 
-sudo apt-get install cdbs devscripts debhelper pkg-config curl
 
-For debian, build a current version of nodejs using
-the build scripts in this repository:
+#### Get nodejs for virtualenv
 
-https://github.com/mark-webster/node-debian
+```sh
+workon trumpet
+pip install nodeenv
+nodeenv -p
+```
 
-Follow the instructions to build the debian package, 
-then install it.
+The last statement will download the latest stable 
+version of nodejs and build it in the python virtual 
+environment so that both virtual environments can 
+be integrated together.
+
 
 #### Install global nodejs packages
 
 Then, install these packages globally:
 
 ```sh
-sudo npm install -g coffee-script
-sudo npm install -g grunt-cli
-sudo npm install -g bower
+npm install -g coffee-script
+npm install -g grunt-cli
+npm install -g bower
 ```
 
 ### Get packages for grunt 
