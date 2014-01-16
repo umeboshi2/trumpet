@@ -5,6 +5,8 @@ define (require, exports, module) ->
 
   Templates = require 'simplerss/templates'
 
+  Models = require 'models'
+  
   class FeedEntryView extends Backbone.Marionette.ItemView
     template: Templates.rss_feed_entry
 
@@ -15,11 +17,23 @@ define (require, exports, module) ->
   class FeedDataView extends Backbone.Marionette.ItemView
     template: Templates.viewfeed
     
-  
+  class NewFeedView extends Backbone.Marionette.ItemView
+    template: Templates.new_rss_feed
+    model: new Models.RssFeed
+    events:
+      'submit form': 'onFormSubmit'
+
+    onFormSubmit: (something) ->
+      window.something = something
+      console.log 'form submitted'
+      
+      
+      
   module.exports =
     FeedEntryView: FeedEntryView
     FeedListView: FeedListView
     FeedDataView: FeedDataView
+    NewFeedView: NewFeedView
     
   
     

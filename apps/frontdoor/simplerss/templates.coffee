@@ -37,24 +37,25 @@ define (require, exports, module) ->
     div '.listview-list-entry', ->
       a href:'#simplerss/showfeed/' + feed.id, feed.name
 
-  rss_feed_entry_empty = renderable (feed) ->
-    div '.listview-list-entry', ->
-      text 'EmptyView'
-
   rss_feed_list = renderable (header) ->
     div '.listview-header', "RSS Feeds"
     div '.rss-feedlist.listview-list'
 
-  sidebar = renderable () ->
-    div '.listview-header', ->
-      div ->
-        a href:'#', 'RSS List'
-        
-  sbutton = renderable (model) ->
-    btnclass = '.btn.btn-default.' + model.bclass
-    div btnclass, ->
-      text model.name
-
+  new_rss_feed = renderable (feed) ->
+    form role:'form', action:'#simplerss/newfeed', ->
+      div '.form-group', ->
+        label for:'input_name', 'Feed Name'
+        input '#input_name.form-control',
+        name:'name'
+        placeholder:feed.name
+      div '.form-group', ->
+        label for:'input_url', 'Url'
+        input '#input_url.form-control',
+        name:'url'
+        placeholder:feed.url
+      #div '#add-feed.btn.btn-default', 'Submit'
+      button '.btn.btn-default', 'Submit New Feed'
+    
   viewfeed = renderable (data) ->
     div '.listview-header', data.feed.name
     div '.listview-list', ->
@@ -73,7 +74,7 @@ define (require, exports, module) ->
   module.exports =
     rss_feed_entry: rss_feed_entry
     rss_feed_list: rss_feed_list
-    sidebar: sidebar
+    new_rss_feed: new_rss_feed
     viewfeed: viewfeed
     
     

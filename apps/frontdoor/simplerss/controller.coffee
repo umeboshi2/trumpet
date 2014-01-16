@@ -30,9 +30,7 @@ define (require, exports, module) ->
       header.append '<a class="action-button pull-right" href="#simplerss/addfeed">Add Feed</a>'
       
     show_feed: (feed_id) ->
-      #@make_main_content()
       feed_data = MSGBUS.reqres.request 'rss:feeddata', feed_id
-      window.feed_data = feed_data
       response = feed_data.fetch()
       response.done =>
         view = new Views.FeedDataView
@@ -40,6 +38,13 @@ define (require, exports, module) ->
         MSGBUS.events.trigger 'rcontent:show', view
         @set_header feed_data.get('feed').title
         $('html, body').animate {scrollTop: 0}, 'fast'
+
+    show_new_feed_form: () ->
+      view = new Views.NewFeedView
+      MSGBUS.events.trigger 'rcontent:show', view
+      header = $ '#header'
+      header.text 'Add New RSS Feed'
+      #header.html ''
       
       
               

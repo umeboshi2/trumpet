@@ -29,33 +29,6 @@ define (require, exports, module) ->
     ########################################
     # Templates
     ########################################
-    user_menu = renderable (user) ->
-        ul '.ctx-menu.nav.navbar-nav', ->
-            li '.dropdown', ->
-                a '.dropdown-toggle', 'data-toggle':'dropdown', ->
-                    unless user == null
-                        text user.get 'username'
-                    else
-                        text "Guest"
-                    b '.caret'
-                ul '.dropdown-menu', ->
-                    li ->
-                        a href:'/usr/status', 'Preferences'
-                    # we need a "get user info" from server
-                    # to populate this menu with 'admin' link
-                    admin = false
-                    unless user == null
-                        groups = user.get 'groups'
-                        if groups != undefined
-                            for g in groups
-                                if g.name == 'admin'
-                                    admin = true
-                    if admin
-                        li ->
-                            a href:'/admin', 'Administer Site'
-                    li ->
-                        a href:'/logout', 'Logout'
-
     login_form = renderable (user) ->
                 form role:'form', method:'POST',
                 action:'/login', ->
