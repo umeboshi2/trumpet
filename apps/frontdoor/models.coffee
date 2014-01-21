@@ -10,6 +10,8 @@ define (require, exports, module) ->
     defaults:
       name: 'No RSS'
       url: '#'
+    url: '/rest/simplerss/feeds'
+    
       
   make_rss_data_model = (rss_id) ->
     class RssData extends Backbone.Model

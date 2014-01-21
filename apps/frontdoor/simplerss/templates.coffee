@@ -42,20 +42,19 @@ define (require, exports, module) ->
     div '.rss-feedlist.listview-list'
 
   new_rss_feed = renderable (feed) ->
-    form role:'form', action:'#simplerss/newfeed', ->
-      div '.form-group', ->
-        label for:'input_name', 'Feed Name'
-        input '#input_name.form-control',
-        name:'name'
-        placeholder:feed.name
-      div '.form-group', ->
-        label for:'input_url', 'Url'
-        input '#input_url.form-control',
-        name:'url'
-        placeholder:feed.url
-      #div '#add-feed.btn.btn-default', 'Submit'
-      button '.btn.btn-default', 'Submit New Feed'
-    
+    div '.form-group', ->
+      label for:'input_name', 'Feed Name'
+      input '#input_name.form-control',
+      name:'name', 'data-validation':'name',
+      placeholder:feed.name
+    div '.form-group', ->
+      label for:'input_url', 'Url'
+      input '#input_url.form-control',
+      name:'url', 'data-validation':'url',
+      placeholder:feed.url
+    input '.btn.btn-default', type:'submit', value:'New Feed'
+
+        
   viewfeed = renderable (data) ->
     div '.listview-header', data.feed.name
     div '.listview-list', ->

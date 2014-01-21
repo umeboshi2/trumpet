@@ -22,7 +22,7 @@ class RssManager(object):
         self.session = session
     
     def add_feed(self, name, url):
-        with trumpet.manager:
+        with transaction.manager:
             feed = Feed(name, url)
             self.session.add(feed)
         return self.session.merge(feed)
