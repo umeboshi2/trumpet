@@ -9,6 +9,7 @@ require.config
     'backbone.wreqr': '/components/backbone.wreqr/lib/amd/backbone.wreqr'
     'backbone.babysitter': '/components/backbone.babysitter/lib/amd/backbone.babysitter'
     marionette: '/components/marionette/lib/core/amd/backbone.marionette'
+    validation: '/components/backbone.validation/dist/backbone-validation-amd'
     bootstrap: '/components/bootstrap/dist/js/bootstrap'
     'jquery-ui': '/components/jquery-ui/ui/jquery-ui'
     requirejs: '/components/requirejs/require'
