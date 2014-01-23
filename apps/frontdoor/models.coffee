@@ -11,14 +11,17 @@ define (require, exports, module) ->
       name: 'No RSS'
       url: '#'
     url: '/rest/simplerss/feeds'
-    
-      
-  make_rss_data_model = (rss_id) ->
-    class RssData extends Backbone.Model
-      url: '/rest/simplerss/feeds/' + rss_id + '/feeddata'
-    return new RssData(rss_id)
-    
-      
+    validation:
+      name:
+        required: true
+      url:
+        required: true
+        
+  class RssData extends Backbone.Model
+    url: () ->
+      '/rest/simplerss/feeds/' + @id + '/feeddata'
+          
   module.exports =
     RssFeed: RssFeed
-    make_rss_data_model: make_rss_data_model
+    RssData: RssData
+

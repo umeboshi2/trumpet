@@ -4,7 +4,7 @@ define (require, exports, module) ->
   Backbone = require 'backbone'
   
   { User, Group, RssFeed,
-  make_rss_data_model } = require 'models'
+  RssData } = require 'models'
   MSGBUS = require 'msgbus'
       
 
@@ -21,16 +21,28 @@ define (require, exports, module) ->
     model: RssFeed
     url: '/rest/simplerss/feeds'
 
+  class RssDataList extends BaseCollection
+    model: RssData
+    
   # set handlers on message bus
-  # 
+  #
+  main_feed_list = new RssFeedList
   MSGBUS.reqres.setHandler 'rss:feedlist', ->
-    new RssFeedList
+    main_feed_list
 
+  main_data_list = new RssDataList
+  
+  
   MSGBUS.reqres.setHandler 'rss:feeddata', (feed_id) ->
     console.log 'handle rss:feeddata ' + feed_id
-    model = make_rss_data_model feed_id
-    return model
-          
+    model = main_data_list.get feed_id
+    if model == undefined
+      model = new RssData
+        id: feed_id
+      main_data_list.add model
+    else
+      model
+      
   
   module.exports =
     RssFeedList: RssFeedList

@@ -24,4 +24,7 @@ define (require, exports, module) ->
       feeds: feeds
     router = new Router
       controller: controller
-    
+    MSGBUS.commands.setHandler 'rssfeed:create', (model) ->
+      console.log "rssfeed:create being handled"
+      controller.new_feed_added model
+          

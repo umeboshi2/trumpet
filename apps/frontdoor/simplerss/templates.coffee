@@ -43,12 +43,12 @@ define (require, exports, module) ->
 
   new_rss_feed = renderable (feed) ->
     div '.form-group', ->
-      label for:'input_name', 'Feed Name'
+      label '.control-label', for:'input_name', 'Feed Name'
       input '#input_name.form-control',
       name:'name', 'data-validation':'name',
       placeholder:feed.name
     div '.form-group', ->
-      label for:'input_url', 'Url'
+      label '.control-label', for:'input_url', 'Url'
       input '#input_url.form-control',
       name:'url', 'data-validation':'url',
       placeholder:feed.url

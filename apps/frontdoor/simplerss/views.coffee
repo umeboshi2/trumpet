@@ -37,7 +37,7 @@ define (require, exports, module) ->
       console.log @model
 
     onSuccess: (model) ->
-      Backbone.trigger 'rssfeed:create', model
+      MSGBUS.commands.execute 'rssfeed:create', model
       
       
   module.exports =

@@ -96,15 +96,15 @@ define (require, exports, module) ->
         invalid: @invalid
 
     valid: (view, attr, selector) =>
-      @$("[data-validation=#{attr}]")
-        .removeClass('invalid')
-        .addClass('valid')
+      @$("[data-validation=#{attr}]").parent()
+        .removeClass('has-error')
+        .addClass('has-success')
 
     invalid: (view, attr, error, selector) =>
       @failure(@model)
-      @$("[data-validation=#{attr}]")
-        .removeClass('valid')
-        .addClass('invalid')
+      @$("[data-validation=#{attr}]").parent()
+        .removeClass('has-success')
+        .addClass('has-error')
 
   module.exports = FormView
   

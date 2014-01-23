@@ -45,7 +45,17 @@ define (require, exports, module) ->
       header = $ '#header'
       header.text 'Add New RSS Feed'
       #header.html ''
-      
+
+    new_feed_added: (model) ->
+      MSGBUS.events.trigger 'sidebar:close'
+      feeds = MSGBUS.reqres.request 'rss:feedlist'
+      view = new Views.FeedListView
+        collection: feeds
+      response = feeds.fetch()
+      response.done ->
+        console.log 'feeds fetched'
+      MSGBUS.events.trigger 'sidebar:show', view
+      MSGBUS.events.trigger 'rcontent:close'
       
               
   module.exports = Controller
