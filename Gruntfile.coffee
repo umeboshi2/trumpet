@@ -52,10 +52,12 @@ module.exports = (grunt) ->
         command: 'python scripts/generate-scss.py'
       googlefonts:
         command: 'python scripts/get-google-fonts.py'
-        stdout: true
+        options:
+          stdout: true
       bower:
         command: 'python scripts/prepare-bower-components.py'
-        stdout: true
+        options:
+          stdout: true
         
     # load grunt-* tasks
     require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks

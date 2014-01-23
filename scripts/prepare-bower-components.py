@@ -59,8 +59,6 @@ def handle_fontawesome(pathspec):
         src = os.path.join(srcdir, basename)
         handle_file(src)
         
-    
-
 def handle_requirejs(pathspec):
     filename = os.path.join(pathspec, 'require.js')
     if not os.path.isfile(filename):
@@ -74,8 +72,10 @@ def handle_file(pathspec):
     dirname = os.path.dirname(dest)
     if not os.path.isdir(dirname):
         os.makedirs(dirname)
-    cmd = ['cp', '-a', src, dest]
-    subprocess.check_call(cmd)
+    if not os.path.isfile(dest):
+        print "Copying to ", dest
+        cmd = ['cp', '-a', src, dest]
+        subprocess.check_call(cmd)
 
 def handle_nodejs_package(name, pathspec):
     pkg = parse_npm_package(pathspec)
@@ -91,8 +91,6 @@ def handle_nodejs_package(name, pathspec):
                 raise RuntimeError, msg
         handle_file(filename)
         
-        
-
 def handle_dir(name, pathspec):
     if is_npm_package(pathspec):
         if name == 'font-awesome':
