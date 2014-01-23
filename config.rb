@@ -11,7 +11,7 @@ sass_dir = "sass"
 images_dir = "images"
 javascripts_dir = "javascripts"
 
-http_fonts_path = '/fonts'
+http_fonts_path = '/components'
 
 
 # You can select your preferred output style here (can be overridden via the command line):

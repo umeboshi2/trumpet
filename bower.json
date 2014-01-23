@@ -33,8 +33,20 @@
     "backbone.babysitter": "~0.0.6",
     "font-awesome": "~4.0.3",
     "lodash": "~2.4.1",
-    "backbone.validation": "~0.7.1"
-  },
+    "backbone.validation": "~0.7.1",
+    "font-play-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/play/Play-Regular.ttf",
+    "font-sacramento-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/sacramento/Sacramento-Regular.ttf",
+    "font-sourcesanspro-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/sourcesanspro/SourceSansPro-Regular.ttf",
+    "font-droidserif-bold":"https://googlefontdirectory.googlecode.com/hg/apache/droidserif/DroidSerif-Bold.ttf",
+    "font-rambla-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/rambla/Rambla-Regular.ttf",
+    "font-droidsans":"https://googlefontdirectory.googlecode.com/hg/apache/droidsans/DroidSans.ttf",
+    "font-droidserif":"https://googlefontdirectory.googlecode.com/hg/apache/droidserif/DroidSerif.ttf",
+    "font-cabin-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/cabin/Cabin-Regular.ttf",
+    "font-nunito-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/nunito/Nunito-Regular.ttf",
+    "font-droidsans-bold":"https://googlefontdirectory.googlecode.com/hg/apache/droidsans/DroidSans-Bold.ttf",
+    "font-rumraisin-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/rumraisin/RumRaisin-Regular.ttf",
+    "font-questrial-regular":"https://googlefontdirectory.googlecode.com/hg/ofl/questrial/Questrial-Regular.ttf"
+      },
   "resolutions": {
     "jquery": "~2.0.3",
     "backbone": "~1.1.0"

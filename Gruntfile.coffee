@@ -64,7 +64,6 @@ module.exports = (grunt) ->
     
     grunt.registerTask 'default', [
       'shell:scss'
-      'shell:googlefonts'
       'shell:bower'
       'coffee:compile'
       'compass:compile'
