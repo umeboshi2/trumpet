@@ -71,7 +71,9 @@ class FeedDataResource(BaseRSSResource):
     def get(self):
         id = int(self.request.matchdict['id'])
         feed = self.mgr.view_latest_feed(id)
-        j = json.dumps(feed['rss'].content, default=make_json)
+        data = dict(feed['rss'].content)
+        data['id'] = id
+        j = json.dumps(data, default=make_json)
         return json.loads(j)
     
         

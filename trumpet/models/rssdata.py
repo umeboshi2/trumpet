@@ -67,6 +67,11 @@ FEEDS = [
     'archive.org|http://archive.org/services/collection-rss.php',
     ]
 
+FEEDS = [
+    'Google US News|http://news.google.com/news?ned=us&topic=n&output=rss',
+    'Google Debian News|http://news.google.com/news?q=debian&output=rss',
+    'Science Daily|http://www.sciencedaily.com/newsfeed.xml',
+    ]
 
 def populate_feeds():
     session = DBSession()
