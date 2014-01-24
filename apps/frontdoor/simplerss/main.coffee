@@ -14,6 +14,7 @@ define (require, exports, module) ->
     appRoutes:
       'simplerss': 'start'
       'simplerss/showfeed/:id': 'show_feed'
+      'simplerss/editfeed/:id': 'show_edit_feed_form'
       'simplerss/addfeed': 'show_new_feed_form'
       
       

@@ -26,7 +26,7 @@ define (require, exports, module) ->
   button, a, nav, form, p,
   ul, li, b,
   h1, h2, h3,
-  subtitle, section
+  subtitle, section, hr
   } = teacup
             
     
@@ -35,7 +35,13 @@ define (require, exports, module) ->
   ########################################
   rss_feed_entry = renderable (feed) ->
     div '.listview-list-entry', ->
+      span '.btn-default.btn-xs', ->
+        a href:'#simplerss/editfeed/' + feed.id,
+        style:'color:black', ->
+          icon '.edit-feed.fa.fa-pencil'
+      text "    "
       a href:'#simplerss/showfeed/' + feed.id, feed.name
+        
 
   rss_feed_list = renderable (header) ->
     div '.listview-header', "RSS Feeds"
@@ -56,11 +62,13 @@ define (require, exports, module) ->
 
         
   viewfeed = renderable (data) ->
-    div '.listview-header', data.feed.name
+    div '.listview-header', ->
+      text data.feed.title
+      div '.btn.btn-default.btn-xs.pull-right', 'edit'
     div '.listview-list', ->
       for entry in data.entries
         div '.listview-list-entry', ->
-          p ->
+          div ->
             a '.rssviewer-viewfeed-entry-link',
             href:entry.link, entry.title
           div ->

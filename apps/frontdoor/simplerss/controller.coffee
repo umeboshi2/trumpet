@@ -11,7 +11,7 @@ define (require, exports, module) ->
   class Controller extends Backbone.Marionette.Controller
     make_main_content: ->
       MSGBUS.events.trigger 'rcontent:close'
-      @set_header 'simplerss'
+      @set_header 'Simple RSS'
       feeds = MSGBUS.reqres.request 'rss:feedlist'
       view = new Views.FeedListView
         collection: feeds
@@ -27,7 +27,7 @@ define (require, exports, module) ->
     set_header: (title) ->
       header = $ '#header'
       header.text title
-      header.append '<a class="action-button pull-right" href="#simplerss/addfeed">Add Feed</a>'
+      header.append '<a class="btn btn-default btn-xs pull-left" href="#simplerss/addfeed">Add Feed</a>'
       
     show_feed: (feed_id) ->
       feed_data = MSGBUS.reqres.request 'rss:feeddata', feed_id
@@ -42,10 +42,15 @@ define (require, exports, module) ->
     show_new_feed_form: () ->
       view = new Views.NewFeedView
       MSGBUS.events.trigger 'rcontent:show', view
-      header = $ '#header'
-      header.text 'Add New RSS Feed'
+      #header = $ '#header'
+      #header.text 'Add New RSS Feed'
       #header.html ''
+      @set_header 'Add New RSS Feed'
 
+    show_edit_feed_form: () ->
+      console.log 'show_edit_feed_form'
+      MSGBUS.events.trigger 'rcontent:close'
+      
     new_feed_added: (model) ->
       MSGBUS.events.trigger 'sidebar:close'
       feeds = MSGBUS.reqres.request 'rss:feedlist'
