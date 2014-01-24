@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-${basecolor}.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/jqueryui-${basecolor}.css"/>
     <link rel="stylesheet" type="text/css" href="/css/screen-${basecolor}.css"/>
     <script data-main="${appname}/main" src="/components/requirejs-bower/require.js" type="text/javascript"></script>
   </head>

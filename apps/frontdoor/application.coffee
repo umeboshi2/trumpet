@@ -13,6 +13,7 @@ define (require, exports, module) ->
   
   require 'frontdoor/main'
   require 'simplerss/main'
+  require 'jellyfish/main'
   
 
   prepare_app = (app) ->
@@ -45,6 +46,7 @@ define (require, exports, module) ->
       # then setup the routes
       MSGBUS.commands.execute 'frontdoor:route'
       MSGBUS.commands.execute 'simplerss:route'
+      MSGBUS.commands.execute 'jellyfish:route'
       
     # connect events
     MSGBUS.events.on 'mainpage:show', (view) =>
