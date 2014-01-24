@@ -27,6 +27,15 @@ class RssManager(object):
             self.session.add(feed)
         return self.session.merge(feed)
 
+    def update_feed_info(self, feed_id, name, url):
+        with transaction.manager:
+            feed = self.session.query(Feed).get(feed_id)
+            if feed is not None:
+                feed.name = name
+                feed.url = url
+                self.session.add(feed)
+        return self.session.merge(feed)
+    
     def _get_latest_feed(self, feed):
         "gets latest feed in database"
         query = self.session.query(FeedData).filter_by(feed_id=feed.id)

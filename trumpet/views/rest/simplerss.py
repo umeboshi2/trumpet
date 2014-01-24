@@ -58,8 +58,25 @@ class FeedResource(BaseRSSResource):
         return data
         
     def collection_put(self):
-        self.mgr.update_feeds()
-        return dict(result='success')
+        if self.request.json and 'id' in self.request.json:
+            j = self.request.json
+            id = j['id']
+            name = j['name']
+            url = j['url']
+            feed = self.mgr.update_feed_info(id, name, url)
+            return dict(obj=feed.serialize(), result='success')
+        else:
+            self.mgr.update_feeds()
+            return dict(result='success')
+
+    def put(self):
+        id = self.request.matchdict['id']
+        name = self.request.json['name']
+        url = self.request.json['url']
+        print 'NAME', name
+        raise RuntimeError, "Not implemented"
+    
+        
     
 
               
