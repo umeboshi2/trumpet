@@ -5,10 +5,7 @@ define (require, exports, module) ->
   MSGBUS = require 'msgbus'
 
   Controller = require 'simplerss/controller'
-  #Models = require 'models'
   
-  
-  feeds = MSGBUS.reqres.request 'rss:feedlist'
 
   class Router extends Backbone.Marionette.AppRouter
     appRoutes:
@@ -20,12 +17,15 @@ define (require, exports, module) ->
       
   MSGBUS.commands.setHandler 'simplerss:route', () ->
     console.log "simplerss:route being handled"
-    window.feeds = feeds
     controller = new Controller
-      feeds: feeds
     router = new Router
       controller: controller
     MSGBUS.commands.setHandler 'rssfeed:create', (model) ->
       console.log "rssfeed:create being handled"
       controller.new_feed_added model
+    MSGBUS.commands.setHandler 'rssfeed:update', (model) ->
+      console.log 'rssfeed:update being handled'
+      controller.feed_info_updated model
+      
+      
           

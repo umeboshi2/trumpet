@@ -30,6 +30,11 @@ define (require, exports, module) ->
   MSGBUS.reqres.setHandler 'rss:feedlist', ->
     main_feed_list
 
+  MSGBUS.reqres.setHandler 'rss:getfeedinfo', (feed_id) ->
+    console.log 'handle rss:getfeedinfo ' + feed_id
+    main_feed_list.get feed_id
+    
+
   main_data_list = new RssDataList
   
   

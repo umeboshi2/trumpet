@@ -47,24 +47,29 @@ define (require, exports, module) ->
     div '.listview-header', "RSS Feeds"
     div '.rss-feedlist.listview-list'
 
-  new_rss_feed = renderable (feed) ->
+  rss_feed_form = renderable (feed, btntxt) ->
     div '.form-group', ->
       label '.control-label', for:'input_name', 'Feed Name'
       input '#input_name.form-control',
       name:'name', 'data-validation':'name',
-      placeholder:feed.name
+      placeholder:feed.name, value:feed.name
     div '.form-group', ->
       label '.control-label', for:'input_url', 'Url'
       input '#input_url.form-control',
       name:'url', 'data-validation':'url',
-      placeholder:feed.url
-    input '.btn.btn-default', type:'submit', value:'New Feed'
+      placeholder:feed.url, value:feed.url
+    input '.btn.btn-default.btn-xs', type:'submit', value:btntxt
+    
+  new_rss_feed = (feed) ->
+    rss_feed_form(feed, 'Submit New Feed')
 
+  edit_rss_feed = (feed) ->
+    rss_feed_form(feed, 'Update Rss Feed')
+    
         
   viewfeed = renderable (data) ->
     div '.listview-header', ->
       text data.feed.title
-      div '.btn.btn-default.btn-xs.pull-right', 'edit'
     div '.listview-list', ->
       for entry in data.entries
         div '.listview-list-entry', ->
@@ -82,6 +87,7 @@ define (require, exports, module) ->
     rss_feed_entry: rss_feed_entry
     rss_feed_list: rss_feed_list
     new_rss_feed: new_rss_feed
+    edit_rss_feed: edit_rss_feed
     viewfeed: viewfeed
     
     

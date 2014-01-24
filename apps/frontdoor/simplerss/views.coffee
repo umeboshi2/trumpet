@@ -19,25 +19,35 @@ define (require, exports, module) ->
 
   class FeedDataView extends Backbone.Marionette.ItemView
     template: Templates.viewfeed
-    
-  class NewFeedView extends FormView
-    template: Templates.new_rss_feed
 
+  class BaseFeedView extends FormView
     ui:
       name: '[name="name"]'
       url: '[name="url"]'
       
-    createModel: -> new Models.RssFeed
-
     updateModel: ->
-      window.myUI = @ui
       @model.set
         name: @ui.name.val()
         url: @ui.url.val()
-      console.log @model
+      #@model.save()
+      
+  class NewFeedView extends BaseFeedView
+    template: Templates.new_rss_feed
+      
+    createModel: ->
+      new Models.RssFeed
 
     onSuccess: (model) ->
       MSGBUS.commands.execute 'rssfeed:create', model
+      
+  class EditFeedView extends BaseFeedView
+    template: Templates.edit_rss_feed
+
+    createModel: ->
+      @model
+      
+    onSuccess: (model) ->
+      MSGBUS.commands.execute 'rssfeed:update', model
       
       
   module.exports =
@@ -45,6 +55,8 @@ define (require, exports, module) ->
     FeedListView: FeedListView
     FeedDataView: FeedDataView
     NewFeedView: NewFeedView
+    EditFeedView: EditFeedView
+    
     
   
     

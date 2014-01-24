@@ -23,19 +23,9 @@ require.config
             deps: ['jquery']
 
 
-# top level always requires bootstrap
-#
-#require ['jquery', 'underscore', 'bootstrap', 'backbone'], ->
-#    app = window.app = _.extend window.app || {},
-#        views: {}
-
 require ['application', 'router', 'backbone'],
 (Application, Router, Backbone) ->
     app = new Application()
     router = new Router app
     window.app = app
     Backbone.history.start()
-
-
-
-    
