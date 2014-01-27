@@ -1,6 +1,8 @@
 name: Your New Jekyll Site
 markdown: redcarpet
 pygments: true
+baseurl: /trumpet/
+
 asset_pipeline:
   bundle: true            # Default = true
   compress: true          # Default = true
