@@ -5,35 +5,34 @@ define (require, exports, module) ->
   MSGBUS = require 'msgbus'
 
   Views = require 'jellyfish/views'
-  Collections = require 'collections'
+  Collections = require 'jellyfish/collections'
 
   
   class Controller extends Backbone.Marionette.Controller
     make_sidebar: ->
+      pages = MSGBUS.reqres.request 'wiki:pagelist'
+      
       MSGBUS.events.trigger 'sidebar:close'
-      view = new Views.FeedListView
-        collection: feeds
+      view = new Views.PageListView
+        collection: pages
       MSGBUS.events.trigger 'sidebar:show', view
-      if feeds.length == 0
-        console.log 'fetching feeds for sidebar'
-        feeds.fetch()
+      if pages.length == 0
+        console.log 'fetching pages for sidebar'
+        pages.fetch()
       
       
-    make_main_content: ->
-      MSGBUS.events.trigger 'rcontent:close'
-      @set_header 'JellyFish'
-      @make_sidebar()
+    set_header: (title) ->
+      header = $ '#header'
+      header.text title
       
     start: ->
       console.log 'jellyfish start'
       MSGBUS.events.trigger 'rcontent:close'
       MSGBUS.events.trigger 'sidebar:close'
       @set_header 'JellyFish'
+      @make_sidebar()
       
 
-    set_header: (title) ->
-      header = $ '#header'
-      header.text title
       
               
   module.exports = Controller

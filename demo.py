@@ -65,6 +65,7 @@ def main(global_config, **settings):
     config.add_view('trumpet.views.frontdoor.FrontDoorView',
                     route_name='home',)
 
+    config.scan('trumpet.views.rest.base')
     config.scan('trumpet.views.rest.users')
     config.scan('trumpet.views.rest.webview')
     config.scan('trumpet.views.rest.sitecontent')

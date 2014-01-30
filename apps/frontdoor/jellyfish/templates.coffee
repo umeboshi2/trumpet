@@ -37,10 +37,26 @@ define (require, exports, module) ->
     div 'listview-header', ->
       text 'Jelly fish content'
       
-            
+  page_list_entry = renderable (page) ->
+    div '.listview-list-entry', ->
+      span '.btn-default.btn-xs', ->
+        a href:'#jellyfish/editpage/' + page.id,
+        style:'color:black', ->
+          icon '.edit-page.fa.fa-pencil'
+      text "    "
+      a href:'#jellyfish/showpage/' + page.id, page.name
+        
+      
+  page_list = renderable () ->
+    div '.listview-header', 'Wiki Pages'
+    div '.listview-list'
+                
   ##################################################################
   # ##########################
   ##################################################################    
           
   module.exports =
     jellyfish: jellyfish
+    page_list_entry: page_list_entry
+    page_list: page_list
+    
