@@ -138,7 +138,17 @@ def handle_item(name, pathspec):
             handle_list_item(name, pathspec)
         else:
             handle_single_item(name, pathspec)
+
+
+def handle_ace_editor():
+    basedir = 'components/ace-builds/src'
+    print "Handling ace"
+    for basename in os.listdir(basedir):
+        pathspec = os.path.join(basedir, basename)
+        handle_file(pathspec)
         
+
+
 
 if __name__ == '__main__':
     paths = get_paths()
@@ -146,7 +156,8 @@ if __name__ == '__main__':
         handle_item(name, pathspec)
     for path in SPECIAL_PATHS:
         handle_file(path)
-        
+    handle_ace_editor()
+    
     
     
     
