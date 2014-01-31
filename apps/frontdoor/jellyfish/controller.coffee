@@ -32,7 +32,20 @@ define (require, exports, module) ->
       @set_header 'JellyFish'
       @make_sidebar()
       
+    show_page: (page_id) ->
+      @make_sidebar()
+      page = MSGBUS.reqres.request 'wiki:pagecontent', page_id
+      view = new Views.ShowPageView
+        model: page
+      MSGBUS.events.trigger 'rcontent:show', view
 
+    edit_page: (page_id) ->
+      @make_sidebar()
+      page = MSGBUS.reqres.request 'wiki:pagecontent', page_id
+      view = new Views.EditPageView
+        model: page
+      MSGBUS.events.trigger 'rcontent:show', view
+      
       
               
   module.exports = Controller

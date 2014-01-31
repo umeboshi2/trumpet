@@ -15,6 +15,9 @@ require.config
     requirejs: '/components/requirejs/require'
     text: '/components/requirejs-text/text'
     teacup: '/components/teacup/lib/teacup'
+    ace: '/components/ace-builds/src/ace'
+    marked: '/components/marked/lib/marked'
+    
     common: '/app/common'
 
     # FIXME: work with using bootstrap components

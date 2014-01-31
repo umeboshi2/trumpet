@@ -10,7 +10,9 @@ define (require, exports, module) ->
   class Router extends Backbone.Marionette.AppRouter
     appRoutes:
       'jellyfish': 'start'
-
+      'jellyfish/showpage/:id': 'show_page'
+      'jellyfish/editpage/:id': 'edit_page'
+      
       
       
   MSGBUS.commands.setHandler 'jellyfish:route', () ->

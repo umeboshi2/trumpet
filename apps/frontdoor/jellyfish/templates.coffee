@@ -3,6 +3,9 @@ define (require, exports, module) ->
   $ = require 'jquery'
   _ = require 'underscore'
   Backbone = require 'backbone'
+
+  marked = require 'marked'
+  
   teacup = require 'teacup'
 
   renderable = teacup.renderable
@@ -50,7 +53,22 @@ define (require, exports, module) ->
   page_list = renderable () ->
     div '.listview-header', 'Wiki Pages'
     div '.listview-list'
-                
+
+  page_view = renderable (page) ->
+    div '.listview-header', ->
+      text page.name
+    div '.listview-list', ->
+      teacup.raw marked page.content
+      
+  edit_page = renderable (page) ->
+    div '.listview-header', ->
+      text "Editing " + page.name
+      div '#save-button.pull-left.btn.btn-default.btn-xs', ->
+        text 'save'
+    div '#editor'
+    
+
+  
   ##################################################################
   # ##########################
   ##################################################################    
@@ -59,4 +77,7 @@ define (require, exports, module) ->
     jellyfish: jellyfish
     page_list_entry: page_list_entry
     page_list: page_list
+    page_view: page_view
+    edit_page: edit_page
+    
     

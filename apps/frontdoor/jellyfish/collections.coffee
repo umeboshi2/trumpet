@@ -23,7 +23,10 @@ define (require, exports, module) ->
   main_page_list = new PageCollection
   MSGBUS.reqres.setHandler 'wiki:pagelist', ->
     main_page_list
-  
+
+  MSGBUS.reqres.setHandler 'wiki:pagecontent', (page_id) ->
+    main_page_list.get page_id
+      
   module.exports =
     PageCollection: PageCollection
 
