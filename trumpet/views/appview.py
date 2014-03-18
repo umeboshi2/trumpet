@@ -51,12 +51,13 @@ class AppView(BasicView):
 class AdminAppView(BasicView):
     def __init__(self, request):
         super(AdminAppView, self).__init__(request)
-        assetpath = 'trumpet:static/apps'
+        assetpath = 'trumpet:static/apps/admin'
         view = request.view_name
         subpath = request.subpath
         if not len(subpath):
             #raise HTTPNotFound()
-            self.response = Response(body='admin page')
+            #self.response = Response(body='admin page')
+            self.response = HTTPFound('/admin/main')
             return
         appname = subpath[0]
         if len(subpath) == 1:
@@ -75,7 +76,6 @@ class AdminAppView(BasicView):
             self.response = Response(body=content)
             self.response.encode_content()
         else:
-            #asset = 'haberdashery:apps/%s' % appname
             asset = os.path.join(assetpath, *subpath)
             self.response = static_asset_response(request, asset)
 
