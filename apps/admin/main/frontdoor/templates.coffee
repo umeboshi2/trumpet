@@ -37,7 +37,9 @@ define (require, exports, module) ->
     div '.something-very-special'
     
   frontdoor_main = renderable () ->
-    div '.action-button', 'hello'
+    div '.btn.btn-default', ->
+      a href:'#useradmin/listusers', 'List Users'
+      
               
   module.exports =
     layout: layout

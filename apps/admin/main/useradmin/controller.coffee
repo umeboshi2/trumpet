@@ -18,6 +18,14 @@ define (require, exports, module) ->
         name: 'adduser'
         label: 'New User'
       }
+      {
+        name: 'listgroups'
+        label: 'List Groups'
+      }
+      {
+        name: 'addgroup'
+        label: 'Add Group'
+      }
     ]
     
   
@@ -42,7 +50,27 @@ define (require, exports, module) ->
     set_header: (title) ->
       header = $ '#header'
       header.text title
+
+    list_users: ->
+      @make_sidebar()
+      console.log "list_users called on controller"
+      @set_header 'List Users'
+
+    add_user: ->
+      @make_sidebar()
+      console.log "add_user called on controller"
+      @set_header 'add user'
       
+    list_groups: ->
+      @make_sidebar()
+      console.log "list_groups called on controller"
+      @set_header 'List Groups'
+
+    add_group: ->
+      @make_sidebar()
+      console.log "add_group called on controller"
+      @set_header 'add group'
+                  
     show_feed: (feed_id) ->
       @make_sidebar()
       feed_data = MSGBUS.reqres.request 'rss:feeddata', feed_id

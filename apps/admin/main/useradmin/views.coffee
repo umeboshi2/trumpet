@@ -1,4 +1,5 @@
 define (require, exports, module) ->
+  $ = require 'jquery'
   Backbone = require 'backbone'
   MSGBUS = require 'msgbus'
   Marionette = require 'marionette'
@@ -12,7 +13,35 @@ define (require, exports, module) ->
   
   class SideBarView extends Backbone.Marionette.ItemView
     template: Templates.useradmin_sidebar
+
+    events:
+      'click .listusers': 'list_users_pressed'
+      'click .adduser': 'add_user_pressed'
+      'click .listgroups': 'list_groups_pressed'
+      'click .addgroup': 'add_group_pressed'
       
+    _navigate: (url) ->
+      r = new Backbone.Router
+      r.navigate url, trigger:true
+      
+    list_users_pressed: () ->
+      console.log 'list_users called'
+      @_navigate '#useradmin/listusers'
+      
+    add_user_pressed: () ->
+      console.log 'add_user called'
+      @_navigate '#useradmin/adduser'
+      
+    list_groups_pressed: () ->
+      console.log 'list_groups_pressed called'
+      @_navigate '#useradmin/listgroups'
+
+    add_group_pressed: () ->
+      console.log 'add_group_pressed called'
+      @_navigate '#useradmin/addgroup'
+
+      
+  
   class BaseFeedView extends FormView
     ui:
       name: '[name="name"]'
