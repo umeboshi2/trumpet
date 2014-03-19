@@ -40,6 +40,24 @@ define (require, exports, module) ->
       console.log 'add_group_pressed called'
       @_navigate '#useradmin/addgroup'
 
+  class SimpleUserEntryView extends Backbone.Marionette.ItemView
+    template: Templates.simple_user_entry
+
+  class UserListViewOrig extends Backbone.Marionette.CollectionView
+    #template: Templates.simple_user_list
+    itemView: SimpleUserEntryView
+    className: 'listview-list'
+
+  class UserListView extends Backbone.Marionette.CompositeView
+    template: Templates.simple_user_list
+    itemView: SimpleUserEntryView
+    className: 'listview-list'
+    
+  class NewUserFormView extends FormView
+    template: Templates.new_user_form
+
+    createModel: ->
+      new Models.User
       
   
   class BaseFeedView extends FormView
@@ -76,7 +94,10 @@ define (require, exports, module) ->
     NewFeedView: NewFeedView
     EditFeedView: EditFeedView
     SideBarView: SideBarView
+    SimpleUserEntryView: SimpleUserEntryView
+    UserListView: UserListView
+    NewUserFormView: NewUserFormView
     
     
   
-    
+

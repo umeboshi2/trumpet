@@ -69,7 +69,7 @@ class AdminAppView(BasicView):
                 raise HTTPNotFound()
             # send back index to start load app
             settings = self.get_app_settings()
-            basecolor = settings['default.css.basecolor']
+            basecolor = settings['admin.css.basecolor']
             template = 'trumpet:templates/webview-app.mako'
             env = dict(appname=appname, basecolor=basecolor)
             content = render(template, env)

@@ -21,14 +21,10 @@ define (require, exports, module) ->
         url: '#useradmin'
       }
       {
-        name: 'Simple RSS'
-        url: '#simplerss'
-      }
-      {
         name: 'Jellyfish'
         url: '#jellyfish'
       }
-      ]
+    ]
 
   MainMenuModel = new Backbone.Model main_menu_data
 

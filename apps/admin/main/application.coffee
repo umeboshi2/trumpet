@@ -13,7 +13,6 @@ define (require, exports, module) ->
   
   require 'frontdoor/main'
   require 'useradmin/main'
-  require 'simplerss/main'
   require 'jellyfish/main'
   
 

@@ -3,8 +3,7 @@ define (require, exports, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
   
-  { User, Group, RssFeed,
-  RssData } = require 'models'
+  { User, Group } = require 'models'
   MSGBUS = require 'msgbus'
       
 
@@ -17,38 +16,31 @@ define (require, exports, module) ->
     parse: (response) ->
       return response.data
 
-  class RssFeedList extends BaseCollection
-    model: RssFeed
-    url: '/rest/simplerss/feeds'
+  class UserList extends BaseCollection
+    model: User
+    url: '/rest/users'
 
-  class RssDataList extends BaseCollection
-    model: RssData
+  class GroupList extends BaseCollection
+    model: Group
+    url: '/rest/groups'
+
+  MainUserList = new UserList
+  MainGroupList = new GroupList
+
+  make_ug_collection = (user_id) ->
+    class uglist extends BaseCollection
+      model Group
+      url: '/rest/users/' + user_id + '/groups'
+    return new uglist
     
-  # set handlers on message bus
-  #
-  main_feed_list = new RssFeedList
-  MSGBUS.reqres.setHandler 'rss:feedlist', ->
-    main_feed_list
-
-  MSGBUS.reqres.setHandler 'rss:getfeedinfo', (feed_id) ->
-    console.log 'handle rss:getfeedinfo ' + feed_id
-    main_feed_list.get feed_id
-    
-
-  main_data_list = new RssDataList
-  
-  
-  MSGBUS.reqres.setHandler 'rss:feeddata', (feed_id) ->
-    console.log 'handle rss:feeddata ' + feed_id
-    model = main_data_list.get feed_id
-    if model == undefined
-      model = new RssData
-        id: feed_id
-      main_data_list.add model
-    else
-      model
+  MSGBUS.reqres.setHandler 'useradmin:userlist', ->
+    MainUserList
+  MSGBUS.reqres.setHandler 'userlist:grouplist', ->
+    MainGroupList
       
   
   module.exports =
-    RssFeedList: RssFeedList
+    MainUserList: MainUserList
+    MainGroupList: MainGroupList
+    
     

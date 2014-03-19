@@ -38,36 +38,56 @@ define (require, exports, module) ->
       window.sidebar = view
       
       MSGBUS.events.trigger 'sidebar:show', view
+
+    _base_page: ->
+      MSGBUS.events.trigger 'rcontent:close'
+      @make_sidebar()
+      
+    set_header: (title) ->
+      header = $ '#header'
+      header.text title
       
     make_main_content: ->
-      MSGBUS.events.trigger 'rcontent:close'
+      @_base_page()
       @set_header 'Manage Users'
-      @make_sidebar()
       
     start: ->
       @make_main_content()
 
-    set_header: (title) ->
-      header = $ '#header'
-      header.text title
 
     list_users: ->
-      @make_sidebar()
+      @_base_page()
       console.log "list_users called on controller"
       @set_header 'List Users'
+      
+      userlist = MSGBUS.reqres.request 'useradmin:userlist'
+      window.userlist = userlist
+      
+      
+      response = userlist.fetch()
+      response.done =>
+        view = new Views.UserListView
+          collection: userlist
+        MSGBUS.events.trigger 'rcontent:show', view
 
     add_user: ->
-      @make_sidebar()
+      @_base_page()
       console.log "add_user called on controller"
       @set_header 'add user'
+
+      view = new Views.NewUserFormView
+      MSGBUS.events.trigger 'rcontent:show', view
+      
+      window.formview = view
       
     list_groups: ->
-      @make_sidebar()
+      @_base_page()
       console.log "list_groups called on controller"
       @set_header 'List Groups'
+        
 
     add_group: ->
-      @make_sidebar()
+      @_base_page()
       console.log "add_group called on controller"
       @set_header 'add group'
                   

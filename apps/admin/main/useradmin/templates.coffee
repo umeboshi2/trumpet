@@ -39,12 +39,36 @@ define (require, exports, module) ->
         div '.btn.btn-default.' + entry.name, entry.label
     
       
-      
+  simple_user_entry = renderable (model) ->
+    div '.listview-list-entry',
+      model.username
+
+  simple_user_list = renderable (users) ->
+    div '.listview-header', 'Users'
+    #div '.listview-list'
+
+  new_user_form = renderable () ->
+    div '.form-group', ->
+      label '.control-label', for:'input_name', 'User Name'
+      input '#input_name.form-control',
+      name:'name', 'data-validation':'name',
+      placeholder:'User Name', value: ''
+    div '.form-group', ->
+      label '.control-label', for:'input_password', 'Password'
+      input '#input_password.form-control',
+      name:'password', 'data-validation':'password',
+      placeholder:'', value:''
+    input '.btn.btn-default.btn-xs', type:'submit', value:"Add New User"
+    
+         
   ##################################################################
   # ##########################
   ##################################################################    
           
   module.exports =
     useradmin_sidebar: useradmin_sidebar
+    simple_user_entry: simple_user_entry
+    simple_user_list: simple_user_list
+    new_user_form: new_user_form
     
     
