@@ -35,12 +35,14 @@ define (require, exports, module) ->
     
   MSGBUS.reqres.setHandler 'useradmin:userlist', ->
     MainUserList
-  MSGBUS.reqres.setHandler 'userlist:grouplist', ->
+  MSGBUS.reqres.setHandler 'useradmin:grouplist', ->
     MainGroupList
-      
+
+            
   
   module.exports =
     MainUserList: MainUserList
     MainGroupList: MainGroupList
+    make_ug_collection: make_ug_collection
     
     

@@ -9,7 +9,7 @@ define (require, exports, module) ->
 
   class User extends Backbone.Model
     defaults:
-      username: ''
+      name: ''
 
   class Group extends Backbone.Model
     defaults:

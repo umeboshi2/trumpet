@@ -43,23 +43,45 @@ define (require, exports, module) ->
   class SimpleUserEntryView extends Backbone.Marionette.ItemView
     template: Templates.simple_user_entry
 
-  class UserListViewOrig extends Backbone.Marionette.CollectionView
-    #template: Templates.simple_user_list
-    itemView: SimpleUserEntryView
-    className: 'listview-list'
-
   class UserListView extends Backbone.Marionette.CompositeView
     template: Templates.simple_user_list
     itemView: SimpleUserEntryView
     className: 'listview-list'
+
+  class SimpleGroupEntryView extends Backbone.Marionette.ItemView
+    template: Templates.simple_group_entry
+
+  class GroupListView extends Backbone.Marionette.CompositeView
+    template: Templates.simple_group_list
+    itemView: SimpleGroupEntryView
+    className: 'listview-list'
     
   class NewUserFormView extends FormView
+    ui:
+      name: '[name="name"]'
+      password: '[name="password"]'
+      confirm: '[name="confirm"]'
+      
     template: Templates.new_user_form
 
     createModel: ->
       new Models.User
+
+    updateModel: ->
+      @model.set
+        name: @ui.name.val()
+        password: @ui.password.val()
+      users = MSGBUS.reqres.request 'useradmin:userlist'
+      users.add @model
       
-  
+        
+      
+  class NewGroupFormView extends FormView
+    template: Templates.new_group_form
+
+    createModel: ->
+      new Models.Group
+      
   class BaseFeedView extends FormView
     ui:
       name: '[name="name"]'
@@ -70,7 +92,10 @@ define (require, exports, module) ->
         name: @ui.name.val()
         url: @ui.url.val()
       #@model.save()
-      
+
+  class ViewUserView extends Backbone.Marionette.ItemView
+    template: Templates.view_user_page
+          
   class NewFeedView extends BaseFeedView
     template: Templates.new_rss_feed
       
@@ -96,7 +121,12 @@ define (require, exports, module) ->
     SideBarView: SideBarView
     SimpleUserEntryView: SimpleUserEntryView
     UserListView: UserListView
+    SimpleGroupEntryView: SimpleGroupEntryView
+    GroupListView: GroupListView
     NewUserFormView: NewUserFormView
+    NewGroupFormView: NewGroupFormView
+    ViewUserView: ViewUserView
+    
     
     
   

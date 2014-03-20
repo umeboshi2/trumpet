@@ -15,8 +15,9 @@ define (require, exports, module) ->
       'useradmin/adduser': 'add_user'
       'useradmin/listgroups': 'list_groups'
       'useradmin/addgroup': 'add_group'
+      'useradmin/viewuser/:id': 'view_user'
       
-      
+        
 
       
   MSGBUS.commands.setHandler 'useradmin:route', () ->

@@ -63,7 +63,6 @@ define (require, exports, module) ->
       userlist = MSGBUS.reqres.request 'useradmin:userlist'
       window.userlist = userlist
       
-      
       response = userlist.fetch()
       response.done =>
         view = new Views.UserListView
@@ -78,19 +77,40 @@ define (require, exports, module) ->
       view = new Views.NewUserFormView
       MSGBUS.events.trigger 'rcontent:show', view
       
-      window.formview = view
       
     list_groups: ->
       @_base_page()
       console.log "list_groups called on controller"
       @set_header 'List Groups'
+
+      grouplist = MSGBUS.reqres.request 'useradmin:grouplist'
+      response = grouplist.fetch()
+      response.done =>
+        view = new Views.GroupListView
+          collection: grouplist
+        MSGBUS.events.trigger 'rcontent:show', view
         
 
     add_group: ->
       @_base_page()
       console.log "add_group called on controller"
       @set_header 'add group'
-                  
+      
+      view = new Views.NewGroupFormView
+      MSGBUS.events.trigger 'rcontent:show', view
+
+    view_user: (user_id) ->
+      @_base_page()
+      console.log "view_user called on controller"
+      @set_header 'view user'
+
+      users = MSGBUS.reqres.request 'useradmin:userlist'
+      
+      view = new Views.ViewUserView
+        model: users.get user_id
+      MSGBUS.events.trigger 'rcontent:show', view
+      
+        
     show_feed: (feed_id) ->
       @make_sidebar()
       feed_data = MSGBUS.reqres.request 'rss:feeddata', feed_id
