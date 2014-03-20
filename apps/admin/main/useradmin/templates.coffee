@@ -59,7 +59,7 @@ define (require, exports, module) ->
     div ->
       div '.listview-header', model.name
       p ->
-        text "This is the user page for" + model.name
+        text "This is the user page for " + model.name
         
   new_user_form = renderable () ->
     div '.form-group', ->
@@ -71,12 +71,12 @@ define (require, exports, module) ->
       label '.control-label', for:'input_password', 'Password'
       input '#input_password.form-control',
       name:'password', 'data-validation':'password',
-      placeholder:'', value:''
+      placeholder:'', value:'', type:'password'
     div '.form-group', ->
       label '.control-label', for:'input_confirm', 'Confirm Password'
       input '#input_confirm.form-control',
       name:'confirm', 'data-validation':'confirm',
-      placeholder:'', value:''
+      placeholder:'', value:'', type:'password'
     input '.btn.btn-default.btn-xs', type:'submit', value:"Add New User"
     
   new_group_form = renderable () ->
