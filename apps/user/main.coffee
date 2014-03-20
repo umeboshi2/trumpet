@@ -18,7 +18,7 @@ require.config
     ace: '/components/ace-builds/src/ace'
     marked: '/components/marked/lib/marked'
     
-    common: '/base/common'
+    common: '/app/common'
 
     # FIXME: work with using bootstrap components
     bsModal: '/components/bootstrap/js/modal'
