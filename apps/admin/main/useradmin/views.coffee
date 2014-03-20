@@ -71,8 +71,13 @@ define (require, exports, module) ->
       @model.set
         name: @ui.name.val()
         password: @ui.password.val()
+        confirm: @ui.confirm.val()
       users = MSGBUS.reqres.request 'useradmin:userlist'
       users.add @model
+
+    onSuccess: (model) ->
+      MSGBUS.events.trigger 'useradmin:event:user_added'
+      
       
         
       

@@ -45,7 +45,7 @@ define (require, exports, module) ->
               a href:'/login', 'login'
           else
             li ->
-              a href:'/usr/status', 'Preferences'
+              a href:'/app/user', 'User Page'
             # we need a "get user info" from server
             # to populate this menu with 'admin' link
             admin = false

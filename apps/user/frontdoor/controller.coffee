@@ -10,16 +10,9 @@ define (require, exports, module) ->
   class Controller extends Backbone.Marionette.Controller
     make_main_content: ->
       MSGBUS.events.trigger 'sidebar:close'
-      $('#header').text 'Front Door'
       user = MSGBUS.reqres.request 'current:user'
-      # FIXME
-      show_login_form = false
-      if ! user.has('name')
-        view = new FDViews.LoginView
-        show_login_form = true
-        #view.render()
-      else
-        view = new FDViews.FrontDoorMainView
+      $('#header').text user.get 'name'
+      view = new FDViews.FrontDoorMainView
       MSGBUS.events.trigger 'rcontent:show', view
           
           
