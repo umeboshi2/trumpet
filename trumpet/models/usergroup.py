@@ -24,7 +24,7 @@ class User(Base, SerialBase):
     email = Column(Unicode(50), unique=True)
     active = Column(Boolean, default=True)
     pw = relationship('Password', uselist=False)
-
+    
     def __init__(self, username=None):
         self.username = username
 
@@ -36,7 +36,14 @@ class User(Base, SerialBase):
 
     @property
     def name(self):
-        return self.username
+        return super(Base, self).username
+
+    # working to eventually rename username to name
+    def serialize(self):
+        data = SerialBase.serialize(self)
+        data['name'] = data['username']
+        return data
+    
     
 class UserConfig(Base, SerialBase):
     __tablename__ = 'user_config'
