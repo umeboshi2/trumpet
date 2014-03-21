@@ -2,12 +2,12 @@
 require.config
   baseUrl: 'main'
   paths:
-    jquery: '/components/jquery/jquery'
+    jquery: '/components/jquery/dist/jquery'
     #underscore: '/components/underscore-amd/underscore'
     underscore: '/components/lodash/dist/lodash.compat'
-    backbone: '/components/backbone-amd/backbone'
+    backbone: '/components/backbone/backbone'
     'backbone.wreqr': '/components/backbone.wreqr/lib/amd/backbone.wreqr'
-    'backbone.babysitter': '/components/backbone.babysitter/lib/amd/backbone.babysitter'
+    'backbone.babysitter': '/components/backbone.babysitter/lib/backbone.babysitter'
     marionette: '/components/marionette/lib/core/amd/backbone.marionette'
     validation: '/components/backbone.validation/dist/backbone-validation-amd'
     bootstrap: '/components/bootstrap/dist/js/bootstrap'

@@ -6,6 +6,8 @@ import json
 # I will only need one of these two
 IGNORED_NEEDED = ['ace', 'ace-builds']
 
+# backbone.modal needs special handling
+IGNORED_NEEDED += ['backbone.modal']
 
 # font-awesome is already handled with compass
 # the other components are for testing
@@ -24,6 +26,7 @@ IGNORED = IGNORED_NEEDED + IGNORED_TESTING + IGNORED_NOT_NEEDED
 SPECIAL_PATHS = [
     'components/marionette/lib/core/amd/backbone.marionette.js',
     'components/bootstrap/js/modal.js',
+    'components/backbone.modal/assets/js/backbone.ui.modal.js',
     ]
 
 
@@ -117,6 +120,7 @@ def handle_single_item(name, pathspec):
     elif os.path.isdir(pathspec):
         handle_dir(name, pathspec)
     else:
+        print "PATHSPEC", pathspec
         raise RuntimeError, "INVALID PATH FOR %s" % name
     
         
@@ -131,13 +135,18 @@ def handle_list_item(name, pathspecs):
     else:
         for p in pathspecs:
             handle_single_item(name, p)
-        
+
+def handle_generic_component(name, pathspec):
+    if type(pathspec) is list:
+        handle_list_item(name, pathspec)
+    else:
+        handle_single_item(name, pathspec)    
+            
 def handle_item(name, pathspec):
     if name not in IGNORED:
-        if type(pathspec) is list:
-            handle_list_item(name, pathspec)
-        else:
-            handle_single_item(name, pathspec)
+        handle_generic_component(name, pathspec)
+        
+    
 
 
 def handle_ace_editor():

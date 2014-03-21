@@ -26,8 +26,6 @@ define (require, exports, module) ->
       model: MainMenuModel
     MSGBUS.events.trigger 'main-menu:show', mainmenu
     console.log 'triggered main-menu:show'
-    #console.log $('#main-menu').addClass('action-button')
-    
     
     user = MSGBUS.reqres.request 'current:user'
 

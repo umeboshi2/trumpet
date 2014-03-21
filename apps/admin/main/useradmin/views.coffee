@@ -99,30 +99,30 @@ define (require, exports, module) ->
       #@model.save()
 
   class ViewUserView extends Backbone.Marionette.ItemView
+    events:
+      'click .delete-user-button': 'delete_user_pressed'
+      'click .confirm-delete-button': 'confirm_delete_pressed'
+      
     template: Templates.view_user_page
-          
-  class NewFeedView extends BaseFeedView
-    template: Templates.new_rss_feed
-      
-    createModel: ->
-      new Models.RssFeed
 
-    onSuccess: (model) ->
-      MSGBUS.commands.execute 'rssfeed:create', model
-      
-  class EditFeedView extends BaseFeedView
-    template: Templates.edit_rss_feed
+    delete_user_pressed: ->
+      console.log 'delete_user_pressed'
+      button = $ '.delete-user-button'
+      button.removeClass 'delete-user-button'
+      button.addClass 'confirm-delete-button'
+      button.text 'Confirm'
 
-    createModel: ->
-      @model
+    confirm_delete_pressed: ->
+      console.log 'confirm_delete_pressed'
+      button = $ '.confirm-delete-button'
+      @model.destroy()
+      MSGBUS.events.trigger 'rcontent:close'
       
-    onSuccess: (model) ->
-      MSGBUS.commands.execute 'rssfeed:update', model
+      
+
       
       
   module.exports =
-    NewFeedView: NewFeedView
-    EditFeedView: EditFeedView
     SideBarView: SideBarView
     SimpleUserEntryView: SimpleUserEntryView
     UserListView: UserListView

@@ -60,7 +60,9 @@ define (require, exports, module) ->
       div '.listview-header', model.name
       p ->
         text "This is the user page for " + model.name
-        
+      hr
+      div '.btn.btn-default.delete-user-button', 'Delete User'
+      
   new_user_form = renderable () ->
     div '.form-group', ->
       label '.control-label', for:'input_name', 'User Name'

@@ -50,6 +50,9 @@ class UserManager(object):
             
     def delete_user(self, id):
         with transaction.manager:
+            cfg = self.session.query(UserConfig).get(id)
+            if cfg is not None:
+                self.session.delete(cfg)
             p = self.session.query(Password).get(id)
             if p is not None:
                 self.session.delete(p)
