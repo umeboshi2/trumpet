@@ -66,11 +66,12 @@ fi
 Source the bashrc or spawn another shell and install the gems:
 
 ```sh
-gem install compass
-gem install susy
-gem install sassy-buttons
-gem install bootstrap-sass
-gem install compass-ui
+gem install sass -v 3.2.18
+gem install compass -v 0.12.2
+gem install susy -v 1.0.9
+gem install sassy-buttons -v 0.2.6
+gem install bootstrap-sass -v 3.0.2.1
+gem install compass-ui -v 0.0.5
 ```
 
 
