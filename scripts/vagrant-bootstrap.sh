@@ -12,9 +12,23 @@ adduser vagrant staff
 apt-get -y update
 apt-get -y upgrade
 
+_python_dev="python-dev libpq-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests python-virtualenv libxml2-dev libxslt1-dev virtualenvwrapper"
+
+_misc_stuff="emacs23 screen git-core devscripts cdbs pkg-config most"
+
+_apache_stuff="libapache2-mod-wsgi apache2-mpm-worker apache2-utils apache2"
+
+_ruby_stuff="rubygems"
+
+debpackages="$_python_dev $_misc_stuff $_apache_stuff $_ruby_stuff"
+
+echo "Installing debian packages: $debpackages"
+
+apt-get -y install $debpackages
+
+
 echo "Installing gems"
 
-#gem install sass -v 3.2.9
 gem install sass -v 3.2.18
 gem install compass -v 0.12.2
 gem install susy -v 1.0.9
@@ -22,19 +36,7 @@ gem install sassy-buttons -v 0.2.6
 gem install bootstrap-sass -v 3.0.2.1
 gem install compass-ui -v 0.0.5
 
-
-#apt-get -y install most python-dev libpq-dev libjpeg62-dev libpng12-dev libfreetype6-dev liblcms1-dev python-requests python-virtualenv libxml2-dev libxslt1-dev
-
-#apt-get -y install rubygems
-
-#apt-get -y install virtualenvwrapper
-
-#apt-get -y install rsync emacs23 screen
-#apt-get -y install git-core devscripts
-
-
-# build deps for nodejs
-apt-get -y install cdbs pkg-config
+echo "Preparing to build nodejs"
 
 mkdir /tmp/make-nodejs
 
@@ -56,6 +58,8 @@ node_deb=nodejs_$node_version-1_$arch.deb
 if [ -f $node_deb ]; then
     echo "Installing $node_deb"
     dpkg -i $node_deb
+    echo "Moving $node_deb to /root"
+    mv -i $node_deb /root
 fi
 
 popd
@@ -66,7 +70,21 @@ for package in coffee-script grunt-cli bower ; do
     npm install -g $package
 done
 
+echo "finished installing node packages."
 
+echo "Performing cleanup"
+
+rm -fr /tmp/make-nodejs
+
+apt-get -y autoremove
+apt-get -y clean
+
+
+echo "Creating large file to clean drive for packing."
+
+dd if=/dev/zero of=/EMPTY bs=1M
+rm -f /EMPTY
+sync
 
 
 echo "Finished with vagrant bootstrap."

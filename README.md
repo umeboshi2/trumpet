@@ -477,3 +477,27 @@ feel that the project can be more easily updated and maintained.
 
 - Use requrirejs optimizer on each app's main.js and build single 
   concatenated file of app tree.
+
+
+## Vagrant
+
+Using vagrant to host development environment.
+
+Install virtualbox
+
+Install vagrant 1.5.1
+
+Install packer 0.5.2
+
+```sh
+git clone clone https://github.com/umeboshi2/bento
+
+cd bento/packer
+
+packer build wheezy-i386.json
+```
+
+```sh
+cp Vagrantfile.bootstrap Vagrantfile
+vagrant up
+```
