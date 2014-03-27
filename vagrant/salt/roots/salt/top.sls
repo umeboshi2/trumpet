@@ -1,0 +1,4 @@
+base:
+  'trumpet':
+    - apache
+    - files
