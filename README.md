@@ -7,6 +7,15 @@
 
 ## Abstract
 
+Trumpet uses the [Pyramid](http://www.pylonsproject.org/) framework 
+to provide services to help build websites.  The goal of this project is 
+to provide a more opinionated framework that focuses on [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) resources and provides a 
+system to develop [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application), as well as use some simple ones provided by the 
+trumpet package.
+
+
+
+
 ## New System
 
 Fanstatic has been removed completely.  All javascript dependencies are 
