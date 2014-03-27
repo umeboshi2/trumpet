@@ -16,6 +16,56 @@ Mako Templates: http://www.makotemplates.org/
 
 Icons: http://www.sireasgallery.com/ (trumpet icon)
 
+## Vagrant
+
+Using vagrant to host development environment.
+
+Install virtualbox
+
+Install vagrant 1.5.1
+
+```sh
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_x86_64.deb
+dpkg -i vagrant_1.5.1_x86_64.deb
+
+# or
+
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_i686.deb
+dpkg -i vagrant_1.5.1_i686.deb
+```
+
+or
+
+Click [here](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1.msi) 
+for windows.
+
+
+then,
+
+```sh
+vagrant plugin install vagrant-vbguest
+
+vagrant up
+
+vagrant ssh
+
+# within vagrant VM
+cd /vagrant
+
+# install node packages
+npm install
+
+# install bower components
+bower install
+
+# run grunt to build static assets
+grunt
+
+# build source dist package
+python setup.py sdist
+```
+
+
 
 ## Setup
 
@@ -477,57 +527,6 @@ feel that the project can be more easily updated and maintained.
 
 - Use requrirejs optimizer on each app's main.js and build single 
   concatenated file of app tree.
-
-
-## Vagrant
-
-Using vagrant to host development environment.
-
-Install virtualbox
-
-Install vagrant 1.5.1
-
-```sh
-wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_x86_64.deb
-dpkg -i vagrant_1.5.1_x86_64.deb
-
-# or
-
-wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_i686.deb
-dpkg -i vagrant_1.5.1_i686.deb
-```
-
-or
-
-Click [here](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1.msi) 
-for windows.
-
-
-then,
-
-```sh
-vagrant plugin install vagrant-vbguest
-
-vagrant up
-
-vagrant ssh
-
-# within vagrant VM
-cd /vagrant
-
-# install node packages
-npm install
-
-# install bower components
-bower install
-
-# run grunt to build static assets
-grunt
-
-# build source dist package
-python setup.py sdist
-```
-
 
 
 
