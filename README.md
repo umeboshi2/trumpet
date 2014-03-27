@@ -487,6 +487,11 @@ Install virtualbox
 
 Install vagrant 1.5.1
 
+```sh
+vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-salt
+```
+
 Install packer 0.5.2
 
 ```sh
