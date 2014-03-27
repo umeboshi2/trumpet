@@ -488,9 +488,50 @@ Install virtualbox
 Install vagrant 1.5.1
 
 ```sh
-vagrant plugin install vagrant-vbguest
-vagrant plugin install vagrant-salt
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_x86_64.deb
+dpkg -i vagrant_1.5.1_x86_64.deb
+
+# or
+
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_i686.deb
+dpkg -i vagrant_1.5.1_i686.deb
 ```
+
+or
+
+Click [here](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1.msi) 
+for windows.
+
+
+then,
+
+```sh
+vagrant plugin install vagrant-vbguest
+
+vagrant up
+
+vagrant ssh
+
+# within vagrant VM
+cd /vagrant
+
+# install node packages
+npm install
+
+# install bower components
+bower install
+
+# run grunt to build static assets
+grunt
+
+# build source dist package
+python setup.py sdist
+```
+
+
+
+
+## Optional - Build a BaseBox
 
 Install packer 0.5.2
 
