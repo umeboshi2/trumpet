@@ -41,6 +41,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
   
   # TODO: share salt directories for provisioning
+  config.vm.synced_folder 'vagrant/salt/roots/salt/', '/srv/salt/'
+  config.vm.synced_folder 'vagrant/salt/roots/pillar/', '/srv/pillar/'
 
 
   # Provider-specific configuration so you can fine-tune various
@@ -58,6 +60,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
+  #config.vm.provider "virtualbox" do |vb|
+  #  vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
+  #end
+
   #config.vm.provision "shell", path: "scripts/vagrant-bootstrap.sh"
+  config.vm.provision "shell", path: "vagrant/scripts/vagrant-bootstrap.sh"
+
+  config.vm.provision :salt do |salt|
+    salt.minion_config = 'vagrant/salt/minion'
+    salt.run_highstate = true
+    salt.verbose = true
+  end
+
 
 end
