@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+    ServerName localhost
+    ServerAdmin webmaster@localhost
+    WSGIPassAuthorization On
+    #WSGIDaemonProcess pyramid user=vagrant group=vagrant threads=2 python-path=/usr/local/lib/python2.7/site-packages
+    WSGIDaemonProcess pyramid user=vagrant group=vagrant threads=2 
+    	<Directory /vagrant>
+            WSGIProcessGroup pyramid
+            Order deny,allow
+	    Allow from all
+	</Directory>
+    	ErrorLog /var/log/apache2/trumpet_error.log
+    	LogLevel warn
+    	CustomLog /var/log/apache2/trumpet_access.log combined
+    	WSGIScriptAlias / /etc/apache2/default.wsgi
+	CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
+
+</VirtualHost>
