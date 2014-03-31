@@ -76,8 +76,8 @@ bower install
 # run grunt to build static assets
 grunt
 
-# build source dist package
-python setup.py sdist
+
+python setup.py develop
 ```
 
 ## Old
