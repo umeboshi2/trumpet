@@ -9,6 +9,10 @@ define (require, exports, module) ->
     label: 'Main'
     entries: [
       {
+        name: 'Home'
+        url: '/'
+      }
+      {
         name: 'Main'
         url: '#'
       }

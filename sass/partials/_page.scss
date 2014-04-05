@@ -1,5 +1,3 @@
-@import "susy";
-
 @import "compass/css3/border-radius";
 
 
@@ -22,9 +20,8 @@ body {
     padding-top: 4em;
 }
 
-.page {
-    @include container($total-columns, $tablet, $computer);
 
+.page {
     font-family: "Source Sans Pro",sans;
 }
 
@@ -49,14 +46,11 @@ body {
 }
 
 .two-col {
-    @include span-columns($total-columns);
 }
 
+
 .right-column-content {
-    @include span-columns(5 * $total-columns / 6, $total-columns);
-    @include omega;
 }
 
 .sidebar {
-    @include span-columns($total-columns / 6, $total-columns);
 }

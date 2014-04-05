@@ -23,12 +23,13 @@
    of the bad hacks that are used to workaround the deficiencies of 
    the CSS specification.
 
--  [Susy](http://susy.oddbird.net/):
+-  [Susy](http://susy.oddbird.net/)(Unused):
    Susy is a grid layout system that will allow for responsive webpages.  I 
    am not using this anymore, as bootstrap is currently handling the 
    responsive grid layout, but Susy is superior to bootstrap and since I 
    am also using bootstrap-sass, I feel that I can eventually reimplement 
-   the bootstrap grid layout in Susy.
+   the bootstrap grid layout in Susy.  UPDATE: I decided to use the 
+   bootstrap grid system for the time being.
 
 -  [Sassy Buttons](http://jaredhardy.com/sassy-buttons/): 
    This is a collection of mixins and defaults that help a developer make

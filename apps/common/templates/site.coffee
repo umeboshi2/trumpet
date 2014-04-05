@@ -74,15 +74,15 @@ define (require, exports, module) ->
 
   ########################################
   PageLayoutTemplate = renderable (user) ->
-    div '.page', ->
-      nav '#mainbar', 'data-spy':'affix', 'data-offset-top':'10'
+    nav '#mainbar', 'data-spy':'affix', 'data-offset-top':'10'
+    div '.page.container-fluid', ->
       div '#main-content', ->
         div '#header'
         div '#subheader'
         div '#content', ->
-          div '.two-col', ->
-            div '.sidebar'
-            div '.right-column-content'
+          div '.two-col.row', ->
+            div '.sidebar.col-md-2'
+            div '.right-column-content.col-md-10'
         div '#footer'
             
   module.exports =

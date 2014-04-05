@@ -16,6 +16,15 @@ module.exports = (grunt) ->
         dest: app_dir
         ext: '.js'
                 
+      compileWithMaps:
+        options:
+          bare: false
+          sourceMap: true
+        expand: true
+        src: ['apps/**/*.coffee']
+        dest: app_dir
+        ext: '.js'
+                
     compass:
       compile:
         config: 'config.rb'
@@ -23,7 +32,7 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: ['**/*.coffee']
-        tasks: ['coffee']
+        tasks: ['coffee:compileWithMaps']
       compass:
         files: ['sass/**/*.scss']
         tasks: ['compass']
