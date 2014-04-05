@@ -65,6 +65,12 @@ vagrant up
 vagrant ssh
 
 # within vagrant VM
+sh /vagrant/vagrant/scripts/trumpet-bootstrap.sh
+```
+
+This will effectively do this for you:
+
+```sh
 cd /vagrant
 
 # install node packages
@@ -76,7 +82,7 @@ bower install
 # run grunt to build static assets
 grunt
 
-
+# install python packages
 python setup.py develop
 ```
 
