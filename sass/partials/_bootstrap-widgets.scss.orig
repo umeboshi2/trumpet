@@ -30,10 +30,7 @@
     .dropdown-menu {
 	background: $basecolor4;
 	li > a:hover {
-	    background-image: linear-gradient(to bottom,darken($basecolor2,10) 0,lighten($basecolor3,10) 100%);
-	    border-style: solid;
-	    border-color: lighten($basecolor1,15);
-	    border-width: 1px;
+	    background-image: linear-gradient(to bottom,$basecolor2 0,$basecolor3 100%);
 	}
     }
 
