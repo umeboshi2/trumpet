@@ -11,12 +11,12 @@ from trumpet.managers.admin.users import UserManager
 
 from trumpet.security import encrypt_password
 
-from trumpet.views.rest.base import BaseResource
+from trumpet.views.rest.base import SimpleResource
     
 # FIXME: this needs to be in manager
 import transaction
 
-class BaseUserResource(BaseResource):
+class BaseUserResource(SimpleResource):
     def __init__(self, request):
         super(BaseUserResource, self).__init__(request)
         self.mgr = UserManager(self.db)

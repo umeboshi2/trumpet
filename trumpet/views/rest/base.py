@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import transaction
@@ -7,7 +8,33 @@ from trumpet.models.sitecontent import SiteText
 from trumpet.models.usergroup import User
 
 
+def apiroot(prefix='/api', version='dev'):
+    return os.path.join(prefix, version)
+
+
+
 class BaseResource(object):
+    def __init__(self, request):
+        self.request = request
+        self.db = self.request.db
+    
+    def get_current_user_id(self):
+        "Get the user id quickly without db query"
+        return self.request.session['user'].id
+
+    def get_current_user(self):
+        "Get user db object"
+        db = self.request.db
+        if 'user' in self.request.session:
+            user_id = self.request.session['user'].id
+            return db.query(User).get(user_id)
+        else:
+            return None
+        
+    def get_app_settings(self):
+        return self.request.registry.settings
+    
+class SimpleResource(object):
     def __init__(self, request):
         self.request = request
         self.db = self.request.db
@@ -43,7 +70,7 @@ class BaseResource(object):
     
 @resource(collection_path='/rest/sitetext', path='/rest/sitetext/{id}',
           permission='admin')
-class SiteTextResource(BaseResource):
+class SiteTextResource(SimpleResource):
     dbmodel = SiteText
     
     def collection_get(self):

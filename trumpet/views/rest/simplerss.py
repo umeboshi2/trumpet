@@ -17,7 +17,7 @@ from trumpet.managers.simplerss import RssManager
 
 from trumpet.security import encrypt_password
 
-from trumpet.views.rest.base import BaseResource
+from trumpet.views.rest.base import SimpleResource
     
 # FIXME: this needs to be in manager
 import transaction
@@ -31,7 +31,7 @@ def make_json(obj):
 
                 
 
-class BaseRSSResource(BaseResource):
+class BaseRSSResource(SimpleResource):
     def __init__(self, request):
         super(BaseRSSResource, self).__init__(request)
         self.mgr = RssManager(request.db)

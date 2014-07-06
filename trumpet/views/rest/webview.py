@@ -4,7 +4,7 @@ from pyramid.security import Everyone, Authenticated
 
 from cornice.resource import resource, view
 
-from trumpet.views.rest.base import BaseResource
+from trumpet.views.rest.base import SimpleResource
 
 from trumpet.models.sitecontent import SiteWebview
 from trumpet.models.sitecontent import SiteLayoutField
@@ -16,7 +16,7 @@ from trumpet.models.sitecontent import SiteWebviewJS
 
 from trumpet.managers.admin.sitewebview import SiteWebviewManager
 
-class BaseWebViewResource(BaseResource):
+class BaseWebViewResource(SimpleResource):
     def __init__(self, request):
         super(BaseWebViewResource, self).__init__(request)
         self.mgr = SiteWebviewManager(self.db)

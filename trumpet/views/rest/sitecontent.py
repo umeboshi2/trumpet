@@ -14,7 +14,7 @@ from trumpet.managers.admin.sitecontent import SiteContentManager
 
 from trumpet.managers.admin.sitewebview import SiteAppManager
 
-from trumpet.views.rest.base import BaseResource
+from trumpet.views.rest.base import SimpleResource
 
 # FIXME: this needs to be in manager
 import transaction
@@ -22,7 +22,7 @@ import transaction
 
 @resource(collection_path='/rest/sitepath', path='/rest/sitepath/{id}',
           permission='admin')
-class SitePathResource(BaseResource):
+class SitePathResource(SimpleResource):
     dbmodel = SitePath
 
     def __init__(self, request):
@@ -53,7 +53,7 @@ class SitePathResource(BaseResource):
 @resource(collection_path='/rest/sitepath/{path_id}/css',
           path='/rest/sitepath/{path_id}/css/{id}',
           permission='admin')
-class SitePathCSSResource(BaseResource):
+class SitePathCSSResource(SimpleResource):
     dbmodel = SitePathCSS
 
     def __init__(self, request):
@@ -86,7 +86,7 @@ class SitePathCSSResource(BaseResource):
 @resource(collection_path='/rest/sitepath/{path_id}/js',
           path='/rest/sitepath/{path_id}/js/{id}',
           permission='admin')
-class SitePathJSResource(BaseResource):
+class SitePathJSResource(SimpleResource):
     dbmodel = SitePathJS
     
 
@@ -119,7 +119,7 @@ class SitePathJSResource(BaseResource):
         
 @resource(collection_path='/rest/sitetmpl', path='/rest/sitetmpl/{id}',
           permission='admin')
-class SiteTemplateResource(BaseResource):
+class SiteTemplateResource(SimpleResource):
     dbmodel = SiteTemplate
 
     def __init__(self, request):
@@ -158,7 +158,7 @@ class SiteTemplateResource(BaseResource):
 
 @resource(collection_path='/rest/sitecss', path='/rest/sitecss/{id}',
           permission='admin')
-class SiteCSSResource(BaseResource):
+class SiteCSSResource(SimpleResource):
     dbmodel = SiteCSS
 
     def __init__(self, request):
@@ -196,7 +196,7 @@ class SiteCSSResource(BaseResource):
     
 @resource(collection_path='/rest/sitejs', path='/rest/sitejs/{id}',
           permission='admin')
-class SiteJSResource(BaseResource):
+class SiteJSResource(SimpleResource):
     dbmodel = SiteJS
 
     def __init__(self, request):
@@ -237,7 +237,7 @@ class SiteJSResource(BaseResource):
 
 @resource(collection_path='/rest/siteapp',
           path='/rest/siteapp/{id}', permission='admin')
-class RESTSiteAppResource(BaseResource):
+class RESTSiteAppResource(SimpleResource):
     dbmodel = DBSiteAppResource
     def __init__(self, request):
         super(RESTSiteAppResource, self).__init__(request)
