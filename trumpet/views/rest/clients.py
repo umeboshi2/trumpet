@@ -24,21 +24,17 @@ class ClientResource(BaseResource):
         j = self.request.json
         contact_id = j['contact_id']
         name = j['name']
-        address = j['address']
-        description = j['description']
-        c = self.mgr.add(name, contact_id, address, description)
+        address = None
+        if 'address' in j:
+            address = j['address']
+        description = None
+        if 'description' in j:
+            description = j['description']
+        c = self.mgr.add(name, contact_id,
+                         address=address, description=description)
         return dict(data=c.serialize(), result='success')
     
     def put(self):
         id = self.request.matchdict['id']
-
-    def get(self):
-        id = self.request.matchdict['id']
-        c = self.mgr.get(id)
-        if c is None:
-            # FIXME
-            raise RuntimeError, "404"
-        return dict(data=c.serialize(), result='success')
-        
-        
-
+        raise RuntimeError, "Not implemented."
+    

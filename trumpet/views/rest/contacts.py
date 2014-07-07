@@ -6,12 +6,12 @@ import vobject
 
 from trumpet.security import encrypt_password
 from trumpet.managers.consultant.contacts import ContactManager
-from trumpet.views.rest.base import BaseResource, apiroot
+from trumpet.views.rest.base import BaseManagerResource, apiroot
 from trumpet.views.base import BasicView
 
 @resource(collection_path=os.path.join(apiroot(), 'consultant/contact'),
           path=os.path.join(apiroot(), 'consultant/contact/{id}'))
-class ContactResource(BaseResource):
+class ContactResource(BaseManagerResource):
     def __init__(self, request):
         super(ContactResource, self).__init__(request)
         self.mgr = ContactManager(request.db)
@@ -35,16 +35,6 @@ class ContactResource(BaseResource):
     
     def put(self):
         id = self.request.matchdict['id']
-
-    def get(self):
-        id = self.request.matchdict['id']
-        c = self.mgr.get(id)
-        if c is None:
-            # FIXME
-            raise RuntimeError, "404"
-        return dict(data=c.serialize(), result='success')
-        
-        
 
     
 ###############################

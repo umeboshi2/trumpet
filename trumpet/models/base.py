@@ -21,7 +21,7 @@ class SerialBase(object):
             try:
                 pytype = column.type.python_type
             except NotImplementedError:
-                print "NOTIMPLEMENTEDERROR", column.type
+                print "NOTIMPLEMENTEDERROR", column, column.type
             value = getattr(self, name)
             if pytype is datetime:
                 value = value.isoformat()

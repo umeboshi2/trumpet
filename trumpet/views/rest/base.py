@@ -33,7 +33,18 @@ class BaseResource(object):
         
     def get_app_settings(self):
         return self.request.registry.settings
-    
+
+class BaseManagerResource(BaseResource):
+    def get(self):
+        id = self.request.matchdict['id']
+        c = self.mgr.get(id)
+        if c is None:
+            # FIXME
+            raise RuntimeError, "404"
+        return dict(data=c.serialize(), result='success')
+        
+        
+
 class SimpleResource(object):
     def __init__(self, request):
         self.request = request
