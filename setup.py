@@ -27,8 +27,8 @@ requires = [
     'psycopg2',        # dbapi for postgresql
     
     # we need to stop using deform
-    'pyramid-deform',  # we will start using deform/colander/peppercorn
-    'deform',
+    #'pyramid-deform',  # we will start using deform/colander/peppercorn
+    #'deform',
 
     # this is for the simple rss viewer example
     'feedparser',      # only needed for rssviewer
@@ -40,14 +40,6 @@ requires = [
 
 
     'requests',
-    #'twill',
-    #'mechanize',       # mechanize may be better than twill sometimes
-    #'beautifulsoup4',
-    #'lxml',            # lxml parser for beautifulsoup4
-    #'facebook-sdk',
-    #'filemagic',       # useful for identifying blobs
-    #'markdown',
-
     
     'pyramid-mako',
     'cornice',         # REST views
