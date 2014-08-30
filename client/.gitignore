@@ -1,0 +1,29 @@
+*.py[cod]
+
+# emacs
+*~
+\#*#
+.#*
+
+# my development cruft
+.sass-cache
+
+sass/fullcalendar.scss
+sass/font-awesome.scss
+sass/bootstrap-*.scss
+sass/jqueryui-*.scss
+sass/screen-*.scss
+css
+
+nodecache.tar
+bowercache.tar
+
+# bower components
+bower_components
+
+# node modules
+node_modules
+
+# vagrant
+.vagrant
+

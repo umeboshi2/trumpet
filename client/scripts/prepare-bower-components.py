@@ -2,6 +2,7 @@ import os, sys
 import subprocess
 import json
 
+DESTDIR = 'javascripts'
 
 # I will only need one of these two
 IGNORED_NEEDED = ['ace', 'ace-builds']
@@ -24,9 +25,9 @@ IGNORED = IGNORED_NEEDED + IGNORED_TESTING + IGNORED_NOT_NEEDED
 
 
 SPECIAL_PATHS = [
-    'components/marionette/lib/core/amd/backbone.marionette.js',
-    'components/bootstrap/js/modal.js',
-    'components/backbone.modal/assets/js/backbone.ui.modal.js',
+    'bower_components/marionette/lib/core/amd/backbone.marionette.js',
+    'bower_components/bootstrap/js/modal.js',
+    'bower_components/backbone.modal/assets/js/backbone.ui.modal.js',
     ]
 
 
@@ -35,7 +36,7 @@ SPECIAL_PATHS = [
 
 
 def get_paths():
-    cmd = ['bower', 'list', '--paths']
+    cmd = ['bower', 'list', '--json', '--paths']
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     retcode = proc.wait()
     if retcode:
@@ -71,7 +72,7 @@ def handle_requirejs(pathspec):
     
 def handle_file(pathspec):
     src = pathspec
-    dest = os.path.join('trumpet', 'static', src)
+    dest = os.path.join(DESTDIR, src)
     dirname = os.path.dirname(dest)
     if not os.path.isdir(dirname):
         os.makedirs(dirname)
@@ -150,7 +151,7 @@ def handle_item(name, pathspec):
 
 
 def handle_ace_editor():
-    basedir = 'components/ace-builds/src'
+    basedir = 'bower_components/ace-builds/src'
     print "Handling ace"
     for basename in os.listdir(basedir):
         pathspec = os.path.join(basedir, basename)
