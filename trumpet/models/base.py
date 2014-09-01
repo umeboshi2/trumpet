@@ -12,26 +12,6 @@ import transaction
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
-class SerialBase(object):
-    def serialize(self):
-        data = dict()
-        table = self.__table__
-        for column in table.columns:
-            name = column.name
-            try:
-                pytype = column.type.python_type
-            except NotImplementedError:
-                print "NOTIMPLEMENTEDERROR", column, column.type
-            value = getattr(self, name)
-            if pytype is datetime:
-                value = value.isoformat()
-            data[name] = value
-        return data
-    
-                
-    
-
-
 def initialize_sql(engine, popfuns):
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine

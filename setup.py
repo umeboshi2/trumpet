@@ -10,6 +10,7 @@ if os.environ.get('USER','') == 'vagrant':
 
 version = '0.2.0'
 
+
 requires = [
     'pyramid',
     'SQLAlchemy',
@@ -17,32 +18,19 @@ requires = [
     'pyramid_tm',
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
-    'docutils',        # only needed for wiki
     'pyramid-beaker',  # session management
+    'pyramid-mako',
+    'cornice',         # REST views
     'waitress',
-
     # we need to think about using another
     # postgresql/sqlalchemy package that
     # can be used with pypy
     'psycopg2',        # dbapi for postgresql
     
-    # we need to stop using deform
-    #'pyramid-deform',  # we will start using deform/colander/peppercorn
-    #'deform',
-
-    # this is for the simple rss viewer example
-    'feedparser',      # only needed for rssviewer
-
-    
     'Pillow',          # image management
     'vobject',         # vcard, iCal support
     'icalendar',       # more iCal support
-
-
     'requests',
-    
-    'pyramid-mako',
-    'cornice',         # REST views
 ]
 
 setup(name='trumpet',
