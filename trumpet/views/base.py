@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 
 import transaction
-from docutils.core import publish_parts
 
 from mako.template import Template
 from mako.exceptions import MakoException
@@ -51,25 +50,14 @@ def static_asset_response(request, asset):
         response.cache_control.public = True
     return response
 
-
-
-
-def render_rst(content):
-    return publish_parts(content, writer_name='html')['html_body']
-
-
-class BasicView(object):
+class BaseView(object):
     def __init__(self, request):
         self.request = request
-        self.response = None
-        self.data = {}
     
-    def __call__(self):
-        if self.response is not None:
-            return self.response
-        else:
-            return self.data
+    def get_app_settings(self):
+        return self.request.registry.settings
 
+class BaseUserView(BaseView):
     def get_current_user_id(self):
         "Get the user id quickly without db query"
         return self.request.session['user'].id
@@ -80,19 +68,20 @@ class BasicView(object):
         user_id = self.request.session['user'].id
         return db.query(User).get(user_id)
 
-    def get_app_settings(self):
-        return self.request.registry.settings
 
-STATIC_VIEWS = ['lib', 'css', 'components', 'fonts']
-class StaticView(BasicView):
+class BaseViewCallable(BaseView):
     def __init__(self, request):
-        super(StaticView, self).__init__(request)
-        view = request.view_name
-        if view in STATIC_VIEWS:
-            path = os.path.join('static', view, *request.subpath)
-            asset = ':'.join(('trumpet', path))
-            self.response = static_asset_response(request, asset)
+        super(BaseViewCallable, self).__init__(request)
+        self.response = None
+        self.data = {}
+    
+    def __call__(self):
+        if self.response is not None:
+            return self.response
         else:
-            raise HTTPNotFound()
-        
-        
+            return self.data
+
+class BaseUserViewCallable(BaseViewCallable, BaseUserView):
+    pass
+
+
