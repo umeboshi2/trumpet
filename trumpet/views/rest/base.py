@@ -7,14 +7,14 @@ from cornice.resource import resource, view
 from trumpet.models.sitecontent import SiteText
 from trumpet.models.usergroup import User
 
-from trumpet.views.base import BaseView
+from trumpet.views.base import BaseUserView
 
 
 def apiroot(prefix='/api', version='dev'):
     return os.path.join(prefix, version)
 
 
-class BaseResource(BaseView):
+class BaseResource(BaseUserView):
     def __init__(self, request):
         super(BaseResource, self).__init__(request)
         self.db = self.request.db
