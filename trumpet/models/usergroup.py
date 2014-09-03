@@ -9,8 +9,8 @@ from sqlalchemy import ForeignKey
 
 from sqlalchemy.orm import relationship
 
-from base import Base, SerialBase
-
+from base import Base
+from util import SerialBase
 # imports for populate()
 import transaction
 from sqlalchemy.exc import IntegrityError

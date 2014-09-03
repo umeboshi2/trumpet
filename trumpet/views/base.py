@@ -19,13 +19,6 @@ from pyramid.path import AssetResolver
 
 
 
-from trumpet.models.base import DBSession
-from trumpet.models.usergroup import User
-
-from trumpet.managers.admin.sitecontent import SiteContentManager
-from trumpet.managers.admin.sitecontent import NoTemplateFound
-
-
 def static_asset_response(request, asset):
     resolver = AssetResolver()
     descriptor = resolver.resolve(asset)
@@ -66,7 +59,7 @@ class BaseUserView(BaseView):
         "Get user db object"
         db = self.request.db
         user_id = self.request.session['user'].id
-        return db.query(User).get(user_id)
+        return db.query(self.usermodel).get(user_id)
 
 
 class BaseViewCallable(BaseView):
