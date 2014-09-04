@@ -16,3 +16,8 @@ class AlchemyRequest(Request):
         self.add_finished_callback(close_session)
         return session
     
+    @reify
+    def usermodel(self):
+        usermodel = self.registry.settings['db.usermodel']
+        return usermodel
+    

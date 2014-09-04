@@ -53,10 +53,14 @@ class BaseView(object):
 class BaseUserView(BaseView):
     def get_current_user_id(self):
         "Get the user id quickly without db query"
+        if 'user' not in self.request.session:
+            return None
         return self.request.session['user'].id
 
     def get_current_user(self):
         "Get user db object"
+        if 'user' not in self.request.session:
+            return None
         db = self.request.db
         user_id = self.request.session['user'].id
         return db.query(self.usermodel).get(user_id)

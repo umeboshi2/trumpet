@@ -32,19 +32,18 @@ def check_password(encrypted, password):
     check = crypt(password, salt)
     return check == encrypted
 
-
 def authenticate(userid, request):
-    #print "called authenticate", request.params
-    dbsession = request.db
-    user = None
+    db = request.db
+    usermodel = request.usermodel
+    fieldname = request.registry.settings['db.usernamefield']
+    field = getattr(usermodel, fieldname)
     try:
-        user = dbsession.query(User).filter_by(username=userid).one()
+        user = db.query(usermodel).filter(field == userid).one()
     except NoResultFound:
         return
     if user is not None:
         return user.get_groups()
-
-
+    
 def check_user_password(user, password):
     return check_password(user.pw.password, password)
 
