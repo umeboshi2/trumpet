@@ -21,3 +21,8 @@ class AlchemyRequest(Request):
         usermodel = self.registry.settings['db.usermodel']
         return usermodel
     
+    @reify
+    def password_model(self):
+        password_model = self.registry.settings['db.password_model']
+        return password_model
+    
