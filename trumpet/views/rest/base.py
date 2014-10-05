@@ -45,9 +45,6 @@ class BaseResource(BaseUserView):
                     data=[self.serialize_object(o) for o in objects])
     
 
-class BaseResource(BaseView):
-        
-
 class BaseManagerResource(BaseResource):
     def get(self):
         id = self.request.matchdict['id']
