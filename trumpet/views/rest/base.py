@@ -4,7 +4,6 @@ from datetime import datetime
 import transaction
 from cornice.resource import resource, view
 
-from trumpet.models.sitecontent import SiteText
 from trumpet.models.usergroup import User
 
 from trumpet.views.base import BaseUserView
@@ -18,7 +17,7 @@ class BaseResource(BaseUserView):
     def __init__(self, request):
         super(BaseResource, self).__init__(request)
         self.db = self.request.db
-        self.limit = 20
+        self.limit = None
         self.max_limit = 100
         
     def serialize_object(self, dbobj):
