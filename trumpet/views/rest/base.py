@@ -23,6 +23,9 @@ class BaseResource(BaseUserView):
     def serialize_object(self, dbobj):
         return dbobj.serialize()
 
+    def serialize_object_for_collection_query(self, dbobj):
+        return self.serialize_object(dbobj)
+
     def collection_query(self):
         raise RuntimeError, "Implement me in subclass"
 
@@ -41,7 +44,7 @@ class BaseResource(BaseUserView):
         q = q.offset(offset).limit(limit)
         objects = q.all()
         return dict(total_count=total_count,
-                    data=[self.serialize_object(o) for o in objects])
+                    data=[self.serialize_object_for_collection_query(o) for o in objects])
     
 
 class BaseManagerResource(BaseResource):
