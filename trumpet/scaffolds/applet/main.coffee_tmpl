@@ -1,0 +1,32 @@
+define (require, exports, module) ->
+  Backbone = require 'backbone'
+  ft = require 'furniture'
+  
+  Controller = require '{{project}}/controller'
+  
+  # require this for msgbus handlers
+  require '{{project}}/collections'
+
+  MainChannel = Backbone.Wreqr.radio.channel 'global'
+  AppChannel = Backbone.Wreqr.radio.channel '{{project}}'
+  
+  { BootStrapAppRouter } = ft.approuters.bootstrap
+    
+  
+  class Router extends BootStrapAppRouter
+    appRoutes:
+      '{{project}}': 'start'
+      '{{project}}/listpages': 'list_pages'
+      '{{project}}/showpage/:name' : 'show_page'
+      '{{project}}/editpage/:name': 'edit_page'
+      '{{project}}/addpage': 'add_page'
+      
+  MainChannel.reqres.setHandler 'applet:{{project}}:route', () ->
+    #console.log "{{project}}:route being handled"
+    page_collection = AppChannel.reqres.request 'pages:collection'
+    response = page_collection.fetch()
+    response.done =>
+      controller = new Controller MainChannel
+      router = new Router
+        controller: controller
+      #console.log '{{project}} router created'

@@ -53,6 +53,7 @@ Start a website with pyramid""",
       # -*- Entry points: -*-
       [pyramid.scaffold]
       trumpet=trumpet.scaffolds:TrumpetProjectTemplate
+      applet=trumpet.scaffolds:TrumpetAppletTemplate
       [console_scripts]
       trumpet-make-tmpl-links = trumpet.scripts.Make_tmpl_links:main
       """,
