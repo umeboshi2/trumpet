@@ -6,6 +6,11 @@ class Resource(dict):
         self.__name__ = name
         self.__parent__ = parent
     
+class ResourceObject(object):
+    def __init__(self, name, parent=None):
+        self.__name__ = name
+        self.__parent__ = parent
+        
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(Resource):
     __default_acl__ = [
