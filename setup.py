@@ -12,6 +12,7 @@ version = '0.2.0'
 
 
 requires = [
+    'chert', 
     'pyramid',
     'SQLAlchemy',
     'transaction',
@@ -57,4 +58,7 @@ Start a website with pyramid""",
       [console_scripts]
       trumpet-make-tmpl-links = trumpet.scripts.Make_tmpl_links:main
       """,
+      dependency_links=[
+          'https://github.com/umeboshi2/chert/archive/master.tar.gz#egg=chert',
+          ],
       )
