@@ -11,7 +11,8 @@ import transaction
 
 #from chert.alchemy import Base
 
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+def make_scoped_session():
+    return scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 
 def initialize_sql(engine, popfuns):
     DBSession.configure(bind=engine)
@@ -24,3 +25,6 @@ def initialize_sql(engine, popfuns):
         except IntegrityError:
             transaction.abort()
             
+DBSession = make_scoped_session()
+
+
