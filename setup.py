@@ -32,6 +32,9 @@ requires = [
     'vobject',         # vcard, iCal support
     'icalendar',       # more iCal support
     'requests',
+    # testing below
+    'gevent-socketio',
+    'pyramid_celery',
 ]
 
 setup(name='trumpet',
