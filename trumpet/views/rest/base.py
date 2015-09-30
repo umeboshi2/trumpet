@@ -23,11 +23,14 @@ class BaseResource(BaseUserView):
     def serialize_object(self, dbobj):
         return dbobj.serialize()
 
+    # override this method if you have more info
+    # in each object than you need to show in the
+    # collection.
     def serialize_object_for_collection_query(self, dbobj):
         return self.serialize_object(dbobj)
 
     def collection_query(self):
-        raise RuntimeError, "Implement me in subclass"
+        raise NotImplementedError, "Implement me in subclass"
 
     def collection_get(self):
         offset = 0
