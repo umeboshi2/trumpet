@@ -10,6 +10,13 @@ class BaseManager(object):
     def get(self, id):
         return self.query().get(id)
 
+    def delete_everything(self):
+        self.query().delete()
+        
+    def delete_everything_tm(self):
+        with transaction.manager:
+            self.delete_everything()
+            
 class GetByNameManager(BaseManager):
     def get_by_name_query(self, name):
         return self.query().filter_by(name=name)
