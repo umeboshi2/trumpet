@@ -120,15 +120,14 @@ def populate_users(admin_username):
         # Using id_count to presume
         # the user's id, which should work
         # when filling an empty database.
-        id_count = 0
         for uname in users:
-            id_count += 1
             user = User(uname)
             password = encrypt_password(uname)
             session.add(user)
-            pw = Password(id_count, password)
+            user = session.merge(user)
+            pw = Password(user.id, password)
             session.add(pw)
-            config = UserConfig(id_count, '')
+            config = UserConfig(user.id, '')
             session.add(config)
             
 def populate_usergroups():
