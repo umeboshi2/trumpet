@@ -1,17 +1,5 @@
 from datetime import datetime
 
-from sqlalchemy import Sequence, Column, ForeignKey
-
-# column types
-from sqlalchemy import Integer, String, Unicode, UnicodeText
-from sqlalchemy import BigInteger
-from sqlalchemy import Boolean, Date, LargeBinary
-from sqlalchemy import PickleType
-from sqlalchemy import Enum
-from sqlalchemy import DateTime
-
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.declarative import declarative_base
 
 # http://stackoverflow.com/questions/4617291/how-do-i-get-a-raw-compiled-sql-query-from-a-sqlalchemy-expression
 from sqlalchemy.sql import compiler
