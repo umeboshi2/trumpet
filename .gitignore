@@ -33,37 +33,3 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
-
-# emacs
-*~
-\#*#
-.#*
-
-# my development cruft
-.sass-cache
-demo.sqlite
-
-# generated files in trumpet static
-trumpet/static/css
-trumpet/static/fonts
-trumpet/static/lib
-trumpet/static/components
-trumpet/static/apps
-
-# generated files in sass/
-
-sass/font-awesome.scss
-sass/bootstrap-*.scss
-sass/jqueryui-*.scss
-sass/screen-*.scss
-
-
-# bower components
-components
-
-# node modules
-node_modules
-
-# vagrant
-.vagrant
-
