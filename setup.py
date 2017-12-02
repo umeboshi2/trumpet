@@ -28,21 +28,13 @@ requires = [
     # can be used with pypy
     'psycopg2',        # dbapi for postgresql
     
-    'Pillow',          # image management
-    'vobject',         # vcard, iCal support
-    'icalendar',       # more iCal support
     'requests',
     # testing below
-    'versiontools',
-    #'gevent>=1.1b5',
-    'gevent==1.0.2',
-    'gevent-socketio',
-    'pyramid_celery',
+    #'versiontools',
 ]
 
 setup(name='trumpet',
       version=version,
-      setup_requires=['versiontools',],
       description="build a website with pyramid",
       long_description="""\
 Start a website with pyramid""",
