@@ -1,5 +1,5 @@
-from ConfigParser import ConfigParser
-from StringIO import StringIO
+from configparser import ConfigParser
+from io import StringIO
 from sqlalchemy.orm.exc import NoResultFound
 import transaction
 

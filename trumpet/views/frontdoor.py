@@ -74,8 +74,8 @@ class FrontDoorView(BasicView):
         headers = forget(self.request)
         if 'user' in self.request.session:
             del self.request.session['user']
-        while self.request.session.keys():
-            key = self.request.session.keys()[0]
+        while list(self.request.session.keys()):
+            key = list(self.request.session.keys())[0]
             del  self.request.session[key]
         location = self.request.route_url('home')
         self.response = HTTPFound(location=location, headers=headers)

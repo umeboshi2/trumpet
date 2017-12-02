@@ -16,4 +16,4 @@ from sqlalchemy.ext.declarative import declarative_base
 from chert.alchemy import compile_query
 from chert.alchemy import SerialBase
 
-raise RuntimeError, "Don't import me"
+raise RuntimeError("Don't import me")

@@ -19,7 +19,7 @@ def initialize_sql(engine, popfuns):
     Base.metadata.bind = engine
     Base.metadata.create_all(engine)
     for popfun in popfuns:
-        print "popfun", popfun.__name__
+        print("popfun", popfun.__name__)
         try:
             popfun()
         except IntegrityError:

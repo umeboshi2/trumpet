@@ -10,7 +10,7 @@ def get_start_end_from_request(request, timestamps=False,
         start = request.GET['start']
         end = request.GET['end']
         if verbose:
-            print "START, END", start, end
+            print("START, END", start, end)
         if not timestamps:
             start = _parse_date(start)
             end = _parse_date(end)

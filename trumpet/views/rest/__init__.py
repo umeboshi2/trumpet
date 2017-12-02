@@ -10,7 +10,7 @@ class BaseResource(DBResource):
         super(BaseResource, self).__init__(request)
         if not hasattr(self, 'dbmodel'):
             msg = "need to set dbmodel property before __init__"
-            raise RuntimeError, msg
+            raise RuntimeError(msg)
 
     def query(self):
         return self.db.query(self.dbmodel)
@@ -27,7 +27,7 @@ class BaseManagementResource(DBResource):
         super(BaseManagementResource, self).__init__(request)
         if not hasattr(self, 'mgrclass'):
             msg = "need to set mgrclass property before __init__"
-            raise RuntimeError, msg
+            raise RuntimeError(msg)
         self.mgr = self.mgrclass(self.request.db)
         self.limit = 20
         self.max_limit = 100

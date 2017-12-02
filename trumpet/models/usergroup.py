@@ -1,5 +1,5 @@
-from ConfigParser import ConfigParser
-from StringIO import StringIO
+from configparser import ConfigParser
+from io import StringIO
 
 from sqlalchemy import Column
 from sqlalchemy import Integer, Boolean
@@ -14,7 +14,7 @@ from chert.alchemy import Base, SerialBase
 # imports for populate()
 import transaction
 from sqlalchemy.exc import IntegrityError
-from base import DBSession
+from .base import DBSession
 
 
 class User(Base, SerialBase):

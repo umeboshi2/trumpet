@@ -30,7 +30,7 @@ class BaseResource(BaseUserView):
         return self.serialize_object(dbobj)
 
     def collection_query(self):
-        raise NotImplementedError, "Implement me in subclass"
+        raise NotImplementedError("Implement me in subclass")
 
     def collection_get(self):
         offset = 0
@@ -56,7 +56,7 @@ class BaseManagerResource(BaseResource):
         c = self.mgr.get(id)
         if c is None:
             # FIXME
-            raise RuntimeError, "404"
+            raise RuntimeError("404")
         return dict(data=c.serialize(), result='success')
         
         
