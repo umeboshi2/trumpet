@@ -96,9 +96,8 @@ class SimpleModelResource(BaseResource):
                 raise HTTPNotFound
             fields = set(self.request.json.keys())
             if self._isTimeStampMixin():
-                fields.discard('created_at')
-                fields.discard('updated_at')
-                m.updated_at = func.now()
+                fields.discard('created')
+                fields.discard('updated')
             for field in fields:
                 setattr(m, field, self.request.json[field])
             self.db.add(m)
