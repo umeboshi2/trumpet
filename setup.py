@@ -45,14 +45,6 @@ Start a website with pyramid""",
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
-      entry_points="""
-      # -*- Entry points: -*-
-      [pyramid.scaffold]
-      trumpet=trumpet.scaffolds:TrumpetProjectTemplate
-      applet=trumpet.scaffolds:TrumpetAppletTemplate
-      [console_scripts]
-      trumpet-make-tmpl-links = trumpet.scripts.Make_tmpl_links:main
-      """,
       dependency_links=[
           'git+https://github.com/umeboshi2/chert.git#egg=chert'
       ],
