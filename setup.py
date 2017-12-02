@@ -14,8 +14,6 @@ version = '0.2.0'
 requires = [
     'chert', 
     'pyramid',
-    'SQLAlchemy',
-    'transaction',
     'pyramid_tm',
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
@@ -27,7 +25,6 @@ requires = [
     # postgresql/sqlalchemy package that
     # can be used with pypy
     'psycopg2',        # dbapi for postgresql
-    
     'requests',
     # testing below
     #'versiontools',
@@ -57,6 +54,6 @@ Start a website with pyramid""",
       trumpet-make-tmpl-links = trumpet.scripts.Make_tmpl_links:main
       """,
       dependency_links=[
-          'https://github.com/umeboshi2/chert/archive/master.tar.gz#egg=chert',
-          ],
+          'git+https://github.com/umeboshi2/chert.git#egg=chert'
+      ],
       )
