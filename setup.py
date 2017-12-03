@@ -26,6 +26,7 @@ requires = [
     # can be used with pypy
     'psycopg2',        # dbapi for postgresql
     'requests',
+    'bcrypt',
     # testing below
     #'versiontools',
 ]
