@@ -48,17 +48,27 @@ class BaseResource(object):
         objects = q.all()
         data = [self.serialize_object_for_collection_query(o) for o in objects]
         return dict(total_count=total_count, items=data)
+
+
+# from bookshelf-csapi 
+#
+# req.query.withRelated - array of related models
+# req.query.columns - array of columns
+# req.query.where - where clause (two formats?)
+# req.query.distinct - distinct values
+# req.query.offset
+# req.query.limit
+# req.query.sort - only one column? always order by key unless present?
+# req.query.direction - default is 'asc'
+# 
+# if sort or offset is present set the direction
+#
+#
+#
+#
     
-# /api/{model}/{id}
-class SimpleModelResource(BaseResource):
-    def __init__(self, request, context=None):
-        super(SimpleModelResource, self).__init__(request, context=context)
-        self.model = self.model_map.get(self.request.matchdict['model'])
-
-    @property
-    def model_map(self):
-        raise NotImplementedError
-
+# BaseResource.model must be set in subclass
+class BaseModelResource(BaseResource):
     def _isTimeStampMixin(self):
         return isinstance(self.model(), TimeStampMixin)
 
@@ -86,7 +96,6 @@ class SimpleModelResource(BaseResource):
         if m is None:
             raise HTTPNotFound
         return self.serialize_object(m)
-
     
     def put(self):
         with transaction.manager:
@@ -112,7 +121,20 @@ class SimpleModelResource(BaseResource):
                 raise HTTPNotFound
             m.delete()
         
-          
-          
+    @property
+    def model(self):
+        raise NotImplementedError
     
+# /api/{model}/{id}
+class SimpleModelResource(BaseModelResource):
+    def __init__(self, request, context=None):
+        super(SimpleModelResource, self).__init__(request, context=context)
         
+    @property
+    def model(self):
+        return self.model_map.get(self.request.matchdict['model'])
+
+    @property
+    def model_map(self):
+        raise NotImplementedError
+
