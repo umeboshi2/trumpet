@@ -1,4 +1,16 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
+include LICENSE
+include README.rst
 recursive-include trumpet/templates *.mako
 recursive-include trumpet/scaffolds/trumpet *
 recursive-include trumpet/static *
 
+recursive-include tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
+include *.txt *.ini *.cfg *.rst
+recursive-include trumpet *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml *.jinja2

@@ -1,0 +1,3 @@
+[run]
+source = trumpet
+omit = trumpet/test*

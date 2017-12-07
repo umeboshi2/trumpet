@@ -1,21 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""The setup script."""
+
 from setuptools import setup, find_packages
-import sys
-import os
 
-# http://stackoverflow.com/a/22147112/1869821
-# if you are not using vagrant, just delete os.link directly,
-# The hard link only saves a little disk space, so you should not care
-if os.environ.get('USER','') == 'vagrant':
-    del os.link
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
 
-version = '0.2.0'
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
 
-
-requires = [
-    'chert', 
-    'pyramid',
+requirements = [
+    'hornstone',
+    'pyramid >= 1.9a',
     'pyramid_tm',
-    'pyramid_debugtoolbar',
+    'plaster_pastedeploy',
     'zope.sqlalchemy',
     'pyramid-beaker',  # session management
     'pyramid-mako',
@@ -24,29 +24,60 @@ requires = [
     # we need to think about using another
     # postgresql/sqlalchemy package that
     # can be used with pypy
-    'psycopg2',        # dbapi for postgresql
-    'requests',
     'bcrypt',
     # testing below
-    #'versiontools',
+    # 'versiontools',
 ]
 
-setup(name='trumpet',
-      version=version,
-      description="build a website with pyramid",
-      long_description="""\
-Start a website with pyramid""",
-      classifiers=[],  # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='pyramid, sqlalchemy, scss',
-      author='Joseph Rawson',
-      author_email='joseph.rawson.works@gmail.com',
-      url='https://github.com/umeboshi2/trumpet',
-      license='Public Domain',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=requires,
-      dependency_links=[
-          'git+https://github.com/umeboshi2/chert.git#egg=chert'
-      ],
-      )
+tests_require = [
+    'WebTest >= 1.3.1',  # py3 compat
+    'pytest',
+    'pytest-cov',
+]
+
+setup_requirements = [
+    'pytest-runner',
+    # TODO(umeboshi2): put setup requirements (distutils extensions, etc.) here
+]
+
+test_requirements = [
+    'WebTest >= 1.3.1',  # py3 compat
+    'pytest',
+    'pytest-cov',
+    # TODO: put package test requirements here
+]
+
+setup(
+    name='trumpet',
+    version='0.2.0',
+    description="Build a website with pyramid",
+    long_description=readme + '\n\n' + history,
+    author="Joseph Rawson",
+    author_email='joseph.rawson.works@gmail.com',
+    url='https://github.com/umeboshi2/trumpet',
+    packages=find_packages(include=['trumpet']),
+    entry_points={
+        'paste.app_factory': [
+            'main = trumpet:main',
+        ],
+        'console_scripts': [
+            'initialize_trumpet_db = trumpet.scripts.initializedb:main',
+        ]
+    },
+    include_package_data=True,
+    install_requires=requirements,
+    license="UNLICENSED",
+    zip_safe=False,
+    keywords='trumpet',
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Intended Audience :: Developers',
+        'License :: Public Domain',
+        'Natural Language :: English',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+    ],
+    test_suite='tests',
+    tests_require=test_requirements,
+    setup_requires=setup_requirements,
+)
