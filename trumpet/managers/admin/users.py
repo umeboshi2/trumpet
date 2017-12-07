@@ -4,7 +4,6 @@ from sqlalchemy.orm.exc import NoResultFound
 import transaction
 
 
-from trumpet.models.base import DBSession
 from trumpet.models.usergroup import User, Group, Password
 from trumpet.models.usergroup import UserGroup, UserConfig
 

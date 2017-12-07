@@ -1,11 +1,8 @@
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 import smtplib
 from email.MIMEText import MIMEText
 
 import vobject
-
-from trumpet.models.usergroup import User
 
 
 def convert_range_to_datetime(start, end):

@@ -1,19 +1,6 @@
-import os
-from datetime import datetime
 
-import transaction
 
-from mako.template import Template
-from mako.exceptions import MakoException
-from mako.exceptions import SyntaxException
-
-from sqlalchemy.exc import OperationalError
-from sqlalchemy.exc import UnboundExecutionError
-from sqlalchemy.orm.exc import NoResultFound
-
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound
-from pyramid.security import authenticated_userid
-from pyramid.renderers import render
+from pyramid.httpexceptions import HTTPNotFound
 from pyramid.response import FileResponse
 from pyramid.path import AssetResolver
 

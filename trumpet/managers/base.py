@@ -1,4 +1,5 @@
 from sqlalchemy.orm.exc import NoResultFound
+import transaction
 
 
 class BaseManager(object):

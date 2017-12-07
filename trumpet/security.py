@@ -7,8 +7,7 @@ from pyramid.authentication import SessionAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from sqlalchemy.orm.exc import NoResultFound
 
-from .models.base import DBSession
-from .models.usergroup import User, Password
+from .models.usergroup import User
 
 
 def make_salt(id=5, length=10):

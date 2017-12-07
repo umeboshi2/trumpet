@@ -30,7 +30,7 @@ class RootGroupFactory(Resource):
 
     def __init__(self, request):
         self.request = request
-        #self['admin'] = dict()
+        # self['admin'] = dict()
 
 
 # straight from deform docs

@@ -17,8 +17,8 @@ class NameSelectSchema(colander.Schema):
 
 
 # FIXME upload files in post request
-#from trumpet.resources import MemoryTmpStore
-#tmpstore = MemoryTmpStore()
+# from trumpet.resources import MemoryTmpStore
+# tmpstore = MemoryTmpStore()
 # class UploadFileSchema(colander.Schema):
 #    upload = colander.SchemaNode(
 #        deform.FileData(),
