@@ -1,10 +1,8 @@
+# -*- coding: utf-8 -*-
 
-def import_OrderedDict():
-    import sys
-    i = sys.version_info
-    if i[0] > 2 or i[1] > 6:
-        module = 'collections'
-    else:
-        module = 'trumpet.compat.OrderedDict'
-    OD = __import__(module)
-    return OD.OrderedDict
+"""Top-level package for trumpet."""
+
+__author__ = """Joseph Rawson"""
+__email__ = 'joseph.rawson.works@gmail.com'
+__version__ = '0.2.0'
+
