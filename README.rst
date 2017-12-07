@@ -156,6 +156,8 @@ Features
 
 * TODO
 
+  - remember vobject and icalendar to make .vcf files, etc...
+
 
 
 

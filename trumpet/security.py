@@ -7,9 +7,6 @@ from pyramid.authentication import SessionAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from sqlalchemy.orm.exc import NoResultFound
 
-from .models.usergroup import User
-
-
 def make_salt(id=5, length=10):
     phrase = ''
     for ignore in range(length):
@@ -77,8 +74,3 @@ def make_authn_authz_policies(secret, cookie, callback=authenticate,
         authn_policy = make_session_authn_policy(callback=callback)
     authz_policy = ACLAuthorizationPolicy()
     return authn_policy, authz_policy
-
-
-def get_current_user(request):
-    user_id = request.session['user'].id
-    return request.db.query(User).get(user_id)

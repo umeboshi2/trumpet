@@ -1,7 +1,7 @@
 import os
 
 import transaction
-from pyramid.httpexceptions.exc import HTTPNotFound
+from pyramid.httpexceptions import HTTPNotFound
 from hornstone.alchemy import TimeStampMixin
 
 
