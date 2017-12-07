@@ -6,7 +6,7 @@
 import pytest
 
 
-from trumpet import trumpet
+import trumpet
 
 
 @pytest.fixture
