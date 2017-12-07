@@ -14,7 +14,7 @@ from trumpet.security import encrypt_password
 class UserManager(object):
     def __init__(self, session):
         self.session = session
-        
+
     def user_query(self):
         return self.session.query(User)
 
@@ -26,7 +26,7 @@ class UserManager(object):
 
     def get_group(self, id):
         return self.group_query().get(id)
-        
+
     def add_user(self, name, password):
         with transaction.manager:
             user = User(name)
@@ -35,7 +35,6 @@ class UserManager(object):
         self.set_password(user.id, password)
         self.Make_default_config(user.id)
         return user
-    
 
     def set_password(self, user_id, password):
         q = self.session.query(Password).filter_by(user_id=user_id)
@@ -47,7 +46,7 @@ class UserManager(object):
                 p = Password(user_id, encrypted)
             p.password = encrypted
             self.session.add(p)
-            
+
     def delete_user(self, id):
         with transaction.manager:
             cfg = self.session.query(UserConfig).get(id)
@@ -64,7 +63,7 @@ class UserManager(object):
         with transaction.manager:
             ug = UserGroup(gid, uid)
             self.session.add(ug)
-            
+
     def remove_user_from_group(self, uid, gid):
         with transaction.manager:
             q = self.session.query(UserGroup)
@@ -82,25 +81,24 @@ class UserManager(object):
         q = q.filter(UserGroup.group_id == gid)
         q = q.filter(UserGroup.user_id == User.id)
         return [r[0] for r in q.all()]
-        
+
     def add_group(self, name):
         with transaction.manager:
             g = Group(name)
             self.session.add(g)
         return self.session.merge(g)
-    
+
     def delete_group(self, id):
         with transaction.manager:
             g = self.get_group(id)
             if g is not None:
                 self.session.delete(g)
-                
+
     def list_groups(self):
         return self.group_query().all()
 
-    
     def Make_default_config(self, user_id):
-        main = dict(sms_email_address='') 
+        main = dict(sms_email_address='')
         phonecall_views = dict(received='agendaDay', assigned='agendaWeek',
                                delegated='agendaWeek', unread='agendaWeek',
                                pending='agendaWeek', closed='month')
@@ -118,4 +116,3 @@ class UserManager(object):
         with transaction.manager:
             config = UserConfig(user_id, text)
             self.session.add(config)
-

@@ -6,25 +6,25 @@ class AddUserSchema(colander.Schema):
         colander.Integer(),
         title="User",
         description="User to add",
-        )
-    
-    
+    )
+
+
 class NameSelectSchema(colander.Schema):
     name = colander.SchemaNode(
         colander.Integer(),
         title="Name",
-        )
+    )
 
 
 # FIXME upload files in post request
 #from trumpet.resources import MemoryTmpStore
 #tmpstore = MemoryTmpStore()
-#class UploadFileSchema(colander.Schema):
+# class UploadFileSchema(colander.Schema):
 #    upload = colander.SchemaNode(
 #        deform.FileData(),
 #        widget=deform.widget.FileUploadWidget(tmpstore),
 #        )
-    
+
 class LoginSchema(colander.Schema):
     username = colander.SchemaNode(
         colander.String(),

@@ -14,6 +14,7 @@ def convert_range_to_datetime(start, end):
     end = datetime.fromtimestamp(float(end))
     return start, end
 
+
 def parse_vcard_object(card):
     firstname = card.n.value.given
     if not firstname:
@@ -31,7 +32,7 @@ def parse_vcard_object(card):
             phone = None
     return firstname, lastname, email, phone
 
-    
+
 def make_vcard(contact):
     card = vobject.vCard()
     card.add('n')
@@ -52,12 +53,14 @@ def make_vcard(contact):
         card.tel.value = contact.phone
     return card
 
+
 def make_email_message(subject, message, sender, receiver):
     msg = MIMEText(message)
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = receiver
     return msg
+
 
 def send_email_through_smtp_server(settings, message, sender, receiver):
     prefix = 'smtp.'
@@ -73,5 +76,3 @@ def send_email_through_smtp_server(settings, message, sender, receiver):
     msg = message.as_string()
     server.sendmail(sender, receiver, msg)
     server.close()
-
-

@@ -32,6 +32,7 @@ def check_password(encrypted, password):
     check = crypt(password, salt)
     return check == encrypted
 
+
 def authenticate(userid, request):
     db = request.db
     usermodel = request.usermodel
@@ -43,7 +44,8 @@ def authenticate(userid, request):
         return
     if user is not None:
         return user.get_groups()
-    
+
+
 def check_user_password(user, password):
     return check_password(user.pw.password, password)
 
@@ -60,6 +62,7 @@ def make_authn_policy(secret, cookie, callback=authenticate,
         cookie_name=cookie,
         timeout=timeout)
     return ap
+
 
 def make_session_authn_policy(callback=authenticate):
     sp = SessionAuthenticationPolicy(callback=callback,
@@ -80,4 +83,3 @@ def make_authn_authz_policies(secret, cookie, callback=authenticate,
 def get_current_user(request):
     user_id = request.session['user'].id
     return request.db.query(User).get(user_id)
-

@@ -19,7 +19,7 @@ class BaseResource(BaseUserView):
         self.db = self.request.db
         self.limit = None
         self.max_limit = 100
-        
+
     def serialize_object(self, dbobj):
         return dbobj.serialize()
 
@@ -48,7 +48,7 @@ class BaseResource(BaseUserView):
         objects = q.all()
         return dict(total_count=total_count,
                     data=[self.serialize_object_for_collection_query(o) for o in objects])
-    
+
 
 class BaseManagerResource(BaseResource):
     def get(self):
@@ -58,5 +58,3 @@ class BaseManagerResource(BaseResource):
             # FIXME
             raise RuntimeError("404")
         return dict(data=c.serialize(), result='success')
-        
-        

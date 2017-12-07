@@ -18,7 +18,6 @@ from pyramid.response import FileResponse
 from pyramid.path import AssetResolver
 
 
-
 def static_asset_response(request, asset):
     resolver = AssetResolver()
     descriptor = resolver.resolve(asset)
@@ -35,20 +34,22 @@ def static_asset_response(request, asset):
     for ending in ['.css', '.js']:
         # one day for css and js
         if path.endswith(ending):
-            response.cache_expires(3600*24)
+            response.cache_expires(3600 * 24)
             response.cache_control.public = True
     if path.endswith('.ttf'):
         # one year for fonts
-        response.cache_expires(3600*24*365)
+        response.cache_expires(3600 * 24 * 365)
         response.cache_control.public = True
     return response
+
 
 class BaseView(object):
     def __init__(self, request):
         self.request = request
-    
+
     def get_app_settings(self):
         return self.request.registry.settings
+
 
 class BaseUserView(BaseView):
     def get_current_user(self):
@@ -61,14 +62,13 @@ class BaseViewCallable(BaseView):
         super(BaseViewCallable, self).__init__(request)
         self.response = None
         self.data = {}
-    
+
     def __call__(self):
         if self.response is not None:
             return self.response
         else:
             return self.data
 
+
 class BaseUserViewCallable(BaseViewCallable, BaseUserView):
     pass
-
-

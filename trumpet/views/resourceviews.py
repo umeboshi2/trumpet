@@ -6,8 +6,10 @@ import transaction
 from cornice.resource import resource, view
 from chert.alchemy import TimeStampMixin
 
+
 def apiroot(prefix='/api', version='dev'):
     return os.path.join(prefix, version)
+
 
 class BaseResource(object):
     def __init__(self, request, context=None):
@@ -16,7 +18,7 @@ class BaseResource(object):
         self.limit = 25
         self.max_limit = 100
         self._use_pagination = True
-        
+
     def serialize_object(self, dbobj):
         return dbobj.serialize()
 
@@ -39,7 +41,7 @@ class BaseResource(object):
             if limit > self.max_limit:
                 limit = self.max_limit
         return query.offset(offset).limit(limit)
-    
+
     def collection_get(self):
         q = self.collection_query()
         total_count = q.count()
@@ -50,7 +52,7 @@ class BaseResource(object):
         return dict(total_count=total_count, items=data)
 
 
-# from bookshelf-csapi 
+# from bookshelf-csapi
 #
 # req.query.withRelated - array of related models
 # req.query.columns - array of columns
@@ -60,13 +62,13 @@ class BaseResource(object):
 # req.query.limit
 # req.query.sort - only one column? always order by key unless present?
 # req.query.direction - default is 'asc'
-# 
+#
 # if sort or offset is present set the direction
 #
 #
 #
 #
-    
+
 # BaseResource.model must be set in subclass
 class BaseModelResource(BaseResource):
     def _isTimeStampMixin(self):
@@ -74,7 +76,7 @@ class BaseModelResource(BaseResource):
 
     def collection_query(self):
         return self.db.query(self.model)
-    
+
     def collection_post(self):
         with transaction.manager:
             m = self.model()
@@ -83,7 +85,7 @@ class BaseModelResource(BaseResource):
                 if type(value) is dict:
                     print("value of field {} is dict".format(field))
                 setattr(m, field, value)
-            # FIXME 
+            # FIXME
             if hasattr(m, 'user_id'):
                 m.user_id = self.request.user.id
             self.db.add(m)
@@ -96,7 +98,7 @@ class BaseModelResource(BaseResource):
         if m is None:
             raise HTTPNotFound
         return self.serialize_object(m)
-    
+
     def put(self):
         with transaction.manager:
             id = self.request.matchdict['id']
@@ -112,7 +114,7 @@ class BaseModelResource(BaseResource):
             self.db.add(m)
             self.db.flush()
         return self.serialize_object(m)
-    
+
     def delete(self):
         with transaction.manager:
             id = self.request.matchdict['id']
@@ -120,16 +122,18 @@ class BaseModelResource(BaseResource):
             if m is None:
                 raise HTTPNotFound
             m.delete()
-        
+
     @property
     def model(self):
         raise NotImplementedError
-    
+
 # /api/{model}/{id}
+
+
 class SimpleModelResource(BaseModelResource):
     def __init__(self, request, context=None):
         super(SimpleModelResource, self).__init__(request, context=context)
-        
+
     @property
     def model(self):
         return self.model_map.get(self.request.matchdict['model'])
@@ -137,4 +141,3 @@ class SimpleModelResource(BaseModelResource):
     @property
     def model_map(self):
         raise NotImplementedError
-

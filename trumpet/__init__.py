@@ -8,5 +8,3 @@ def import_OrderedDict():
         module = 'trumpet.compat.OrderedDict'
     OD = __import__(module)
     return OD.OrderedDict
-
-    

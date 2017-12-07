@@ -21,8 +21,6 @@ from trumpet.views.schema import LoginSchema
 from trumpet.views.login import check_login_form
 
 
-
-
 class FrontDoorView(BasicView):
     def __init__(self, request):
         super(FrontDoorView, self).__init__(request)
@@ -30,7 +28,7 @@ class FrontDoorView(BasicView):
             self.handle_post()
         else:
             self.handle_get()
-            
+
     def handle_get(self):
         request = self.request
         view = request.view_name
@@ -69,18 +67,15 @@ class FrontDoorView(BasicView):
             headers = remember(self.request, username)
         self.response = HTTPFound('/frontdoor')
 
-
     def handle_logout(self, post):
         headers = forget(self.request)
         if 'user' in self.request.session:
             del self.request.session['user']
         while list(self.request.session.keys()):
             key = list(self.request.session.keys())[0]
-            del  self.request.session[key]
+            del self.request.session[key]
         location = self.request.route_url('home')
         self.response = HTTPFound(location=location, headers=headers)
-        
-    
 
     def handle_post(self):
         request = self.request
@@ -93,6 +88,3 @@ class FrontDoorView(BasicView):
             return self.handle_logout(post)
         else:
             return self.handle_login(post)
-
-        
-    

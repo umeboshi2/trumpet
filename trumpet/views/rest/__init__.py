@@ -1,10 +1,12 @@
 from trumpet.views.base import BaseUserView
 
+
 class DBResource(BaseUserView):
     def __init__(self, request):
         super(DBResource, self).__init__(request)
         self.db = self.request.db
-    
+
+
 class BaseResource(DBResource):
     def __init__(self, request):
         super(BaseResource, self).__init__(request)
@@ -17,11 +19,12 @@ class BaseResource(DBResource):
 
     def _get(self, id):
         return self.query().get(id)
-    
+
     def get(self):
         id = int(self.request.matchdict['id'])
         return self._get(id).serialize()
-    
+
+
 class BaseManagementResource(DBResource):
     def __init__(self, request):
         super(BaseManagementResource, self).__init__(request)
@@ -32,10 +35,9 @@ class BaseManagementResource(DBResource):
         self.limit = 20
         self.max_limit = 100
 
-    
     def serialize_object(self, dbobj):
         return dbobj.serialize()
-    
+
     def get(self):
         id = int(self.request.matchdict['id'])
         return self.serialize_object(self.mgr.get(id))
@@ -44,7 +46,7 @@ class BaseManagementResource(DBResource):
         GET = self.request.GET
         q = self.mgr.query()
         return q
-    
+
     def collection_get(self):
         offset = 0
         limit = self.limit

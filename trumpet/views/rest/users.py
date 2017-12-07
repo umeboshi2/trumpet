@@ -12,16 +12,16 @@ from trumpet.managers.admin.users import UserManager
 from trumpet.security import encrypt_password
 
 from trumpet.views.rest.base import SimpleResource
-    
+
 # FIXME: this needs to be in manager
 import transaction
+
 
 class BaseUserResource(SimpleResource):
     def __init__(self, request):
         super(BaseUserResource, self).__init__(request)
         self.mgr = UserManager(self.db)
-        
-    
+
 
 @resource(collection_path='/rest/users', path='/rest/users/{id}',
           permission='admin')
@@ -29,9 +29,9 @@ class UserResource(BaseUserResource):
     dbmodel = User
 
     def collection_get(self):
-        get=None
+        get = None
         if self.request.GET:
-            get=dict(self.request.GET)
+            get = dict(self.request.GET)
         q = self.mgr.user_query()
         return dict(data=[o.serialize() for o in q], get=get)
 
@@ -67,11 +67,12 @@ class GroupResource(BaseUserResource):
         self.mgr.delete_group(id)
         return dict(result='success')
 
+
 @resource(collection_path='/rest/users/{uid}/groups', path='/rest/users/{uid}/groups/{id}',
           permission='admin')
 class UserGroupResource(BaseUserResource):
     dbmodel = UserGroup
-    
+
     def collection_get(self):
         uid = int(self.request.matchdict['uid'])
         groups = self.mgr.list_groups_for_user(uid)
@@ -93,20 +94,19 @@ class UserGroupResource(BaseUserResource):
     def get(self):
         gid = int(self.request.matchdict['id'])
         return dict(data=self.mgr.get_group(gid).serialize())
-    
-    
+
+
 @resource(collection_path='/rest/groups/{gid}/members', path='/rest/groups/{gid}/members/{uid}',
           permission='admin')
 class GroupMemberResource(BaseUserResource):
     dbmodel = UserGroup
-    
+
     def collection_get(self):
         gid = int(self.request.matchdict['gid'])
         users = self.mgr.list_members_of_group(gid)
         data = [u.serialize() for u in users]
         return dict(data=data)
 
-    
 
 @resource(path='/rest/current/user')
 class CurrentUserResource(BaseUserResource):
@@ -133,8 +133,7 @@ class CurrentUserResource(BaseUserResource):
                 with transaction.manager:
                     user.config.set_config('')
         return data
-    
-    
+
     def put(self):
         user = self.get_current_user()
         if user is None:
