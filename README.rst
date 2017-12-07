@@ -74,27 +74,27 @@ A page on the static resources used to build SPA's can be found `here`_.
 .. _`Single Page Applications`: http://en.wikipedia.org/wiki/Single-page_application
 .. _`here`: https://github.com/umeboshi2/trumpet/blob/master/docs/TrumpetStaticResources.md
 
-
-NEWS
+News
 -----
 
-Trumpet is being converted into it's original concept of being a 
-set of building blocks to help build a pyramid web service.  In the past, 
-a large amount of time has been spent on managing static resources 
-through pyramid and python.  A separate project, haberdashery, was created 
-to help manage the static resources in a python package.  While the idea 
-of developing the static resources has evolved into an environment where 
-no python is required, except for a few development scripts, many of the 
-ideas used previously have been made obsolescent by using nodejs and 
-compass.
+Trumpet is getting a bit closer to the original intended goal of
+being a set of building blocks and tools to help build a pyramid
+web application.  Management of static resources has moved
+completely away from python.  Compass is still being used to
+help manage the stylesheets.  Webpack is being used to handle the
+javascript, as well as some css, fonts, etc. Currently, cookiecutter
+is being used to test generating project skeletons, replacing the
+previous scaffold.
 
-Trumpet is now focused primarily on providing server side components to 
-help make a website/application.  Static resources are to be developed 
-in another project, although they may be served through the pyramid 
-server.
+The general concept is to have support for creating web applications
+with different hosting requirements.  A creative use of cookiecutter
+templates may provide the ability to generate a pyramid site, a static
+application/site, or even a tree of static assets that can be used in
+many projects.
 
-Goals
-------
+
+Goals and Progress
+---------------------
 
 * user management
 
@@ -104,28 +104,26 @@ Goals
 
 * db support
 
-  - common sqlalchemy code for all databases
-  - request object with attached sessionmaker
+  - common sqlalchemy code for all databases **complete**
+  - request object with attached sessionmaker **completed by upstream scaffold**
 
-* session management
+* session management **obsolete?**
 
-  - minimal use of cookies
+  - minimal use of cookies **completed by using JSON Web Tokens**
   - use access_token as parameter to all requests requiring authentication
-  - policies for session management
-
+  - policies for session management *now token policies*
+    
     + sessions per user (configure number of sessions a user can have)
     + sessions per device (register devices to user?)
     + session duration
     + session timeout/expiration
   
-  - is beaker good enough?
-    
 * view classes
   
   - basic view classes to be used by all views
     
-    + common methods
-    + app settings available
+    + common methods *WIP*
+    + app settings available *still debating usefulness, JSONAPI may be better*
       
   - base user aware view class
     
@@ -133,18 +131,19 @@ Goals
       
   - base cornice resource
   - base static resource
-  - base page resource
+  - base page resource *this is almost good enough*
     
-    - send the html page that runs the app
+    - send the html page that runs the app **complete**
     - use template to fill the head with links and meta info
-    - handle permissions for access to app
+    - handle permissions for access to app *send auth_token as query param?*
       
-- server side validation
+- server side validation **still needed**
   
-  - use colander to build schemas for validation
+  - use colander to build schemas for validation (or JSONSchema?)
     
 - integrate with job servers for long running jobs
 
+  
   
 Old
 -----
