@@ -119,8 +119,8 @@ class BaseModelResource(BaseResource):
             m = self.db.query(self.model).get(id)
             if m is None:
                 raise HTTPNotFound
-            m.delete()
-
+            self.db.delete(m)
+            
     @property
     def model(self):
         raise NotImplementedError
@@ -129,8 +129,8 @@ class BaseModelResource(BaseResource):
 
 
 class SimpleModelResource(BaseModelResource):
-    def __init__(self, request, context=None):
-        super(SimpleModelResource, self).__init__(request, context=context)
+    #def __init__(self, request, context=None):
+    #    super(SimpleModelResource, self).__init__(request, context=context)
 
     @property
     def model(self):
