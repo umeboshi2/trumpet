@@ -21,11 +21,9 @@ requirements = [
     'pyramid-mako',
     'cornice',         # REST views
     'waitress',
-    # we need to think about using another
-    # postgresql/sqlalchemy package that
-    # can be used with pypy
     'bcrypt',
     # testing below
+    'querystring_parser',
     # 'versiontools',
 ]
 

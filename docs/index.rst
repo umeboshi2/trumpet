@@ -13,7 +13,10 @@ Contents:
    contributing
    authors
    history
-
+   former-env-setup
+   TrumpetStaticResources
+   WebViews
+   
 Indices and tables
 ==================
 
