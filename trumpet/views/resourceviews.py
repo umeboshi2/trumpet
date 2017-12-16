@@ -1,7 +1,9 @@
 import os
+import types
 
 import transaction
 from pyramid.httpexceptions import HTTPNotFound
+from querystring_parser import parser as qsparser
 from hornstone.alchemy import TimeStampMixin
 
 
@@ -23,7 +25,11 @@ class BaseResource(object):
     # use this when you do only need  certain model attributes
     # in a collection, rather than return the complete models
     def serialize_object_for_collection_query(self, dbobj):
-        return self.serialize_object(dbobj)
+        # FIXME test this better
+        if hasattr(dbobj, 'keys') and isinstance(dbobj.keys, types.MethodType):
+            return dict(((k, getattr(dbobj, k)) for k in dbobj.keys()))
+        else:
+            return self.serialize_object(dbobj)
 
     def collection_query(self):
         raise RuntimeError("Implement me in subclass")
@@ -41,12 +47,26 @@ class BaseResource(object):
         return query.offset(offset).limit(limit)
 
     def collection_get(self):
-        q = self.collection_query()
+        qs = qsparser.parse(self.request.query_string)
+        if 'columns' in qs and '' in qs['columns'] and len(qs['columns']['']):
+            _fields = (getattr(self.model, f) for f in qs['columns'][''])
+            query = self.db.query(*_fields)
+        else:
+            query = self.collection_query()
+
+        if 'distinct' in qs:
+            # setup distinct and groupby
+            raise RuntimeError("No support for distinct yet.")
+        if 'where' in qs:
+            # setup where clauses
+            raise RuntimeError("No support for where yet.")
+        
+        q = query
         total_count = q.count()
+
         if self._use_pagination:
             q = self._apply_pagination(q)
-        objects = q.all()
-        data = [self.serialize_object_for_collection_query(o) for o in objects]
+        data = [self.serialize_object_for_collection_query(o) for o in q]
         return dict(total_count=total_count, items=data)
 
 
@@ -120,18 +140,14 @@ class BaseModelResource(BaseResource):
             if m is None:
                 raise HTTPNotFound
             self.db.delete(m)
-            
+
     @property
     def model(self):
         raise NotImplementedError
 
-# /api/{model}/{id}
-
 
 class SimpleModelResource(BaseModelResource):
-    #def __init__(self, request, context=None):
-    #    super(SimpleModelResource, self).__init__(request, context=context)
-
+    """Handles /api/{model}[/{id}]"""
     @property
     def model(self):
         return self.model_map.get(self.request.matchdict['model'])
