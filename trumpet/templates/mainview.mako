@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <div class="container-fluid">
+    <div id="root-div" class="container-fluid">
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-6 jumbotron">
