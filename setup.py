@@ -53,7 +53,7 @@ setup(
     author="Joseph Rawson",
     author_email='joseph.rawson.works@gmail.com',
     url='https://github.com/umeboshi2/trumpet',
-    packages=find_packages(include=['trumpet']),
+    packages=find_packages(include=['trumpet', 'trumpet.*']),
     entry_points={
         'paste.app_factory': [
             'main = trumpet:main',
