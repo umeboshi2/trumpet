@@ -60,7 +60,7 @@ class BaseResource(object):
         if 'where' in qs:
             # setup where clauses
             raise RuntimeError("No support for where yet.")
-        
+
         q = query
         total_count = q.count()
 

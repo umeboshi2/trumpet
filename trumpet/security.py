@@ -7,6 +7,7 @@ from pyramid.authentication import SessionAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from sqlalchemy.orm.exc import NoResultFound
 
+
 def make_salt(id=5, length=10):
     phrase = ''
     for ignore in range(length):
