@@ -58,9 +58,6 @@ setup(
         'paste.app_factory': [
             'main = trumpet:main',
         ],
-        # 'console_scripts': [
-        #     'initialize_trumpet_db = trumpet.scripts.initializedb:main',
-        # ]
     },
     include_package_data=True,
     install_requires=requirements,
