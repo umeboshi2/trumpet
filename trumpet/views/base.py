@@ -79,7 +79,7 @@ class BaseResource(BaseViewCallable):
         return self._get(id).serialize()
 
 
-class BaseManagementResource(BaseResource):
+class BaseManagementResource(BaseViewCallable):
     def __init__(self, request, context=None):
         super(BaseManagementResource, self).__init__(request)
         if not hasattr(self, 'mgrclass'):
