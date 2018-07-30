@@ -47,7 +47,7 @@ test_requirements = [
 
 setup(
     name='trumpet',
-    version='0.2.5',
+    version='0.2.6',
     description="Build a website with pyramid",
     long_description=readme + '\n\n' + history,
     author="Joseph Rawson",
@@ -58,9 +58,6 @@ setup(
         'paste.app_factory': [
             'main = trumpet:main',
         ],
-        # 'console_scripts': [
-        #     'initialize_trumpet_db = trumpet.scripts.initializedb:main',
-        # ]
     },
     include_package_data=True,
     install_requires=requirements,
