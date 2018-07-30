@@ -86,14 +86,12 @@ class BaseManagementResource(BaseViewCallable):
             msg = "need to set mgrclass property before __init__"
             raise RuntimeError(msg)
         self.mgr = self.mgrclass(self.request.dbsession)
-        
+
     def get(self):
         id = int(self.request.matchdict['id'])
         return self.mgr.get(id).serialize()
-    
+
     def collection_get(self):
         # FIXME: use offset, limit, and pass filters
         objects = self.mgr.all()
         return dict(data=[o.serialize() for o in objects])
-        
-        
