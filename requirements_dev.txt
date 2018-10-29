@@ -5,7 +5,7 @@ flake8==3.5.0
 pip==18.0
 pytest==3.7.4
 pytest-runner==4.2
-pytz==2018.5
+pytz==2018.7
 PyYAML==3.13
 tox==3.2.1
 watchdog==0.9.0
