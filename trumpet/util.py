@@ -5,7 +5,9 @@ def encrypt_password(password):
     if type(password) is str:
         password = password.encode()
     hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-    return hashed.decode()
+    if type(hashed) is bytes:
+        return hashed.decode()
+    return hashed
 
 
 def password_matches(user, password):
