@@ -3,7 +3,7 @@ coverage==4.5.2
 cryptography==2.5
 flake8==3.7.2
 pip==19.0.1
-pytest==4.1.1
+pytest==4.2.0
 pytest-runner==4.2
 pytz==2018.9
 PyYAML==3.13
