@@ -4,7 +4,7 @@ cryptography==2.5
 flake8==3.7.5
 pip==19.0.2
 pytest==4.2.1
-pytest-runner==4.2
+pytest-runner==4.4
 pytz==2018.9
 PyYAML==3.13
 tox==3.7.0
