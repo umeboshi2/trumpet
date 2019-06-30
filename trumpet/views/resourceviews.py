@@ -1,5 +1,7 @@
 import os
 import types
+from uuid import UUID
+from datetime import datetime, date
 
 import transaction
 from pyramid.httpexceptions import HTTPNotFound
@@ -27,7 +29,18 @@ class BaseResource(object):
     def serialize_object_for_collection_query(self, dbobj):
         # FIXME test this better
         if hasattr(dbobj, 'keys') and isinstance(dbobj.keys, types.MethodType):
-            return dict(((k, getattr(dbobj, k)) for k in dbobj.keys()))
+            # FIXME we need to DRY this up and handle coverting
+            # types to json compat in a single place
+            data = dict()
+            for key in dbobj.keys():
+                value = getattr(dbobj, key)
+                vtype = type(value)
+                if vtype is UUID:
+                    value = str(value)
+                elif vtype in [datetime, date]:
+                    value = value.isoformat()
+                data[key] = value
+            return data
         else:
             return self.serialize_object(dbobj)
 
