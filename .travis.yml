@@ -6,8 +6,9 @@ install: pip install -U tox-travis
 script: tox
 deploy:
   on:
-    all_branches: true
     tags: true
+    # only deploy on python 3.6
+    python: 3.6
   provider: pypi
   distributions: sdist bdist_wheel
   user: Joseph.Rawson
