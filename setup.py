@@ -22,6 +22,7 @@ requirements = [
     'cornice',         # REST views
     'waitress',
     'bcrypt',
+    'python-dateutil',
     # testing below
     'querystring_parser',
     # 'versiontools',
