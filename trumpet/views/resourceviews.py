@@ -71,8 +71,10 @@ class BaseResource(object):
             # setup distinct and groupby
             raise RuntimeError("No support for distinct yet.")
         if 'where' in qs:
-            # setup where clauses
-            raise RuntimeError("No support for where yet.")
+            where = qs['where']
+            for field in where:
+                col = getattr(self.model, field)
+                query = query.filter(col == where[field])
 
         q = query
         total_count = q.count()
