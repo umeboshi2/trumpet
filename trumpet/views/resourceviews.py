@@ -5,6 +5,7 @@ from datetime import datetime, date
 
 import transaction
 from pyramid.httpexceptions import HTTPNotFound
+from pyramid.httpexceptions import HTTPMethodNotAllowed
 from querystring_parser import parser as qsparser
 from hornstone.alchemy import TimeStampMixin
 
@@ -20,6 +21,9 @@ class BaseResource(object):
         self.limit = 25
         self.max_limit = 100
         self._use_pagination = True
+
+    def __permitted_methods__(self):
+        return list()
 
     def serialize_object(self, dbobj):
         return dbobj.serialize()
@@ -60,6 +64,8 @@ class BaseResource(object):
         return query.offset(offset).limit(limit)
 
     def collection_get(self):
+        if 'collection_get' not in self.__permitted_methods__():
+            raise HTTPMethodNotAllowed
         qs = qsparser.parse(self.request.query_string)
         if 'columns' in qs and '' in qs['columns'] and len(qs['columns']['']):
             _fields = (getattr(self.model, f) for f in qs['columns'][''])
@@ -111,6 +117,8 @@ class BaseModelResource(BaseResource):
         return self.db.query(self.model)
 
     def collection_post(self):
+        if 'collection_post' not in self.__permitted_methods__():
+            raise HTTPMethodNotAllowed
         with transaction.manager:
             m = self.model()
             for field in self.request.json:
@@ -126,6 +134,8 @@ class BaseModelResource(BaseResource):
         return self.serialize_object(m)
 
     def get(self):
+        if 'get' not in self.__permitted_methods__():
+            raise HTTPMethodNotAllowed
         id = self.request.matchdict['id']
         m = self.db.query(self.model).get(id)
         if m is None:
@@ -133,6 +143,8 @@ class BaseModelResource(BaseResource):
         return self.serialize_object(m)
 
     def put(self):
+        if 'put' not in self.__permitted_methods__():
+            raise HTTPMethodNotAllowed
         with transaction.manager:
             id = self.request.matchdict['id']
             m = self.db.query(self.model).get(id)
@@ -149,6 +161,8 @@ class BaseModelResource(BaseResource):
         return self.serialize_object(m)
 
     def delete(self):
+        if 'delete' not in self.__permitted_methods__():
+            raise HTTPMethodNotAllowed
         with transaction.manager:
             id = self.request.matchdict['id']
             m = self.db.query(self.model).get(id)
