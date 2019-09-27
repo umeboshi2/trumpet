@@ -12,7 +12,7 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'hornstone',
+    'hornstone >= 0.1.21',
     'pyramid >= 1.9a',
     'pyramid_tm',
     'plaster_pastedeploy',
