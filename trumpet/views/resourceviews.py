@@ -150,12 +150,13 @@ class BaseModelResource(BaseResource):
             m = self.db.query(self.model).get(id)
             if m is None:
                 raise HTTPNotFound
-            fields = set(self.request.json.keys())
+            fields = set(m.get_table_column_names())
             if self._isTimeStampMixin():
                 fields.discard('created')
                 fields.discard('updated')
             for field in fields:
-                setattr(m, field, self.request.json[field])
+                if field in self.request.json:
+                    setattr(m, field, self.request.json[field])
             self.db.add(m)
             self.db.flush()
         return self.serialize_object(m)
