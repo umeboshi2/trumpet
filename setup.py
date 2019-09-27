@@ -48,7 +48,7 @@ test_requirements = [
 
 setup(
     name='trumpet',
-    version='0.2.10',
+    version='0.2.11',
     description="Build a website with pyramid",
     long_description=readme + '\n\n' + history,
     author="Joseph Rawson",
