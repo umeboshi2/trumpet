@@ -5,7 +5,7 @@ flake8==3.7.8
 pip==19.3.1
 pytest==5.2.1
 pytest-runner==5.1
-pytz==2019.3
+pytz==2021.1
 PyYAML==5.1.2
 tox==3.14.0
 tox-pyenv==1.1.0
