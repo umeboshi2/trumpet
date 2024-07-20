@@ -1,6 +1,6 @@
 bump2version==0.5.11
 coverage==4.5.4
-cryptography==2.8
+cryptography==43.0.0
 flake8==3.7.8
 pip==19.3.1
 pytest==5.2.1
